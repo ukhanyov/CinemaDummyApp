@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun CinemaApp() {
-    CinemaDummyAppTheme {
+    CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
