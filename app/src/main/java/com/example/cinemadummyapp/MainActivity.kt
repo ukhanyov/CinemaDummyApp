@@ -1,46 +1,61 @@
 package com.example.cinemadummyapp
 
+import CinemaNavHost
+import Onboarding
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import tabRowScreens
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            CinemaDummyAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
-            }
+            CinemaApp()
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun CinemaApp() {
+    CinemaDummyAppTheme {
+        val navController = rememberNavController()
+        val currentBackStack by navController.currentBackStackEntryAsState()
+        val currentDestination = currentBackStack?.destination
+
+        val currentScreen =
+            tabRowScreens.find { it.route == currentDestination?.route } ?: Onboarding
+
+        Scaffold(
+            topBar = {
+//                RallyTabRow(
+//                    allScreens = rallyTabRowScreens,
+//                    onTabSelected = { newScreen ->
+//                        navController.navigateSingleTopTo(newScreen.route)
+//                    },
+//                    currentScreen = currentScreen
+//                )
+            }
+        ) { innerPadding ->
+            CinemaNavHost(
+                navController = navController,
+                modifier = Modifier.padding(innerPadding)
+            )
+        }
+    }
 }
 
-@Preview(showBackground = true)
+@Preview
 @Composable
-fun GreetingPreview() {
-    CinemaDummyAppTheme {
-        Greeting("Android")
-    }
+fun CinemaAppPreview() {
+    CinemaApp()
 }
