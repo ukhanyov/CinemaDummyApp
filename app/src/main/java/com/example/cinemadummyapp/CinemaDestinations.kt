@@ -16,6 +16,11 @@ object Onboarding : CinemaDestination {
     override val route = "onboarding"
 }
 
+object CreateAccount : CinemaDestination {
+    override val icon = null
+    override val route = "create_account"
+}
+
 //object Accounts : CinemaDestination {
 //    override val icon = Icons.Filled.AttachMoney
 //    override val route = "accounts"

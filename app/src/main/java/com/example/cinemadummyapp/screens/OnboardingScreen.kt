@@ -30,7 +30,9 @@ fun OnboardingScreenPreview() {
 }
 
 @Composable
-fun OnboardingScreen() {
+fun OnboardingScreen(
+    goToCreateAccount: () -> Unit = {}
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -58,7 +60,7 @@ fun OnboardingScreen() {
                     .padding(horizontal = 48.dp),
                 shape = RoundedCornerShape(10.dp),
                 border = BorderStroke(width = 1.dp, color = Color.White),
-                onClick = { /*TODO*/ }
+                onClick = { goToCreateAccount() }
             ) {
                 Text(
                     text = "SIGN UP WITH EMAIL",
