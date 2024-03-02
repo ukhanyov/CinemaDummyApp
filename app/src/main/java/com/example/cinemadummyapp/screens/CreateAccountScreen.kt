@@ -65,12 +65,13 @@ fun CreateAccountScreen(onCreateAccountClicked: () -> Unit = {}) {
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             var email by rememberSaveable {
-                mutableStateOf("example@email.com")
+                mutableStateOf("")
             }
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
+                placeholder = { Text(text = "example@email.com") },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 isError = isValidEmail(email).not().also {
@@ -112,7 +113,8 @@ fun CreateAccountScreen(onCreateAccountClicked: () -> Unit = {}) {
                 colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 60.dp)
+                    .padding(horizontal = 60.dp),
+                enabled = email.isNotBlank() && isValidEmail(email)
             ) {
                 Text(text = "CREATE ACCOUNT")
             }
@@ -139,6 +141,7 @@ fun CreateAccountScreen(onCreateAccountClicked: () -> Unit = {}) {
 }
 
 fun isValidEmail(email: String): Boolean {
+    if (email.isEmpty()) return true
     val emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
     return email.matches(emailRegex.toRegex())
 }
