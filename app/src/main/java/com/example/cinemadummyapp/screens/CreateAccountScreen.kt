@@ -38,7 +38,7 @@ fun CreateAccountScreenPreview() {
 }
 
 @Composable
-fun CreateAccountScreen() {
+fun CreateAccountScreen(onCreateAccountClicked: () -> Unit = {}) {
     var isEmailValid by rememberSaveable {
         mutableStateOf(false)
     }
@@ -107,7 +107,7 @@ fun CreateAccountScreen() {
             Spacer(modifier = Modifier.size(32.dp))
 
             Button(
-                onClick = { /*TODO*/ },
+                onClick = { onCreateAccountClicked() },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
                 modifier = Modifier
