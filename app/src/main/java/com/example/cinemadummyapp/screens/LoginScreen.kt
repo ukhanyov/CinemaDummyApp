@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.isValidEmail
+import com.example.cinemadummyapp.common.isValidPassword
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -38,9 +39,6 @@ fun LoginScreenPreview() {
 
 @Composable
 fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
-    var isEmailValid by rememberSaveable {
-        mutableStateOf(false)
-    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -70,12 +68,15 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
-                placeholder = { Text(text = "example@email.com") },
+                placeholder = {
+                    Text(
+                        text = "example@email.com",
+                        color = Color.LightGray
+                    )
+                },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                isError = isValidEmail(email).not().also {
-                    isEmailValid = it
-                }
+                isError = email.isValidEmail().not()
             )
 
             Spacer(modifier = Modifier.size(16.dp))
@@ -113,7 +114,7 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 60.dp),
-                enabled = email.isNotBlank() && isValidEmail(email)
+                enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
             ) {
                 Text(text = "LOGIN")
             }

@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.isValidEmail
+import com.example.cinemadummyapp.common.isValidPassword
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -42,9 +43,6 @@ fun CreateAccountScreenPreview() {
 fun CreateAccountScreen(
     onCreateAccountClicked: () -> Unit = {}
 ) {
-    var isEmailValid by rememberSaveable {
-        mutableStateOf(false)
-    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -67,29 +65,26 @@ fun CreateAccountScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            var email by rememberSaveable {
-                mutableStateOf("")
-            }
+            var email by rememberSaveable { mutableStateOf("") }
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
                 label = { Text("Email") },
-                placeholder = { Text(text = "example@email.com") },
+                placeholder = {
+                    Text(
+                        text = "example@email.com",
+                        color = Color.LightGray
+                    )
+                },
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                isError = isValidEmail(email).not().also {
-                    isEmailValid = it
-                }
+                isError = email.isValidEmail().not()
             )
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            var password by rememberSaveable {
-                mutableStateOf("Password")
-            }
-            var isPasswordHidden by rememberSaveable {
-                mutableStateOf(true)
-            }
+            var password by rememberSaveable { mutableStateOf("") }
+            var isPasswordHidden by rememberSaveable { mutableStateOf(true) }
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
@@ -117,7 +112,7 @@ fun CreateAccountScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 60.dp),
-                enabled = email.isNotBlank() && isValidEmail(email)
+                enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
             ) {
                 Text(text = "CREATE ACCOUNT")
             }
