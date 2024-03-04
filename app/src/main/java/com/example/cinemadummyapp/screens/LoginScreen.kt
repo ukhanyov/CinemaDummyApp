@@ -1,7 +1,6 @@
 package com.example.cinemadummyapp.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -43,10 +42,11 @@ fun LoginScreenPreview() {
 
 @Composable
 fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
-    Box(
+    Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         val painter = painterResource(R.drawable.logo2)
         Image(
@@ -54,74 +54,67 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
                 .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
                 .padding(45.dp)
                 .fillMaxWidth()
-                .align(Alignment.TopCenter),
+                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
             painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Fit
         )
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            var email by rememberSaveable {
-                mutableStateOf("")
-            }
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                placeholder = {
-                    Text(
-                        text = "example@email.com",
-                        color = Color.LightGray
-                    )
-                },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                isError = email.isValidEmail().not()
-            )
+        var email by rememberSaveable {
+            mutableStateOf("")
+        }
+        OutlinedTextField(
+            value = email,
+            onValueChange = { email = it },
+            label = { Text("Email") },
+            placeholder = {
+                Text(
+                    text = "example@email.com",
+                    color = Color.LightGray
+                )
+            },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+            isError = email.isValidEmail().not()
+        )
 
-            Spacer(modifier = Modifier.size(16.dp))
+        Spacer(modifier = Modifier.size(16.dp))
 
-            var password by rememberSaveable {
-                mutableStateOf("")
-            }
-            var isPasswordHidden by rememberSaveable {
-                mutableStateOf(true)
-            }
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
-                trailingIcon = {
-                    IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
-                        val imageVector = if (isPasswordHidden)
-                            ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
-                        else
-                            ImageVector.vectorResource(id = R.drawable.ic_visibility)
-                        Icon(imageVector = imageVector, contentDescription = null)
-                    }
+        var password by rememberSaveable {
+            mutableStateOf("")
+        }
+        var isPasswordHidden by rememberSaveable {
+            mutableStateOf(true)
+        }
+        OutlinedTextField(
+            value = password,
+            onValueChange = { password = it },
+            label = { Text("Password") },
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+            visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+            trailingIcon = {
+                IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
+                    val imageVector = if (isPasswordHidden)
+                        ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
+                    else
+                        ImageVector.vectorResource(id = R.drawable.ic_visibility)
+                    Icon(imageVector = imageVector, contentDescription = null)
                 }
-            )
-
-            Spacer(modifier = Modifier.size(32.dp))
-
-            Button(
-                onClick = { onCreateAccountClicked() },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 60.dp),
-                enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
-            ) {
-                Text(text = "LOGIN")
             }
+        )
+
+        Spacer(modifier = Modifier.size(32.dp))
+
+        Button(
+            onClick = { onCreateAccountClicked() },
+            shape = RoundedCornerShape(10.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 60.dp),
+            enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
+        ) {
+            Text(text = "LOGIN")
         }
     }
 }

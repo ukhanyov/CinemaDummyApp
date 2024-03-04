@@ -16,10 +16,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TransformedText
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
@@ -53,7 +51,8 @@ fun ConfirmCreateAccountScreen() {
                 .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
                 .padding(45.dp)
                 .fillMaxWidth()
-                .align(Alignment.TopCenter),
+                .align(Alignment.TopCenter)
+                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
             painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Fit

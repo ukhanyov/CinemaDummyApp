@@ -58,7 +58,8 @@ fun CreateAccountScreen(
                 .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
                 .padding(45.dp)
                 .fillMaxWidth()
-                .align(Alignment.TopCenter),
+                .align(Alignment.TopCenter)
+                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
             painter = painter,
             contentDescription = null,
             contentScale = ContentScale.Fit
