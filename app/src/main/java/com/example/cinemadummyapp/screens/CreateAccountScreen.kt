@@ -22,7 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.R
@@ -32,6 +32,10 @@ import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
+@PreviewScreenSizes
+@PreviewDynamicColors
+@PreviewFontScale
+@PreviewLightDark
 @Composable
 fun CreateAccountScreenPreview() {
     CinemaDummyAppTheme {
