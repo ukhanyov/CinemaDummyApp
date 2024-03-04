@@ -18,13 +18,11 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.isValidEmail
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
@@ -83,7 +81,7 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
             Spacer(modifier = Modifier.size(16.dp))
 
             var password by rememberSaveable {
-                mutableStateOf("Password")
+                mutableStateOf("")
             }
             var isPasswordHidden by rememberSaveable {
                 mutableStateOf(true)
@@ -117,26 +115,8 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
                     .padding(horizontal = 60.dp),
                 enabled = email.isNotBlank() && isValidEmail(email)
             ) {
-                Text(text = "CREATE ACCOUNT")
+                Text(text = "LOGIN")
             }
-        }
-        Column(
-            modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
-            Text(
-                text = "By signing up you have agreed to our",
-                fontWeight = FontWeight.Light,
-                fontSize = 12.sp
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = "Terms of Use & Privacy Policy",
-                fontSize = 12.sp
-            )
         }
     }
 }
