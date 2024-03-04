@@ -77,7 +77,7 @@ fun OnboardingScreen(
                 color = Color.White,
                 fontWeight = FontWeight.Light,
                 modifier = Modifier
-                    .padding(vertical = 4.dp, horizontal = 16.dp)
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
                     .fillMaxWidth()
                     .clickable { goToLogin() },
                 textAlign = TextAlign.Center
