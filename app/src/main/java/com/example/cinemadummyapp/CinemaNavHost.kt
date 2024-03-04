@@ -4,8 +4,13 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.cinemadummyapp.ConfirmCreateAccount
+import com.example.cinemadummyapp.CreateAccount
+import com.example.cinemadummyapp.Login
+import com.example.cinemadummyapp.Onboarding
 import com.example.cinemadummyapp.screens.ConfirmCreateAccountScreen
 import com.example.cinemadummyapp.screens.CreateAccountScreen
+import com.example.cinemadummyapp.screens.LoginScreen
 import com.example.cinemadummyapp.screens.OnboardingScreen
 
 @Composable
@@ -22,6 +27,9 @@ fun CinemaNavHost(
             OnboardingScreen(
                 goToCreateAccount = {
                     navController.navigateSingleTopTo(CreateAccount.route)
+                },
+                goToLogin = {
+                    navController.navigateSingleTopTo(Login.route)
                 }
             )
         }
@@ -34,6 +42,9 @@ fun CinemaNavHost(
         }
         composable(route = ConfirmCreateAccount.route) {
             ConfirmCreateAccountScreen()
+        }
+        composable(route = Login.route) {
+            LoginScreen()
         }
     }
 }

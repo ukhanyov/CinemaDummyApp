@@ -32,16 +32,14 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
 @Composable
-fun CreateAccountScreenPreview() {
+fun LoginScreenPreview() {
     CinemaDummyAppTheme {
-        CreateAccountScreen()
+        LoginScreen()
     }
 }
 
 @Composable
-fun CreateAccountScreen(
-    onCreateAccountClicked: () -> Unit = {}
-) {
+fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
     var isEmailValid by rememberSaveable {
         mutableStateOf(false)
     }

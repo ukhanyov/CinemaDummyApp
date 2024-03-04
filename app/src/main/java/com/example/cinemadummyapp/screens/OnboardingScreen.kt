@@ -3,6 +3,7 @@ package com.example.cinemadummyapp.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedButton
@@ -31,7 +32,8 @@ fun OnboardingScreenPreview() {
 
 @Composable
 fun OnboardingScreen(
-    goToCreateAccount: () -> Unit = {}
+    goToCreateAccount: () -> Unit = {},
+    goToLogin: () -> Unit = {}
 ) {
     Box(
         modifier = Modifier
@@ -76,7 +78,8 @@ fun OnboardingScreen(
                 fontWeight = FontWeight.Light,
                 modifier = Modifier
                     .padding(vertical = 4.dp, horizontal = 16.dp)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable { goToLogin() },
                 textAlign = TextAlign.Center
             )
         }
