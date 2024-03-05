@@ -124,7 +124,8 @@ fun CreateAccountScreen(
                     onClick = { onCreateAccountClicked() },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-                    modifier = Modifier,
+                    modifier = Modifier
+                        .sizeIn(minWidth = 100.dp),
                     enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
                 ) {
                     Text(text = "CREATE ACCOUNT")
