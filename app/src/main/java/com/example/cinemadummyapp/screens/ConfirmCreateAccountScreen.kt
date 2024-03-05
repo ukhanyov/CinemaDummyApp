@@ -40,110 +40,129 @@ fun ConfirmCreateAccountScreenPreview() {
 
 @Composable
 fun ConfirmCreateAccountScreen() {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        val painter = painterResource(R.drawable.logo2)
-        Image(
+        Box(
             modifier = Modifier
-                .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
-                .padding(45.dp)
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
-            painter = painter,
-            contentDescription = null,
-            contentScale = ContentScale.Fit
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .weight(1f)
+                .align(Alignment.CenterHorizontally)
         ) {
-
-            var code by rememberSaveable {
-                mutableStateOf("")
-            }
-
-            Text(
-                text = "Verify Code",
-                fontSize = 24.sp
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = "Please check your email. We just sent a verification code on your email",
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
+            val painter = painterResource(R.drawable.logo2)
+            Image(
                 modifier = Modifier
-                    .padding(horizontal = 16.dp)
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-
-            TextField(
-                value = code,
-                onValueChange = {
-                    if (it.length <= 4) code = it
-                },
-                placeholder = { Text(text = "— — — —") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
-                colors = TextFieldDefaults.colors(
-                    errorContainerColor = Color.White,
-                    disabledContainerColor = Color.White,
-                    focusedContainerColor = Color.White,
-                    unfocusedContainerColor = Color.White,
-                ),
-                modifier = Modifier
-                    .width(100.dp)
-            )
-            Spacer(modifier = Modifier.size(16.dp))
-
-            Row {
-                Text(
-                    text = "Didn’t get a code?",
-                    fontSize = 12.sp
-                )
-                Text(
-                    text = " Try again",
-                    color = AppMainAccent,
-                    fontSize = 12.sp
-                )
-            }
-
-            Spacer(modifier = Modifier.size(16.dp))
-
-            Button(
-                onClick = { },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-                modifier = Modifier
+                    .aspectRatio(136.dp / 102.dp)
+                    .padding(top = 16.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 60.dp)
+                    .align(Alignment.Center)
+                    .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Fit
+            )
+        }
+        Box(
+            modifier = Modifier
+                .weight(1f)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(text = "VERIFY")
+
+                var code by rememberSaveable {
+                    mutableStateOf("")
+                }
+
+                Text(
+                    text = "Verify Code",
+                    fontSize = 24.sp
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Please check your email. We just sent a verification code on your email",
+                    fontSize = 16.sp,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+
+                TextField(
+                    value = code,
+                    onValueChange = {
+                        if (it.length <= 4) code = it
+                    },
+                    placeholder = { Text(text = "— — — —") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
+                    colors = TextFieldDefaults.colors(
+                        errorContainerColor = Color.White,
+                        disabledContainerColor = Color.White,
+                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = Color.White,
+                    ),
+                    modifier = Modifier
+                        .width(100.dp)
+                )
+                Spacer(modifier = Modifier.size(16.dp))
+
+                Row {
+                    Text(
+                        text = "Didn’t get a code?",
+                        fontSize = 12.sp
+                    )
+                    Text(
+                        text = " Try again",
+                        color = AppMainAccent,
+                        fontSize = 12.sp
+                    )
+                }
+
+                Spacer(modifier = Modifier.size(16.dp))
+
+                Button(
+                    onClick = { },
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 60.dp)
+                ) {
+                    Text(text = "VERIFY")
+                }
             }
         }
-        Column(
+        Box(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .weight(1f)
         ) {
-            Text(
-                text = "By signing up you have agreed to our",
-                fontWeight = FontWeight.Light,
-                fontSize = 12.sp
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = "Terms of Use & Privacy Policy",
-                fontSize = 12.sp
-            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "By signing up you have agreed to our",
+                    fontWeight = FontWeight.Light,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Terms of Use & Privacy Policy",
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+            }
         }
     }
 }
