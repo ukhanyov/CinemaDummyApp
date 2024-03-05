@@ -42,45 +42,61 @@ fun OnboardingScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppMainAccent),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+            .background(AppMainAccent)
     ) {
-        val painter = painterResource(R.drawable.logo)
-        Image(
+        Box(
             modifier = Modifier
-                .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
-                .fillMaxWidth()
-                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
-            painter = painter,
-            contentDescription = null,
-            contentScale = ContentScale.Fit
-        )
-        OutlinedButton(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 48.dp),
-            shape = RoundedCornerShape(10.dp),
-            border = BorderStroke(width = 1.dp, color = Color.White),
-            onClick = { goToCreateAccount() }
+                .weight(1f)
+                .align(Alignment.CenterHorizontally)
         ) {
-            Text(
-                text = "SIGN UP WITH EMAIL",
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
+            val painter = painterResource(R.drawable.logo)
+            Image(
                 modifier = Modifier
-                    .padding(vertical = 4.dp, horizontal = 16.dp)
+                    .aspectRatio(136.dp / 102.dp)
+                    .padding(top = 16.dp)
+                    .fillMaxWidth()
+                    .align(Alignment.Center)
+                    .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Fit
             )
         }
-        Text(
-            text = "Already have an account?",
-            color = Color.White,
-            fontWeight = FontWeight.Light,
+        Box(
             modifier = Modifier
-                .padding(vertical = 8.dp, horizontal = 16.dp)
-                .fillMaxWidth()
-                .clickable { goToLogin() },
-            textAlign = TextAlign.Center
-        )
+                .weight(1f)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                OutlinedButton(
+                    modifier = Modifier
+                        .padding(horizontal = 48.dp),
+                    shape = RoundedCornerShape(10.dp),
+                    border = BorderStroke(width = 1.dp, color = Color.White),
+                    onClick = { goToCreateAccount() }
+                ) {
+                    Text(
+                        text = "SIGN UP WITH EMAIL",
+                        color = Color.White,
+                        fontWeight = FontWeight.Bold,
+                        modifier = Modifier
+                            .padding(vertical = 4.dp, horizontal = 16.dp),
+                        textAlign = TextAlign.Center
+                    )
+                }
+                Text(
+                    text = "Already have an account?",
+                    color = Color.White,
+                    fontWeight = FontWeight.Light,
+                    modifier = Modifier
+                        .padding(vertical = 8.dp, horizontal = 16.dp)
+                        .clickable { goToLogin() },
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
     }
 }
