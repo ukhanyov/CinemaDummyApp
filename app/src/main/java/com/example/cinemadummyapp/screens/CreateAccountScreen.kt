@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -47,98 +48,114 @@ fun CreateAccountScreenPreview() {
 fun CreateAccountScreen(
     onCreateAccountClicked: () -> Unit = {}
 ) {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
     ) {
-        val painter = painterResource(R.drawable.logo2)
-        Image(
+        Box(
             modifier = Modifier
-                .aspectRatio(painter.intrinsicSize.width / painter.intrinsicSize.height)
-                .padding(45.dp)
-                .fillMaxWidth()
-                .align(Alignment.TopCenter)
-                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
-            painter = painter,
-            contentDescription = null,
-            contentScale = ContentScale.Fit
-        )
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .weight(0.75f)
+                .align(Alignment.CenterHorizontally)
         ) {
-            var email by rememberSaveable { mutableStateOf("") }
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Email") },
-                placeholder = {
-                    Text(
-                        text = "example@email.com",
-                        color = Color.LightGray
-                    )
-                },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
-                isError = email.isValidEmail().not()
-            )
-
-            Spacer(modifier = Modifier.size(16.dp))
-
-            var password by rememberSaveable { mutableStateOf("") }
-            var isPasswordHidden by rememberSaveable { mutableStateOf(true) }
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Password") },
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
-                trailingIcon = {
-                    IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
-                        val imageVector = if (isPasswordHidden)
-                            ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
-                        else
-                            ImageVector.vectorResource(id = R.drawable.ic_visibility)
-                        Icon(imageVector = imageVector, contentDescription = null)
-                    }
-                }
-            )
-
-            Spacer(modifier = Modifier.size(32.dp))
-
-            Button(
-                onClick = { onCreateAccountClicked() },
-                shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
+            val painter = painterResource(R.drawable.logo2)
+            Image(
                 modifier = Modifier
+                    .aspectRatio(136.dp / 102.dp)
+                    .padding(top = 16.dp)
                     .fillMaxWidth()
-                    .padding(horizontal = 60.dp),
-                enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
+                    .align(Alignment.Center)
+                    .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
+                painter = painter,
+                contentDescription = null,
+                contentScale = ContentScale.Fit
+            )
+        }
+        Box(
+            modifier = Modifier
+                .weight(0.8f)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                Text(text = "CREATE ACCOUNT")
+                var email by rememberSaveable { mutableStateOf("") }
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Email") },
+                    placeholder = {
+                        Text(
+                            text = "example@email.com",
+                            color = Color.LightGray
+                        )
+                    },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    isError = email.isValidEmail().not()
+                )
+
+                Spacer(modifier = Modifier.size(16.dp))
+
+                var password by rememberSaveable { mutableStateOf("") }
+                var isPasswordHidden by rememberSaveable { mutableStateOf(true) }
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Password") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+                    trailingIcon = {
+                        IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
+                            val imageVector = if (isPasswordHidden)
+                                ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
+                            else
+                                ImageVector.vectorResource(id = R.drawable.ic_visibility)
+                            Icon(imageVector = imageVector, contentDescription = null)
+                        }
+                    }
+                )
+
+                Spacer(modifier = Modifier.size(32.dp))
+
+                Button(
+                    onClick = { onCreateAccountClicked() },
+                    shape = RoundedCornerShape(10.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
+                    modifier = Modifier,
+                    enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
+                ) {
+                    Text(text = "CREATE ACCOUNT")
+                }
             }
         }
-        Column(
+        Box(
             modifier = Modifier
-                .align(Alignment.BottomCenter)
-                .fillMaxWidth()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
+                .weight(0.5f)
         ) {
-            Text(
-                text = "By signing up you have agreed to our",
-                fontWeight = FontWeight.Light,
-                fontSize = 12.sp
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = "Terms of Use & Privacy Policy",
-                fontSize = 12.sp
-            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Text(
+                    text = "By signing up you have agreed to our",
+                    fontWeight = FontWeight.Light,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                Text(
+                    text = "Terms of Use & Privacy Policy",
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+            }
         }
     }
 }
