@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
@@ -47,7 +48,7 @@ fun ConfirmCreateAccountScreen() {
     ) {
         Box(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.75f)
                 .align(Alignment.CenterHorizontally)
         ) {
             val painter = painterResource(R.drawable.logo2)
@@ -70,12 +71,11 @@ fun ConfirmCreateAccountScreen() {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
 
                 var code by rememberSaveable {
-                    mutableStateOf("")
+                    mutableStateOf("— — — —")
                 }
 
                 Text(
@@ -95,9 +95,15 @@ fun ConfirmCreateAccountScreen() {
                 TextField(
                     value = code,
                     onValueChange = {
-                        if (it.length <= 4) code = it
+                        val newString = it.replace(" ", "").replace("—", "")
+                        if (newString.isDigitsOnly()) {
+                            if (newString.isEmpty()) {
+                                code = "— — — —"
+                                return@TextField
+                            }
+                            if (newString.length <= 4) code = newString
+                        }
                     },
-                    placeholder = { Text(text = "— — — —") },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
@@ -108,7 +114,7 @@ fun ConfirmCreateAccountScreen() {
                         unfocusedContainerColor = Color.White,
                     ),
                     modifier = Modifier
-                        .width(100.dp)
+                        .widthIn(min = 100.dp)
                 )
                 Spacer(modifier = Modifier.size(16.dp))
 
@@ -130,17 +136,19 @@ fun ConfirmCreateAccountScreen() {
                     onClick = { },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 60.dp)
+                    modifier = Modifier.size(width = 150.dp, height = 36.dp),
+                    enabled = code.length == 4
                 ) {
-                    Text(text = "VERIFY")
+                    Text(
+                        text = "VERIFY",
+                        color = Color.White
+                    )
                 }
             }
         }
         Box(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.25f)
         ) {
             Column(
                 modifier = Modifier
