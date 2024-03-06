@@ -3,15 +3,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cinemadummyapp.ConfirmCreateAccount
-import com.example.cinemadummyapp.CreateAccount
-import com.example.cinemadummyapp.Login
-import com.example.cinemadummyapp.Onboarding
+import com.example.cinemadummyapp.*
 import com.example.cinemadummyapp.common.navigateSingleTopTo
-import com.example.cinemadummyapp.screens.ConfirmCreateAccountScreen
-import com.example.cinemadummyapp.screens.CreateAccountScreen
-import com.example.cinemadummyapp.screens.LoginScreen
-import com.example.cinemadummyapp.screens.OnboardingScreen
+import com.example.cinemadummyapp.screens.*
 
 @Composable
 fun CinemaNavHost(
@@ -41,10 +35,21 @@ fun CinemaNavHost(
             )
         }
         composable(route = ConfirmCreateAccount.route) {
-            ConfirmCreateAccountScreen()
+            ConfirmCreateAccountScreen(
+                goToAppUsage = {
+                    navController.navigateSingleTopTo(Usage.route)
+                }
+            )
         }
         composable(route = Login.route) {
-            LoginScreen()
+            LoginScreen(
+                goToAppUsage = {
+                    navController.navigateSingleTopTo(Usage.route)
+                }
+            )
+        }
+        composable(route = Usage.route) {
+            UsageScreen()
         }
     }
 }

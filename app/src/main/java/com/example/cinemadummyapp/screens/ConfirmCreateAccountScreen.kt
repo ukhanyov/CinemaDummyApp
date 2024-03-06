@@ -40,7 +40,9 @@ fun ConfirmCreateAccountScreenPreview() {
 }
 
 @Composable
-fun ConfirmCreateAccountScreen() {
+fun ConfirmCreateAccountScreen(
+    goToAppUsage: () -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -133,7 +135,7 @@ fun ConfirmCreateAccountScreen() {
                 Spacer(modifier = Modifier.size(16.dp))
 
                 Button(
-                    onClick = { },
+                    onClick = { goToAppUsage() },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
                     modifier = Modifier.size(width = 150.dp, height = 36.dp),

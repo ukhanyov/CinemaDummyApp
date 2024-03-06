@@ -42,7 +42,7 @@ fun LoginScreenPreview() {
 }
 
 @Composable
-fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
+fun LoginScreen(goToAppUsage: () -> Unit = {}) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -122,7 +122,7 @@ fun LoginScreen(onCreateAccountClicked: () -> Unit = {}) {
                 Spacer(modifier = Modifier.size(32.dp))
 
                 Button(
-                    onClick = { onCreateAccountClicked() },
+                    onClick = { goToAppUsage() },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
                     modifier = Modifier
