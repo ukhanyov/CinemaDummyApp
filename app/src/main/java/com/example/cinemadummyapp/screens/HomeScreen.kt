@@ -1,10 +1,10 @@
 package com.example.cinemadummyapp.screens
 
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -23,9 +23,23 @@ fun HomeScreenPreview() {
 
 @Composable
 fun HomeScreen() {
-    Text(
-        text = "HomeScreen",
-        textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxSize()
-    )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(0.5f)
+        ) {
+
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .weight(0.5f)
+        ) {
+
+        }
+    }
 }
