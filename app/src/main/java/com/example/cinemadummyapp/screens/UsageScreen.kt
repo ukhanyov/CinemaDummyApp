@@ -35,18 +35,11 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.Home
 import com.example.cinemadummyapp.UsageDestination
-import com.example.cinemadummyapp.common.navigateSingleTopTo
+import com.example.cinemadummyapp.common.*
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 import com.example.cinemadummyapp.usageRowScreens
 import java.util.Locale
-
-private val TabHeight = 56.dp
-private const val InactiveTabOpacity = 0.60f
-
-private const val TabFadeInAnimationDuration = 150
-private const val TabFadeInAnimationDelay = 100
-private const val TabFadeOutAnimationDuration = 100
 
 @Preview
 @PreviewScreenSizes
