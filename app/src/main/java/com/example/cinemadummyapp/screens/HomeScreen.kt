@@ -17,9 +17,12 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.R
+import com.example.cinemadummyapp.common.Toolbar
+import com.example.cinemadummyapp.common.ToolbarState
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 data class HomeState(
+    val toolbarState: ToolbarState = ToolbarState.Home(),
     @DrawableRes val poster: Int = R.drawable.the_batman_poster,
     val posterFilmName: String = "The Batman",
     val posterAction: String = "Get your tickets now",
@@ -42,58 +45,61 @@ fun HomeScreenPreview() {
 fun HomeScreen(
     homeState: HomeState = HomeState()
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Box(
+    Column(modifier = Modifier.fillMaxSize()) {
+        Toolbar(homeState.toolbarState)
+        Column(
             modifier = Modifier
                 .fillMaxSize()
-                .weight(1f)
         ) {
-            Image(
+            Box(
                 modifier = Modifier
-                    .fillMaxSize(),
-                painter = painterResource(homeState.poster),
-                contentDescription = null,
-                contentScale = ContentScale.FillHeight,
-            )
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomStart)
-                    .fillMaxWidth()
-                    .background(
-                        Brush.verticalGradient(
-                            0F to Color.Transparent,
-                            .5F to Color.Black.copy(alpha = 0.5F),
-                            1F to Color.Black.copy(alpha = 0.8F)
-                        )
-                    )
-                    .padding(start = 8.dp, end = 8.dp, bottom = 8.dp, top = 24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                    .fillMaxSize()
+                    .weight(1f)
             ) {
-                Text(
-                    text = homeState.posterFilmName,
-                    color = Color.White,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 24.sp
+                Image(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    painter = painterResource(homeState.poster),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillHeight,
                 )
-                Text(
-                    text = homeState.posterAction,
-                    color = Color.White,
-                    fontWeight = FontWeight.Light,
-                    fontSize = 16.sp
-                )
+                Column(
+                    modifier = Modifier
+                        .align(Alignment.BottomStart)
+                        .fillMaxWidth()
+                        .background(
+                            Brush.verticalGradient(
+                                0F to Color.Transparent,
+                                .5F to Color.Black.copy(alpha = 0.5F),
+                                1F to Color.Black.copy(alpha = 0.8F)
+                            )
+                        )
+                        .padding(start = 8.dp, end = 8.dp, bottom = 8.dp, top = 24.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = homeState.posterFilmName,
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 24.sp
+                    )
+                    Text(
+                        text = homeState.posterAction,
+                        color = Color.White,
+                        fontWeight = FontWeight.Light,
+                        fontSize = 16.sp
+                    )
+                }
             }
-        }
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .weight(1f)
-                .background(Color.Black)
-        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f)
+                    .background(Color.Black)
+            ) {
 
+            }
         }
     }
 }
