@@ -99,6 +99,16 @@ fun LoginScreen(goToAppUsage: () -> Unit = {}) {
                             color = Color.LightGray
                         )
                     },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        disabledTextColor = Color.Black,
+                        disabledSupportingTextColor = Color.Black,
+                        errorTextColor = Color.Red,
+                        errorSupportingTextColor = Color.Red,
+                        focusedTextColor = Color.Black,
+                        focusedSupportingTextColor = Color.Black,
+                        unfocusedSupportingTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                    ),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                     isError = email.isValidEmail().not()
@@ -119,6 +129,16 @@ fun LoginScreen(goToAppUsage: () -> Unit = {}) {
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                     visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        disabledTextColor = Color.Black,
+                        disabledSupportingTextColor = Color.Black,
+                        errorTextColor = Color.Red,
+                        errorSupportingTextColor = Color.Red,
+                        focusedTextColor = Color.Black,
+                        focusedSupportingTextColor = Color.Black,
+                        unfocusedSupportingTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                    ),
                     trailingIcon = {
                         IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
                             val imageVector = if (isPasswordHidden)

@@ -125,6 +125,14 @@ fun ConfirmCreateAccountScreen(
                         disabledContainerColor = Color.White,
                         focusedContainerColor = Color.White,
                         unfocusedContainerColor = Color.White,
+                        disabledTextColor = Color.Black,
+                        disabledSupportingTextColor = Color.Black,
+                        errorTextColor = Color.Red,
+                        errorSupportingTextColor = Color.Red,
+                        focusedTextColor = Color.Black,
+                        focusedSupportingTextColor = Color.Black,
+                        unfocusedSupportingTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
                     ),
                     modifier = Modifier
                         .widthIn(min = 100.dp)
