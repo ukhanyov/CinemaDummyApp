@@ -160,7 +160,10 @@ fun LoginScreen(goToAppUsage: () -> Unit = {}) {
                         .sizeIn(minWidth = 100.dp),
                     enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
                 ) {
-                    Text(text = "LOGIN")
+                    Text(
+                        text = "LOGIN",
+                        color = Color.White
+                    )
                 }
             }
         }

@@ -159,7 +159,10 @@ fun CreateAccountScreen(
                         .sizeIn(minWidth = 100.dp),
                     enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
                 ) {
-                    Text(text = "CREATE ACCOUNT")
+                    Text(
+                        text = "CREATE ACCOUNT",
+                        color = Color.White
+                    )
                 }
             }
         }
