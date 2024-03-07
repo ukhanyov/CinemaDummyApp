@@ -1,6 +1,7 @@
 package com.example.cinemadummyapp.screens
 
 import UsageNavHost
+import android.app.Activity
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
@@ -11,19 +12,25 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.Home
@@ -55,6 +62,13 @@ fun UsageScreenPreview() {
 
 @Composable
 fun UsageScreen() {
+    val activity = LocalView.current.context as Activity
+    activity.window.statusBarColor = Color.Black.toArgb()
+    WindowCompat.getInsetsController(
+        activity.window,
+        LocalView.current
+    ).isAppearanceLightStatusBars = false
+
     Box(
         modifier = Modifier
             .fillMaxSize()
