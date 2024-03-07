@@ -1,4 +1,4 @@
-package com.example.cinemadummyapp.screens
+package com.example.cinemadummyapp.onboarding
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -21,14 +21,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.isValidEmail
@@ -42,16 +39,14 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @PreviewFontScale
 @PreviewLightDark
 @Composable
-fun CreateAccountScreenPreview() {
+fun LoginScreenPreview() {
     CinemaDummyAppTheme {
-        CreateAccountScreen()
+        LoginScreen()
     }
 }
 
 @Composable
-fun CreateAccountScreen(
-    onCreateAccountClicked: () -> Unit = {}
-) {
+fun LoginScreen(goToAppUsage: () -> Unit = {}) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
     WindowCompat.getInsetsController(
@@ -66,7 +61,7 @@ fun CreateAccountScreen(
     ) {
         Box(
             modifier = Modifier
-                .weight(0.75f)
+                .weight(0.5f)
                 .align(Alignment.CenterHorizontally)
         ) {
             val painter = painterResource(R.drawable.logo2)
@@ -84,14 +79,16 @@ fun CreateAccountScreen(
         }
         Box(
             modifier = Modifier
-                .weight(0.8f)
+                .weight(1f)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                var email by rememberSaveable { mutableStateOf("") }
+                var email by rememberSaveable {
+                    mutableStateOf("")
+                }
                 OutlinedTextField(
                     value = email,
                     onValueChange = { email = it },
@@ -119,8 +116,12 @@ fun CreateAccountScreen(
 
                 Spacer(modifier = Modifier.size(16.dp))
 
-                var password by rememberSaveable { mutableStateOf("") }
-                var isPasswordHidden by rememberSaveable { mutableStateOf(true) }
+                var password by rememberSaveable {
+                    mutableStateOf("")
+                }
+                var isPasswordHidden by rememberSaveable {
+                    mutableStateOf(true)
+                }
                 OutlinedTextField(
                     value = password,
                     onValueChange = { password = it },
@@ -152,7 +153,7 @@ fun CreateAccountScreen(
                 Spacer(modifier = Modifier.size(32.dp))
 
                 Button(
-                    onClick = { onCreateAccountClicked() },
+                    onClick = { goToAppUsage() },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
                     modifier = Modifier
@@ -160,36 +161,10 @@ fun CreateAccountScreen(
                     enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
                 ) {
                     Text(
-                        text = "CREATE ACCOUNT",
+                        text = "LOGIN",
                         color = Color.White
                     )
                 }
-            }
-        }
-        Box(
-            modifier = Modifier
-                .weight(0.5f)
-        ) {
-            Column(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = "By signing up you have agreed to our",
-                    fontWeight = FontWeight.Light,
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = "Terms of Use & Privacy Policy",
-                    fontSize = 12.sp,
-                    textAlign = TextAlign.Center
-                )
-                Spacer(modifier = Modifier.size(8.dp))
             }
         }
     }

@@ -1,6 +1,5 @@
-package com.example.cinemadummyapp.screens
+package com.example.cinemadummyapp.interaction
 
-import UsageNavHost
 import android.app.Activity
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -33,12 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.cinemadummyapp.Home
-import com.example.cinemadummyapp.UsageDestination
 import com.example.cinemadummyapp.common.*
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
-import com.example.cinemadummyapp.usageRowScreens
 import java.util.Locale
 
 @Preview
@@ -47,14 +43,14 @@ import java.util.Locale
 @PreviewFontScale
 @PreviewLightDark
 @Composable
-fun UsageScreenPreview() {
+fun InteractionScreenPreview() {
     CinemaDummyAppTheme {
-        UsageScreen()
+        InteractionScreen()
     }
 }
 
 @Composable
-fun UsageScreen() {
+fun InteractionScreen() {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.Black.toArgb()
     WindowCompat.getInsetsController(
@@ -71,12 +67,12 @@ fun UsageScreen() {
         val currentBackStack by navController.currentBackStackEntryAsState()
         val currentDestination = currentBackStack?.destination
         val currentScreen =
-            usageRowScreens.find { it.route == currentDestination?.route } ?: Home
+            interactionScreens.find { it.route == currentDestination?.route } ?: Home
 
         Scaffold(
             bottomBar = {
-                UsageRow(
-                    allScreens = usageRowScreens,
+                InteractionRow(
+                    allScreens = interactionScreens,
                     onTabSelected = { newScreen ->
                         navController.navigateSingleTopTo(newScreen.route)
                     },
@@ -84,7 +80,7 @@ fun UsageScreen() {
                 )
             }
         ) { innerPadding ->
-            UsageNavHost(
+            InteractionNavHost(
                 navController = navController,
                 modifier = Modifier.padding(innerPadding)
             )
@@ -93,10 +89,10 @@ fun UsageScreen() {
 }
 
 @Composable
-fun UsageRow(
-    allScreens: List<UsageDestination>,
-    onTabSelected: (UsageDestination) -> Unit,
-    currentScreen: UsageDestination
+fun InteractionRow(
+    allScreens: List<InteractionDestination>,
+    onTabSelected: (InteractionDestination) -> Unit,
+    currentScreen: InteractionDestination
 ) {
     Surface(
         modifier = Modifier
@@ -105,7 +101,7 @@ fun UsageRow(
     ) {
         Row(Modifier.selectableGroup()) {
             allScreens.forEach { screen ->
-                UsageTab(
+                InteractionTab(
                     text = screen.route,
                     icon = screen.icon,
                     onSelected = { onTabSelected(screen) },
@@ -117,7 +113,7 @@ fun UsageRow(
 }
 
 @Composable
-private fun UsageTab(
+private fun InteractionTab(
     text: String,
     icon: ImageVector,
     onSelected: () -> Unit,

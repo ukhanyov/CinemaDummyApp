@@ -1,4 +1,4 @@
-package com.example.cinemadummyapp.screens
+package com.example.cinemadummyapp.onboarding
 
 import android.app.Activity
 import androidx.compose.foundation.Image
@@ -16,18 +16,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.text.isDigitsOnly
 import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.R
+import com.example.cinemadummyapp.common.isValidEmail
+import com.example.cinemadummyapp.common.isValidPassword
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -37,15 +42,15 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @PreviewFontScale
 @PreviewLightDark
 @Composable
-fun ConfirmCreateAccountScreenPreview() {
+fun CreateAccountScreenPreview() {
     CinemaDummyAppTheme {
-        ConfirmCreateAccountScreen()
+        CreateAccountScreen()
     }
 }
 
 @Composable
-fun ConfirmCreateAccountScreen(
-    goToAppUsage: () -> Unit = {}
+fun CreateAccountScreen(
+    onCreateAccountClicked: () -> Unit = {}
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
@@ -79,52 +84,25 @@ fun ConfirmCreateAccountScreen(
         }
         Box(
             modifier = Modifier
-                .weight(1f)
+                .weight(0.8f)
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-
-                var code by rememberSaveable {
-                    mutableStateOf("— — — —")
-                }
-
-                Text(
-                    text = "Verify Code",
-                    fontSize = 24.sp
-                )
-                Spacer(modifier = Modifier.size(8.dp))
-                Text(
-                    text = "Please check your email. We just sent a verification code on your email",
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                )
-                Spacer(modifier = Modifier.size(16.dp))
-
-                TextField(
-                    value = code,
-                    onValueChange = {
-                        val newString = it.replace(" ", "").replace("—", "")
-                        if (newString.isDigitsOnly()) {
-                            if (newString.isEmpty()) {
-                                code = "— — — —"
-                                return@TextField
-                            }
-                            if (newString.length <= 4) code = newString
-                        }
+                var email by rememberSaveable { mutableStateOf("") }
+                OutlinedTextField(
+                    value = email,
+                    onValueChange = { email = it },
+                    label = { Text("Email") },
+                    placeholder = {
+                        Text(
+                            text = "example@email.com",
+                            color = Color.LightGray
+                        )
                     },
-                    singleLine = true,
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                    textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Center),
-                    colors = TextFieldDefaults.colors(
-                        errorContainerColor = Color.White,
-                        disabledContainerColor = Color.White,
-                        focusedContainerColor = Color.White,
-                        unfocusedContainerColor = Color.White,
+                    colors = OutlinedTextFieldDefaults.colors(
                         disabledTextColor = Color.Black,
                         disabledSupportingTextColor = Color.Black,
                         errorTextColor = Color.Red,
@@ -134,34 +112,55 @@ fun ConfirmCreateAccountScreen(
                         unfocusedSupportingTextColor = Color.Black,
                         unfocusedTextColor = Color.Black,
                     ),
-                    modifier = Modifier
-                        .widthIn(min = 100.dp)
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    isError = email.isValidEmail().not()
                 )
-                Spacer(modifier = Modifier.size(16.dp))
-
-                Row {
-                    Text(
-                        text = "Didn’t get a code?",
-                        fontSize = 12.sp
-                    )
-                    Text(
-                        text = " Try again",
-                        color = AppMainAccent,
-                        fontSize = 12.sp
-                    )
-                }
 
                 Spacer(modifier = Modifier.size(16.dp))
+
+                var password by rememberSaveable { mutableStateOf("") }
+                var isPasswordHidden by rememberSaveable { mutableStateOf(true) }
+                OutlinedTextField(
+                    value = password,
+                    onValueChange = { password = it },
+                    label = { Text("Password") },
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                    visualTransformation = if (isPasswordHidden) PasswordVisualTransformation() else VisualTransformation.None,
+                    colors = OutlinedTextFieldDefaults.colors(
+                        disabledTextColor = Color.Black,
+                        disabledSupportingTextColor = Color.Black,
+                        errorTextColor = Color.Red,
+                        errorSupportingTextColor = Color.Red,
+                        focusedTextColor = Color.Black,
+                        focusedSupportingTextColor = Color.Black,
+                        unfocusedSupportingTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                    ),
+                    trailingIcon = {
+                        IconButton(onClick = { isPasswordHidden = isPasswordHidden.not() }) {
+                            val imageVector = if (isPasswordHidden)
+                                ImageVector.vectorResource(id = R.drawable.ic_visibility_off)
+                            else
+                                ImageVector.vectorResource(id = R.drawable.ic_visibility)
+                            Icon(imageVector = imageVector, contentDescription = null)
+                        }
+                    }
+                )
+
+                Spacer(modifier = Modifier.size(32.dp))
 
                 Button(
-                    onClick = { goToAppUsage() },
+                    onClick = { onCreateAccountClicked() },
                     shape = RoundedCornerShape(10.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-                    modifier = Modifier.size(width = 150.dp, height = 36.dp),
-                    enabled = code.length == 4
+                    modifier = Modifier
+                        .sizeIn(minWidth = 100.dp),
+                    enabled = email.isNotBlank() && email.isValidEmail() && password.isValidPassword()
                 ) {
                     Text(
-                        text = "VERIFY",
+                        text = "CREATE ACCOUNT",
                         color = Color.White
                     )
                 }
@@ -169,7 +168,7 @@ fun ConfirmCreateAccountScreen(
         }
         Box(
             modifier = Modifier
-                .weight(0.25f)
+                .weight(0.5f)
         ) {
             Column(
                 modifier = Modifier

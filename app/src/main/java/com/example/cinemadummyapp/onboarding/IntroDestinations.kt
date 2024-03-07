@@ -1,4 +1,4 @@
-package com.example.cinemadummyapp
+package com.example.cinemadummyapp.onboarding
 
 interface IntroDestination {
     val route: String

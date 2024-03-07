@@ -1,4 +1,4 @@
-package com.example.cinemadummyapp
+package com.example.cinemadummyapp.interaction
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -6,24 +6,24 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.ui.graphics.vector.ImageVector
 
-interface UsageDestination {
+interface InteractionDestination {
     val icon: ImageVector
     val route: String
 }
 
-object Home : UsageDestination {
+object Home : InteractionDestination {
     override val icon = Icons.Filled.Home
-    override val route = "usage/home"
+    override val route = "interaction/home"
 }
 
-object Tickets : UsageDestination {
+object Tickets : InteractionDestination {
     override val icon = Icons.Filled.DateRange
-    override val route = "usage/tickets"
+    override val route = "interaction/tickets"
 }
 
-object Profile : UsageDestination {
+object Profile : InteractionDestination {
     override val icon = Icons.Filled.Person
-    override val route = "usage/profile"
+    override val route = "interaction/profile"
 }
 
-val usageRowScreens = listOf(Home, Tickets, Profile)
+val interactionScreens = listOf(Home, Tickets, Profile)

@@ -1,7 +1,6 @@
-package com.example.cinemadummyapp.screens
+package com.example.cinemadummyapp.interaction.home
 
 import android.app.Activity
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,19 +21,8 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
-import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.Toolbar
-import com.example.cinemadummyapp.common.ToolbarState
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
-
-data class HomeState(
-    val toolbarState: ToolbarState = ToolbarState.Home(),
-    @DrawableRes val poster: Int = R.drawable.the_batman_poster,
-    val posterFilmName: String = "The Batman",
-    val posterAction: String = "Get your tickets now",
-    val allTabs: List<String> = listOf("On Theater", "Coming Soon"),
-    val selectedTabIndex: Int = 0
-)
 
 @Preview
 @PreviewScreenSizes

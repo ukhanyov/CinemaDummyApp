@@ -3,9 +3,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cinemadummyapp.*
 import com.example.cinemadummyapp.common.navigateSingleTopTo
-import com.example.cinemadummyapp.screens.*
+import com.example.cinemadummyapp.interaction.InteractionScreen
+import com.example.cinemadummyapp.onboarding.*
 
 @Composable
 fun CinemaNavHost(
@@ -49,7 +49,7 @@ fun CinemaNavHost(
             )
         }
         composable(route = Usage.route) {
-            UsageScreen()
+            InteractionScreen()
         }
     }
 }

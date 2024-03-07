@@ -1,4 +1,4 @@
-package com.example.cinemadummyapp.screens
+package com.example.cinemadummyapp.onboarding
 
 import android.app.Activity
 import androidx.compose.foundation.BorderStroke
