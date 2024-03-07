@@ -115,8 +115,10 @@ fun HomeScreen(
                     .background(Color.Black)
             ) {
                 TabRow(
-                    modifier = Modifier.background(Color.Black),
-                    selectedTabIndex = homeState.selectedTabIndex
+                    modifier = Modifier,
+                    selectedTabIndex = homeState.selectedTabIndex,
+                    containerColor = Color.Black,
+                    divider = {}
                 ) {
                     homeState.allTabs.forEachIndexed { index, title ->
                         Tab(
@@ -129,7 +131,7 @@ fun HomeScreen(
                                 )
                             },
                             selected = homeState.selectedTabIndex == index,
-                            onClick = { onTabSelected(index) }
+                            onClick = { onTabSelected(index) },
                         )
                     }
                 }
