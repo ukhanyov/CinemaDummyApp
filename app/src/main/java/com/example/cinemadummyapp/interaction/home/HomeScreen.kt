@@ -102,25 +102,36 @@ fun HomeScreen(
                     .weight(1f)
                     .background(Color.Black)
             ) {
-                TabRow(
-                    modifier = Modifier,
-                    selectedTabIndex = homeState.selectedTabIndex,
-                    containerColor = Color.Black,
-                    divider = {}
-                ) {
-                    homeState.allTabs.forEachIndexed { index, title ->
-                        Tab(
-                            modifier = Modifier.background(Color.Black),
-                            text = {
-                                Text(
-                                    text = title,
-                                    color = Color.White,
-                                    fontSize = 16.sp
-                                )
-                            },
-                            selected = homeState.selectedTabIndex == index,
-                            onClick = { onTabSelected(index) },
-                        )
+                Column {
+                    TabRow(
+                        modifier = Modifier,
+                        selectedTabIndex = homeState.selectedTabIndex,
+                        containerColor = Color.Black,
+                        divider = {}
+                    ) {
+                        homeState.allTabs.forEachIndexed { index, title ->
+                            Tab(
+                                modifier = Modifier.background(Color.Black),
+                                text = {
+                                    Text(
+                                        text = title,
+                                        color = Color.White,
+                                        fontSize = 16.sp
+                                    )
+                                },
+                                selected = homeState.selectedTabIndex == index,
+                                onClick = { onTabSelected(index) },
+                            )
+                        }
+                    }
+                    when {
+                        homeState.allTabs[homeState.selectedTabIndex] == "On Theater" -> {
+                            OnTheaterScreen(homeState.onTheaterList)
+                        }
+
+                        homeState.allTabs[homeState.selectedTabIndex] == "Coming Soon" -> {
+
+                        }
                     }
                 }
             }

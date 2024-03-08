@@ -14,7 +14,8 @@ fun CinemaNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Onboarding.route,
+        startDestination = Usage.route,
+//        startDestination = Onboarding.route,
         modifier = modifier
     ) {
         composable(route = Onboarding.route) {
