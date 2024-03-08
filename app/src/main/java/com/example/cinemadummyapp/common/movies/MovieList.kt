@@ -65,3 +65,66 @@ val onTheater = listOf(
         description = "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
     ),
 )
+
+val comingSoon = listOf(
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.the_good_the_bad_and_the_ugly,
+        title = "The Good, the Bad and the Ugly",
+        description = "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.forrest_gump,
+        title = "Forrest Gump",
+        description = "The history of the United States from the 1950s to the '70s unfolds from the perspective of an Alabama man with an IQ of 75, who yearns to be reunited with his childhood sweetheart.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.the_lord_of_the_rings_the_two_towers,
+        title = "The Lord of the Rings: The Two Towers",
+        description = "While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron's new ally, Saruman, and his hordes of Isengard.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.fight_club,
+        title = "Fight Club",
+        description = "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.inception,
+        title = "Inception",
+        description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.star_wars_episode_v_the_empire_strikes_back,
+        title = "Star Wars: Episode V - The Empire Strikes Back",
+        description = "After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.the_matrix,
+        title = "The Matrix",
+        description = "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.goodfellas,
+        title = "GoodFellas",
+        description = "The story of Henry Hill and his life in the mafia, covering his relationship with his wife Karen and his mob partners Jimmy Conway and Tommy DeVito.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.one_flew_over_the_cuckoo_s_nest,
+        title = "One Flew Over the Cuckoo's Nest",
+        description = "In the Fall of 1963, a Korean War veteran and criminal pleads insanity and is admitted to a mental institution, where he rallies up the scared patients against the tyrannical nurse.",
+    ),
+    Movie(
+        id = UUID.randomUUID().toString(),
+        image = R.drawable.seven,
+        title = "Seven",
+        description = "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
+    ),
+)

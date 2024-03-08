@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.ToolbarState
 import com.example.cinemadummyapp.common.movies.Movie
+import com.example.cinemadummyapp.common.movies.comingSoon
 import com.example.cinemadummyapp.common.movies.onTheater
 
 data class HomeState(
@@ -14,4 +15,5 @@ data class HomeState(
     val allTabs: List<String> = listOf("On Theater", "Coming Soon"),
     val selectedTabIndex: Int = 0,
     val onTheaterList: List<Movie> = onTheater,
+    val comingSoonList: List<Movie> = comingSoon,
 )

@@ -126,11 +126,11 @@ fun HomeScreen(
                     }
                     when {
                         homeState.allTabs[homeState.selectedTabIndex] == "On Theater" -> {
-                            OnTheaterScreen(homeState.onTheaterList)
+                            MovieListScreen(homeState.onTheaterList)
                         }
 
                         homeState.allTabs[homeState.selectedTabIndex] == "Coming Soon" -> {
-
+                            MovieListScreen(homeState.comingSoonList)
                         }
                     }
                 }

@@ -29,13 +29,13 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @Composable
 fun OnTheaterScreenPreview() {
     CinemaDummyAppTheme {
-        OnTheaterScreen(onTheater)
+        MovieListScreen(onTheater)
     }
 }
 
 
 @Composable
-fun OnTheaterScreen(
+fun MovieListScreen(
     list: List<Movie>
 ) {
     LazyColumn(
