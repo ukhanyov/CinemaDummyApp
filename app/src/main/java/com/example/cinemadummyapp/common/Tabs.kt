@@ -2,7 +2,7 @@ package com.example.cinemadummyapp.common
 
 import androidx.compose.ui.unit.dp
 
-val TabHeight = 56.dp
+val TabHeight = 80.dp
 const val InactiveTabOpacity = 0.60f
 
 const val TabFadeInAnimationDuration = 150
