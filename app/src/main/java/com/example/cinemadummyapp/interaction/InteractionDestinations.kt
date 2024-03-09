@@ -26,4 +26,4 @@ object Profile : InteractionDestination {
     override val route = "interaction/profile"
 }
 
-val interactionScreens = listOf(Home, Tickets, Profile)
+val interactionScreens = listOf(Home, /*Tickets,*/ Profile)
