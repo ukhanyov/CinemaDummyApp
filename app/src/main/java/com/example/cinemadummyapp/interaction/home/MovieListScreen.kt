@@ -61,9 +61,8 @@ fun MovieListScreen(
             Box(
                 modifier = Modifier
                     .padding(itemPadding)
-                    .size(itemWidthDp) // Make Box take maximum space within parent
-                    .aspectRatio(1f) // Enforce a 1:1 (square) aspect ratio
-//                    .weight(1f)
+                    .size(itemWidthDp)
+                    .aspectRatio(1f)
             ) {
                 Image(
                     modifier = Modifier
