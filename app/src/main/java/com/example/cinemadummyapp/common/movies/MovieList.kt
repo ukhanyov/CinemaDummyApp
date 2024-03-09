@@ -128,3 +128,5 @@ val comingSoon = listOf(
         description = "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
     ),
 )
+
+val randomMovie = (onTheater + comingSoon).random()

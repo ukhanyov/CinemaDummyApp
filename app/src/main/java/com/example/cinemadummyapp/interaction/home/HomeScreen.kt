@@ -63,9 +63,9 @@ fun HomeScreen(
                 Image(
                     modifier = Modifier
                         .fillMaxSize(),
-                    painter = painterResource(homeState.poster),
+                    painter = painterResource(homeState.movie.image),
                     contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
+                    contentScale = ContentScale.Crop,
                 )
                 Column(
                     modifier = Modifier
@@ -83,7 +83,7 @@ fun HomeScreen(
                     verticalArrangement = Arrangement.Center
                 ) {
                     Text(
-                        text = homeState.posterFilmName,
+                        text = homeState.movie.title,
                         color = Color.White,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 24.sp
