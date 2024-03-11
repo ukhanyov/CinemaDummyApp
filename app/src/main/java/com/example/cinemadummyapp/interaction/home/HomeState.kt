@@ -1,10 +1,10 @@
 package com.example.cinemadummyapp.interaction.home
 
-import com.example.cinemadummyapp.common.ToolbarState
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.comingSoon
 import com.example.cinemadummyapp.common.movies.onTheater
 import com.example.cinemadummyapp.common.movies.randomMovie
+import com.example.cinemadummyapp.common.toolbar.ToolbarState
 
 data class HomeState(
     val toolbarState: ToolbarState = ToolbarState.Home(),

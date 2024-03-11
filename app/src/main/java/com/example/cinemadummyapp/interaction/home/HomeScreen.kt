@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
-import com.example.cinemadummyapp.common.Toolbar
+import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
@@ -50,7 +50,7 @@ fun HomeScreen(
     ).isAppearanceLightStatusBars = false
 
     Column(modifier = Modifier.fillMaxSize()) {
-        Toolbar(homeState.toolbarState)
+        AppToolbar(homeState.toolbarState)
         Column(
             modifier = Modifier
                 .fillMaxSize()
