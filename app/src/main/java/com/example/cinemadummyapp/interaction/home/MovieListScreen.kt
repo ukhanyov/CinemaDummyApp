@@ -2,6 +2,7 @@ package com.example.cinemadummyapp.interaction.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -40,7 +41,8 @@ fun OnTheaterScreenPreview() {
 
 @Composable
 fun MovieListScreen(
-    list: List<Movie>
+    list: List<Movie>,
+    onMovieSelected: (Movie) -> Unit = {},
 ) {
 
     val screenWidthDp = with(LocalDensity.current) {
@@ -63,6 +65,7 @@ fun MovieListScreen(
                     .padding(itemPadding)
                     .size(itemWidthDp)
                     .aspectRatio(1f)
+                    .clickable { onMovieSelected(it) }
             ) {
                 Image(
                     modifier = Modifier

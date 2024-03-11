@@ -3,6 +3,7 @@ package com.example.cinemadummyapp.interaction.home
 import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -21,6 +22,7 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -40,7 +42,8 @@ fun HomeScreenPreview() {
 @Composable
 fun HomeScreen(
     homeState: HomeState = HomeState(),
-    onTabSelected: (Int) -> Unit = {}
+    onTabSelected: (Int) -> Unit = {},
+    onMovieSelected: (Movie) -> Unit = {},
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.Black.toArgb()
@@ -62,7 +65,8 @@ fun HomeScreen(
             ) {
                 Image(
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .clickable { onMovieSelected(homeState.movie) },
                     painter = painterResource(homeState.movie.image),
                     contentDescription = null,
                     contentScale = ContentScale.Crop,
@@ -126,11 +130,11 @@ fun HomeScreen(
                     }
                     when {
                         homeState.allTabs[homeState.selectedTabIndex] == "On Theater" -> {
-                            MovieListScreen(homeState.onTheaterList)
+                            MovieListScreen(homeState.onTheaterList) { onMovieSelected(it) }
                         }
 
                         homeState.allTabs[homeState.selectedTabIndex] == "Coming Soon" -> {
-                            MovieListScreen(homeState.comingSoonList)
+                            MovieListScreen(homeState.comingSoonList) { onMovieSelected(it) }
                         }
                     }
                 }
