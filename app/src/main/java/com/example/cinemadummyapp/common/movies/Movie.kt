@@ -1,16 +1,13 @@
 package com.example.cinemadummyapp.common.movies
 
-import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import kotlinx.parcelize.Parcelize
 
-@Parcelize
 data class Movie(
     val id: String,
     @DrawableRes val image: Int,
     val title: String,
     val description: String
-) : Parcelable
+)
 
 fun Movie.toArgData(): String {
     return "${this.id}$deliminator${this.image}$deliminator${this.title}$deliminator${this.description}"
