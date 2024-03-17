@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -74,8 +76,7 @@ fun MovieDetailsBookingScreen(
         }
         Column(
             modifier = Modifier
-                .weight(1f)
-                .padding(16.dp),
+                .weight(1f),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
@@ -100,15 +101,32 @@ fun MovieDetailsBookingScreen(
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
-
                         Text(
+                            modifier = Modifier
+                                .drawBehind {
+                                    drawRoundRect(
+                                        color = Color.White,
+                                        cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx())
+                                    )
+                                }
+                                .padding(8.dp),
                             text = it.format(DateTimeFormatter.ofPattern("E")).capitalize() +
                                     "\n" +
                                     it.format(DateTimeFormatter.ofPattern("M/d")).capitalize(),
                             textAlign = TextAlign.Center,
                         )
                         Spacer(modifier = Modifier.size(8.dp))
-                        Text(text = "${it.hour}:${it.minute}")
+                        Text(
+                            modifier = Modifier
+                                .drawBehind {
+                                    drawRoundRect(
+                                        color = Color.White,
+                                        cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx())
+                                    )
+                                }
+                                .padding(2.dp),
+                            text = it.format(DateTimeFormatter.ofPattern("H:m"))
+                        )
                     }
                 }
             }
