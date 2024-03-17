@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.randomMovie
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import java.time.format.DateTimeFormatter
 
 val movieDetailsBookingScreenDefaultModifier = Modifier
     .fillMaxSize()
@@ -93,10 +94,21 @@ fun MovieDetailsBookingScreen(
                     .weight(0.8f)
             ) {
                 items(bookingData.schedule, key = { it.toEpochSecond() }) {
-                    Column {
-                        Text(text = "${it.dayOfWeek.name}\n${it.monthValue}/${it.dayOfMonth}")
+                    Column(
+                        modifier = Modifier
+                            .padding(4.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                    ) {
+
+                        Text(
+                            text = it.format(DateTimeFormatter.ofPattern("E")).capitalize() +
+                                    "\n" +
+                                    it.format(DateTimeFormatter.ofPattern("M/d")).capitalize(),
+                            textAlign = TextAlign.Center,
+                        )
                         Spacer(modifier = Modifier.size(8.dp))
-                        Text(text = "${it.hour}/${it.minute}")
+                        Text(text = "${it.hour}:${it.minute}")
                     }
                 }
             }
