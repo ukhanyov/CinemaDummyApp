@@ -70,7 +70,7 @@ fun MovieDetailsScreen(
     ) {
         when {
             toolbarState.selectedTabIndex == 0 -> {
-                MovieDetailsScreen(movieDetailsBookingScreenDefaultModifier, movie)
+                MovieDetailsBookingScreen(movieDetailsBookingScreenDefaultModifier, movie)
             }
 
             toolbarState.selectedTabIndex == 1 -> {

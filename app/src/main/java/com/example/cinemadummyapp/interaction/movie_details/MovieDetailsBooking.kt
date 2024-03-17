@@ -1,8 +1,10 @@
 package com.example.cinemadummyapp.interaction.movie_details
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,6 +38,9 @@ fun MovieDetailsBookingScreen(
     modifier: Modifier = Modifier,
     movie: Movie = randomMovie
 ) {
+    var bookingData by remember {
+        mutableStateOf(movie.generateBookingData())
+    }
     Column(
         modifier = modifier
     ) {
@@ -66,8 +71,35 @@ fun MovieDetailsBookingScreen(
                 overflow = TextOverflow.Ellipsis,
             )
         }
-        Box(modifier = Modifier.weight(1f)) {
-
+        Column(
+            modifier = Modifier
+                .weight(1f)
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Text(
+                modifier = Modifier.weight(0.2f),
+                text = "Sessions this week",
+                color = Color.White,
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Center,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
+            )
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(0.8f)
+            ) {
+                items(bookingData.schedule, key = { it.toEpochSecond() }) {
+                    Column {
+                        Text(text = "${it.dayOfWeek.name}\n${it.monthValue}/${it.dayOfMonth}")
+                        Spacer(modifier = Modifier.size(8.dp))
+                        Text(text = "${it.hour}/${it.minute}")
+                    }
+                }
+            }
         }
     }
 }
