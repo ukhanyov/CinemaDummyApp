@@ -36,15 +36,15 @@ fun MovieDetailsScreenPreview() {
 
 @Composable
 fun MovieDetailsScreen(
-    movie: Movie = randomMovie,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    movie: Movie = randomMovie
 ) {
+    var toolbarState by remember {
+        mutableStateOf(ToolbarState.MovieDetails())
+    }
     Column(
         modifier = modifier
     ) {
-        var toolbarState by remember {
-            mutableStateOf(ToolbarState.MovieDetails())
-        }
         AppToolbar(toolbarState) {
             toolbarState = toolbarState.copy(selectedTabIndex = it)
         }
@@ -68,6 +68,14 @@ fun MovieDetailsScreen(
             )
 
     ) {
+        when {
+            toolbarState.selectedTabIndex == 0 -> {
+                MovieDetailsScreen(movieDetailsBookingScreenDefaultModifier, movie)
+            }
 
+            toolbarState.selectedTabIndex == 1 -> {
+
+            }
+        }
     }
 }

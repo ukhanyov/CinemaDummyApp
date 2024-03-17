@@ -9,8 +9,8 @@ import com.example.cinemadummyapp.onboarding.*
 
 @Composable
 fun CinemaNavHost(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController
 ) {
     NavHost(
         navController = navController,

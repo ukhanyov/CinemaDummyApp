@@ -17,8 +17,8 @@ import com.example.cinemadummyapp.interaction.tickets.TicketsScreen
 
 @Composable
 fun InteractionNavHost(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavHostController
 ) {
     var homeState by remember {
         mutableStateOf(HomeState())
