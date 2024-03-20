@@ -123,70 +123,75 @@ fun OnboardingScreen(
                         .clickable { goToLogin() },
                     textAlign = TextAlign.Center
                 )
-                val biometricResult by promptManager.promptResults.collectAsState(initial = null)
-                val enrollActivityResult = rememberLauncherForActivityResult(
-                    contract = ActivityResultContracts.StartActivityForResult(),
-                    onResult = {
-                        Toast.makeText(activity, "${it}", Toast.LENGTH_LONG)
-                            .show()
-                    }
-                )
-                LaunchedEffect(biometricResult) {
-                    if (biometricResult is BiometricResult.AuthenticationNotSet) {
-                        if (Build.VERSION.SDK_INT >= 30) {
-                            val enrollIntent = Intent(ACTION_BIOMETRIC_ENROLL).apply {
-                                putExtra(
-                                    EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
-                                    Authenticators.BIOMETRIC_STRONG or Authenticators.DEVICE_CREDENTIAL
-                                )
-                            }
-                            enrollActivityResult.launch(enrollIntent)
-                        }
-                    }
+            }
+
+            val biometricResult by promptManager.promptResults.collectAsState(initial = null)
+            val enrollActivityResult = rememberLauncherForActivityResult(
+                contract = ActivityResultContracts.StartActivityForResult(),
+                onResult = {
+                    Toast.makeText(activity, "${it}", Toast.LENGTH_LONG)
+                        .show()
                 }
-                Icon(
-                    modifier = Modifier
-                        .size(width = 120.dp, height = 120.dp)
-                        .clickable {
-                            promptManager.showBiometricPrompt("asd", "fgh")
-                        },
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_biometric),
-                    contentDescription = null
-                )
-                biometricResult?.let { result ->
-                    when (result) {
-                        is BiometricResult.AuthenticationError -> {
-                            Toast.makeText(activity, result.error, Toast.LENGTH_LONG).show()
+            )
+            LaunchedEffect(biometricResult) {
+                if (biometricResult is BiometricResult.AuthenticationNotSet) {
+                    if (Build.VERSION.SDK_INT >= 30) {
+                        val enrollIntent = Intent(ACTION_BIOMETRIC_ENROLL).apply {
+                            putExtra(
+                                EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED,
+                                Authenticators.BIOMETRIC_STRONG or Authenticators.DEVICE_CREDENTIAL
+                            )
                         }
-
-                        BiometricResult.AuthenticationFailed -> {
-                            Toast.makeText(activity, "AuthenticationFailed", Toast.LENGTH_LONG)
-                                .show()
-                        }
-
-                        BiometricResult.AuthenticationNotSet -> {
-                            Toast.makeText(activity, "AuthenticationNotSet", Toast.LENGTH_LONG)
-                                .show()
-                        }
-
-                        BiometricResult.AuthenticationSuccess -> {
-                            Toast.makeText(activity, "AuthenticationSuccess", Toast.LENGTH_LONG)
-                                .show()
-                            goToUsage()
-                        }
-
-                        BiometricResult.FeatureUnavailable -> {
-                            Toast.makeText(activity, "FeatureUnavailable", Toast.LENGTH_LONG)
-                                .show()
-                        }
-
-                        BiometricResult.HardwareUnavailable -> {
-                            Toast.makeText(activity, "HardwareUnavailable", Toast.LENGTH_LONG)
-                                .show()
-                        }
+                        enrollActivityResult.launch(enrollIntent)
                     }
                 }
             }
+            Icon(
+                modifier = Modifier
+                    .size(width = 120.dp, height = 120.dp)
+                    .align(Alignment.BottomCenter)
+                    .padding(25.dp)
+                    .clickable {
+                        promptManager.showBiometricPrompt("Login", "via biometrics")
+                    },
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_biometric),
+                tint = Color.White,
+                contentDescription = null
+            )
+            biometricResult?.let { result ->
+                when (result) {
+                    is BiometricResult.AuthenticationError -> {
+                        Toast.makeText(activity, result.error, Toast.LENGTH_LONG).show()
+                    }
+
+                    BiometricResult.AuthenticationFailed -> {
+                        Toast.makeText(activity, "AuthenticationFailed", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    BiometricResult.AuthenticationNotSet -> {
+                        Toast.makeText(activity, "AuthenticationNotSet", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    BiometricResult.AuthenticationSuccess -> {
+                        Toast.makeText(activity, "AuthenticationSuccess", Toast.LENGTH_LONG)
+                            .show()
+                        goToUsage()
+                    }
+
+                    BiometricResult.FeatureUnavailable -> {
+                        Toast.makeText(activity, "FeatureUnavailable", Toast.LENGTH_LONG)
+                            .show()
+                    }
+
+                    BiometricResult.HardwareUnavailable -> {
+                        Toast.makeText(activity, "HardwareUnavailable", Toast.LENGTH_LONG)
+                            .show()
+                    }
+                }
+            }
+
         }
     }
 }
