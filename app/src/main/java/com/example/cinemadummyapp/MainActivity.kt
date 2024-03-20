@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.*
 import androidx.navigation.compose.rememberNavController
+import com.example.cinemadummyapp.onboarding.Onboarding
+import com.example.cinemadummyapp.onboarding.Usage
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +28,11 @@ fun CinemaApp() {
     CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
         Box(modifier = Modifier.fillMaxSize()) {
-            CinemaNavHost(navController = navController)
+            CinemaNavHost(
+                navController = navController,
+                startDestination = Onboarding.route,
+//                startDestination = Usage.route,
+            )
         }
     }
 }

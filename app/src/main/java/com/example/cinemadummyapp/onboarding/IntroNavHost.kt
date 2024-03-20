@@ -10,12 +10,12 @@ import com.example.cinemadummyapp.onboarding.*
 @Composable
 fun CinemaNavHost(
     modifier: Modifier = Modifier,
+    startDestination: String = Usage.route,
     navController: NavHostController
 ) {
     NavHost(
         navController = navController,
-        startDestination = Usage.route,
-//        startDestination = Onboarding.route,
+        startDestination = startDestination,
         modifier = modifier
     ) {
         composable(route = Onboarding.route) {
