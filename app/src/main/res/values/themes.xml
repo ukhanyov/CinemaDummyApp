@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.CinemaDummyApp" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.CinemaDummyApp" parent="Theme.AppCompat.NoActionBar" />
+
 </resources>
