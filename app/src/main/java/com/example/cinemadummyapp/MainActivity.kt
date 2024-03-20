@@ -4,6 +4,7 @@ import CinemaNavHost
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -14,7 +15,7 @@ import com.example.cinemadummyapp.onboarding.Onboarding
 import com.example.cinemadummyapp.onboarding.Usage
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
