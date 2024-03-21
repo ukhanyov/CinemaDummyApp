@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -20,7 +19,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.TabHeight
@@ -60,8 +58,11 @@ fun InteractionScreen() {
 //        val currentScreen =
 //            interactionScreens.find { it.route == currentDestination?.route } ?: Home
 
+        var hideBottomNavigation by remember { mutableStateOf(false) }
+
         Scaffold(
             floatingActionButton = {
+                if (hideBottomNavigation) return@Scaffold
                 FloatingActionButton(
                     shape = CircleShape,
                     containerColor = Color(0xFF121212),
@@ -82,6 +83,7 @@ fun InteractionScreen() {
             },
             floatingActionButtonPosition = FabPosition.Center,
             bottomBar = {
+                if (hideBottomNavigation) return@Scaffold
                 InteractionRow(
                     allScreens = interactionScreens,
                     onTabSelected = { newScreen ->
@@ -95,7 +97,8 @@ fun InteractionScreen() {
         ) { innerPadding ->
             InteractionNavHost(
                 navController = navController,
-                modifier = Modifier.padding(innerPadding)
+                modifier = Modifier.padding(innerPadding),
+                hideBottomNavigation = { hideBottomNavigation = it }
             )
         }
     }

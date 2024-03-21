@@ -18,7 +18,8 @@ import com.example.cinemadummyapp.interaction.tickets.TicketsScreen
 @Composable
 fun InteractionNavHost(
     modifier: Modifier = Modifier,
-    navController: NavHostController
+    navController: NavHostController,
+    hideBottomNavigation: (Boolean) -> Unit
 ) {
     var homeState by remember {
         mutableStateOf(HomeState())
@@ -38,12 +39,15 @@ fun InteractionNavHost(
                     navController.navigateToMovieDetails(it.toArgData())
                 },
             )
+            hideBottomNavigation(false)
         }
         composable(route = Tickets.route) {
             TicketsScreen()
+            hideBottomNavigation(false)
         }
         composable(route = Profile.route) {
             ProfileScreen()
+            hideBottomNavigation(false)
         }
         composable(
             route = MovieDetails.routeWithArgs,
@@ -54,6 +58,7 @@ fun InteractionNavHost(
                 movie = movie,
                 modifier = movieDetailsScreenDefaultModifier
             )
+            hideBottomNavigation(true)
         }
     }
 }
