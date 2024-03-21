@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -14,6 +15,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,6 +49,9 @@ fun MovieDetailsBookingScreen(
     modifier: Modifier = Modifier,
     movie: Movie = randomMovie
 ) {
+    val screenWidthDp = with(LocalDensity.current) {
+        LocalConfiguration.current.screenWidthDp.dp.toPx()
+    }
     var bookingData by remember { mutableStateOf(movie.generateBookingData()) }
     if (bookingData.selectedDate == null) {
         bookingData = bookingData.copy(
@@ -95,7 +101,7 @@ fun MovieDetailsBookingScreen(
             ) {
                 Text(
                     modifier = Modifier,
-                    text = "Sessions this week",
+                    text = "Available Sessions:",
                     color = Color.White,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
@@ -103,9 +109,11 @@ fun MovieDetailsBookingScreen(
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
+                val datesListState = rememberLazyListState()
+                var withScrollToSelectedDate by remember { mutableStateOf(true) }
                 LazyRow(
-                    modifier = Modifier
-                        .padding(top = 16.dp)
+                    modifier = Modifier.padding(top = 16.dp),
+                    state = datesListState
                 ) {
                     items(bookingData.schedule, key = { it.toEpochSecond() }) {
                         val textColor =
@@ -167,6 +175,15 @@ fun MovieDetailsBookingScreen(
                                 )
                             }
                         }
+                    }
+                }
+                if (withScrollToSelectedDate && bookingData.selectedDate != null) {
+                    withScrollToSelectedDate = false
+                    LaunchedEffect(true) {
+                        datesListState.animateScrollToItem(
+                            bookingData.schedule.indexOf(bookingData.selectedDate),
+                            -(screenWidthDp / 2).toInt()
+                        )
                     }
                 }
                 if (bookingData.selectedDate != null) {
