@@ -1,14 +1,15 @@
 package com.example.cinemadummyapp.interaction.movie_details
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -20,6 +21,7 @@ import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.randomMovie
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 val movieDetailsBookingScreenDefaultModifier = Modifier
     .fillMaxSize()
@@ -95,38 +97,39 @@ fun MovieDetailsBookingScreen(
                     .weight(0.8f)
             ) {
                 items(bookingData.schedule, key = { it.toEpochSecond() }) {
-                    Column(
+                    val textColor = Color.White
+                    val cardBorderColor = Color(0xFF242424)
+                    val cardFillColor = Color(0xFF181818)
+                    Card(
                         modifier = Modifier
-                            .padding(4.dp),
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                            .padding(horizontal = 4.dp),
+                        colors = CardColors(
+                            containerColor = cardFillColor,
+                            contentColor = cardFillColor,
+                            disabledContainerColor = cardFillColor,
+                            disabledContentColor = cardFillColor,
+                        ),
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = cardBorderColor,
+                        ),
                     ) {
-                        Text(
+                        Column(
                             modifier = Modifier
-                                .drawBehind {
-                                    drawRoundRect(
-                                        color = Color.White,
-                                        cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx())
-                                    )
-                                }
                                 .padding(8.dp),
-                            text = it.format(DateTimeFormatter.ofPattern("E")).capitalize() +
-                                    "\n" +
-                                    it.format(DateTimeFormatter.ofPattern("M/d")).capitalize(),
-                            textAlign = TextAlign.Center,
-                        )
-                        Spacer(modifier = Modifier.size(8.dp))
-                        Text(
-                            modifier = Modifier
-                                .drawBehind {
-                                    drawRoundRect(
-                                        color = Color.White,
-                                        cornerRadius = CornerRadius(5.dp.toPx(), 5.dp.toPx())
-                                    )
-                                }
-                                .padding(2.dp),
-                            text = it.format(DateTimeFormatter.ofPattern("H:m"))
-                        )
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            Text(
+                                text = it.format(DateTimeFormatter.ofPattern("E"))
+                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+                                color = textColor,
+                            )
+                            Text(
+                                text = it.format(DateTimeFormatter.ofPattern("M/d"))
+                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
+                                color = textColor,
+                            )
+                        }
                     }
                 }
             }
