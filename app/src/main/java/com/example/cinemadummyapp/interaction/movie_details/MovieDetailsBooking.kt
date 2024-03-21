@@ -47,6 +47,11 @@ fun MovieDetailsBookingScreen(
     movie: Movie = randomMovie
 ) {
     var bookingData by remember { mutableStateOf(movie.generateBookingData()) }
+    if (bookingData.selectedDate == null) {
+        bookingData = bookingData.copy(
+            selectedDate = bookingData.schedule.firstOrNull { it.isToday() }
+        )
+    }
     Column(
         modifier = modifier
     ) {
