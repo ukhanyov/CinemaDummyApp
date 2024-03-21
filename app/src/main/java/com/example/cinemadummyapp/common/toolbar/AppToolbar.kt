@@ -27,7 +27,8 @@ fun HomeScreenPreview() {
 @Composable
 fun AppToolbar(
     toolbarState: ToolbarState = ToolbarState.MovieDetails(),
-    onTabSelected: (Int) -> Unit = {}
+    onTabSelected: (Int) -> Unit = {},
+    onBackClicked: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -38,7 +39,11 @@ fun AppToolbar(
     ) {
         when (toolbarState) {
             is ToolbarState.Home -> HomeToolbar(toolbarState)
-            is ToolbarState.MovieDetails -> MovieDetailsToolbar(toolbarState) { onTabSelected(it) }
+            is ToolbarState.MovieDetails -> MovieDetailsToolbar(
+                state = toolbarState,
+                onTabSelected = { onTabSelected(it) },
+                onBackClicked = { onBackClicked() },
+            )
         }
     }
 }

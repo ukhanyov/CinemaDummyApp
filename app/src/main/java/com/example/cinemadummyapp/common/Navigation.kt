@@ -17,3 +17,7 @@ fun NavHostController.navigateSingleTopTo(route: String) = this.navigate(route) 
 fun NavHostController.navigateToMovieDetails(movie: String) {
     this.navigateSingleTopTo("${MovieDetails.route}/$movie")
 }
+
+fun NavHostController.onBackClicked() {
+    this.popBackStack()
+}

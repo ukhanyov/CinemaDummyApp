@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.cinemadummyapp.common.movies.fromArgDataToMovie
 import com.example.cinemadummyapp.common.movies.toArgData
 import com.example.cinemadummyapp.common.navigateToMovieDetails
+import com.example.cinemadummyapp.common.onBackClicked
 import com.example.cinemadummyapp.interaction.home.HomeScreen
 import com.example.cinemadummyapp.interaction.home.HomeState
 import com.example.cinemadummyapp.interaction.movie_details.MovieDetailsScreen
@@ -50,7 +51,8 @@ fun InteractionNavHost(
             val movie = it.arguments?.getString(MovieDetails.movieArg)?.fromArgDataToMovie()!!
             MovieDetailsScreen(
                 movie = movie,
-                modifier = movieDetailsScreenDefaultModifier
+                modifier = movieDetailsScreenDefaultModifier,
+                onBackClicked = { navController.onBackClicked() }
             )
             hideBottomNavigation(true)
         }
