@@ -46,9 +46,7 @@ fun MovieDetailsBookingScreen(
     modifier: Modifier = Modifier,
     movie: Movie = randomMovie
 ) {
-    var bookingData by remember {
-        mutableStateOf(movie.generateBookingData())
-    }
+    var bookingData by remember { mutableStateOf(movie.generateBookingData()) }
     Column(
         modifier = modifier
     ) {
@@ -136,13 +134,19 @@ fun MovieDetailsBookingScreen(
                                     .padding(16.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
-                                Text(
-                                    text = it.format(DateTimeFormatter.ofPattern("E"))
+                                val text = when {
+                                    it.isToday() -> "Today"
+                                    it.isTomorrow() -> "Tomorrow"
+                                    it.isYesterday() -> "Yesterday"
+                                    else -> it.format(DateTimeFormatter.ofPattern("E"))
                                         .replaceFirstChar {
                                             if (it.isLowerCase()) it.titlecase(
                                                 Locale.getDefault()
                                             ) else it.toString()
-                                        },
+                                        }
+                                }
+                                Text(
+                                    text = text,
                                     color = textColor,
                                     fontSize = 24.sp,
                                 )

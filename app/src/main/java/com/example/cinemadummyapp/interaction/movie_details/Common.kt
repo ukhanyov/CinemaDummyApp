@@ -1,6 +1,8 @@
 package com.example.cinemadummyapp.interaction.movie_details
 
 import com.example.cinemadummyapp.common.movies.Movie
+import java.time.LocalDate
+import java.time.ZoneId
 import java.time.ZonedDateTime
 
 data class Booking(
@@ -71,4 +73,16 @@ private fun getTimeSlots(): List<String> {
         returnList.add(listOfTimes.random())
     }
     return returnList.toList().sorted()
+}
+
+fun ZonedDateTime.isToday(): Boolean {
+    return this.toLocalDate().equals(LocalDate.now(ZoneId.systemDefault()))
+}
+
+fun ZonedDateTime.isTomorrow(): Boolean {
+    return this.toLocalDate().equals(LocalDate.now(ZoneId.systemDefault()).plusDays(1))
+}
+
+fun ZonedDateTime.isYesterday(): Boolean {
+    return this.toLocalDate().equals(LocalDate.now(ZoneId.systemDefault()).minusDays(1))
 }
