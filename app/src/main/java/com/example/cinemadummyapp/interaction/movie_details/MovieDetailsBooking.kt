@@ -1,6 +1,7 @@
 package com.example.cinemadummyapp.interaction.movie_details
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -78,11 +79,12 @@ fun MovieDetailsBookingScreen(
         }
         Column(
             modifier = Modifier
-                .weight(1f),
+                .weight(1f)
+                .padding(top = 32.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                modifier = Modifier.weight(0.2f),
+                modifier = Modifier,/*.weight(0.2f)*/
                 text = "Sessions this week",
                 color = Color.White,
                 fontSize = 24.sp,
@@ -94,15 +96,19 @@ fun MovieDetailsBookingScreen(
             LazyRow(
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(0.8f)
+                    .padding(top = 16.dp)
+                /*.weight(0.8f)*/
             ) {
                 items(bookingData.schedule, key = { it.toEpochSecond() }) {
-                    val textColor = Color.White
-                    val cardBorderColor = Color(0xFF242424)
-                    val cardFillColor = Color(0xFF181818)
+                    val textColor = if (bookingData.selectedDate == it) Color.Black else Color.White
+                    val cardBorderColor =
+                        if (bookingData.selectedDate == it) Color.White else Color(0xFF242424)
+                    val cardFillColor =
+                        if (bookingData.selectedDate == it) Color.White else Color(0xFF181818)
                     Card(
                         modifier = Modifier
-                            .padding(horizontal = 4.dp),
+                            .padding(horizontal = 4.dp)
+                            .clickable { bookingData = bookingData.copy(selectedDate = it) },
                         colors = CardColors(
                             containerColor = cardFillColor,
                             contentColor = cardFillColor,
