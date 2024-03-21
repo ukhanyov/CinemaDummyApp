@@ -21,9 +21,7 @@ fun InteractionNavHost(
     navController: NavHostController,
     hideBottomNavigation: (Boolean) -> Unit
 ) {
-    var homeState by remember {
-        mutableStateOf(HomeState())
-    }
+    var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
         navController = navController,
         startDestination = Home.route,
@@ -32,12 +30,8 @@ fun InteractionNavHost(
         composable(route = Home.route) {
             HomeScreen(
                 homeState = homeState,
-                onTabSelected = {
-                    homeState = homeState.copy(selectedTabIndex = it)
-                },
-                onMovieSelected = {
-                    navController.navigateToMovieDetails(it.toArgData())
-                },
+                onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
+                onMovieSelected = { navController.navigateToMovieDetails(it.toArgData()) },
             )
             hideBottomNavigation(false)
         }

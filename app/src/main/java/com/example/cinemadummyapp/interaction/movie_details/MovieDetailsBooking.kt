@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.Text
@@ -55,7 +57,7 @@ fun MovieDetailsBookingScreen(
                 .weight(1f)
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
                 text = movie.title,
@@ -80,87 +82,44 @@ fun MovieDetailsBookingScreen(
         Column(
             modifier = Modifier
                 .weight(1f)
-                .padding(top = 32.dp),
+                .padding(top = 32.dp)
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text(
-                modifier = Modifier,
-                text = "Sessions this week",
-                color = Color.White,
-                fontSize = 24.sp,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-                maxLines = 2,
-                overflow = TextOverflow.Ellipsis,
-            )
-            LazyRow(
-                modifier = Modifier
-                    .padding(top = 16.dp)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
             ) {
-                items(bookingData.schedule, key = { it.toEpochSecond() }) {
-                    val textColor = if (bookingData.selectedDate == it) Color.Black else Color.White
-                    val cardBorderColor =
-                        if (bookingData.selectedDate == it) Color.White else Color(0xFF242424)
-                    val cardFillColor =
-                        if (bookingData.selectedDate == it) Color.White else Color(0xFF181818)
-                    Card(
-                        modifier = Modifier
-                            .padding(horizontal = 4.dp)
-                            .clickable {
-                                bookingData = bookingData.copy(
-                                    selectedDate = it,
-                                    selectedTime = null,
-                                )
-                            },
-                        colors = CardColors(
-                            containerColor = cardFillColor,
-                            contentColor = cardFillColor,
-                            disabledContainerColor = cardFillColor,
-                            disabledContentColor = cardFillColor,
-                        ),
-                        border = BorderStroke(
-                            width = 1.dp,
-                            color = cardBorderColor,
-                        ),
-                    ) {
-                        Column(
-                            modifier = Modifier
-                                .padding(16.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = it.format(DateTimeFormatter.ofPattern("E"))
-                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                                color = textColor,
-                                fontSize = 24.sp,
-                            )
-                            Text(
-                                text = it.format(DateTimeFormatter.ofPattern("M/d"))
-                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
-                                color = textColor,
-                                fontSize = 20.sp,
-                            )
-                        }
-                    }
-                }
-            }
-            if (bookingData.selectedDate != null) {
+                Text(
+                    modifier = Modifier,
+                    text = "Sessions this week",
+                    color = Color.White,
+                    fontSize = 24.sp,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis,
+                )
                 LazyRow(
                     modifier = Modifier
-//                        .fillMaxSize()
                         .padding(top = 16.dp)
                 ) {
-                    items(bookingData.timeSlots, key = { it }) {
+                    items(bookingData.schedule, key = { it.toEpochSecond() }) {
                         val textColor =
-                            if (bookingData.selectedTime == it) Color.Black else Color.White
+                            if (bookingData.selectedDate == it) Color.Black else Color.White
                         val cardBorderColor =
-                            if (bookingData.selectedTime == it) Color.White else Color(0xFF242424)
+                            if (bookingData.selectedDate == it) Color.White else Color(0xFF242424)
                         val cardFillColor =
-                            if (bookingData.selectedTime == it) Color.White else Color(0xFF181818)
+                            if (bookingData.selectedDate == it) Color.White else Color(0xFF181818)
                         Card(
                             modifier = Modifier
                                 .padding(horizontal = 4.dp)
-                                .clickable { bookingData = bookingData.copy(selectedTime = it) },
+                                .clickable {
+                                    bookingData = bookingData.copy(
+                                        selectedDate = it,
+                                        selectedTime = null,
+                                    )
+                                },
                             colors = CardColors(
                                 containerColor = cardFillColor,
                                 contentColor = cardFillColor,
@@ -174,17 +133,95 @@ fun MovieDetailsBookingScreen(
                         ) {
                             Column(
                                 modifier = Modifier
-                                    .padding(8.dp),
+                                    .padding(16.dp),
                                 horizontalAlignment = Alignment.CenterHorizontally
                             ) {
                                 Text(
-                                    text = it,
+                                    text = it.format(DateTimeFormatter.ofPattern("E"))
+                                        .replaceFirstChar {
+                                            if (it.isLowerCase()) it.titlecase(
+                                                Locale.getDefault()
+                                            ) else it.toString()
+                                        },
                                     color = textColor,
+                                    fontSize = 24.sp,
+                                )
+                                Text(
+                                    text = it.format(DateTimeFormatter.ofPattern("M/d"))
+                                        .replaceFirstChar {
+                                            if (it.isLowerCase()) it.titlecase(
+                                                Locale.getDefault()
+                                            ) else it.toString()
+                                        },
+                                    color = textColor,
+                                    fontSize = 20.sp,
                                 )
                             }
                         }
                     }
                 }
+                if (bookingData.selectedDate != null) {
+                    LazyRow(
+                        modifier = Modifier
+                            .padding(top = 16.dp)
+                    ) {
+                        items(bookingData.timeSlots, key = { it }) {
+                            val textColor =
+                                if (bookingData.selectedTime == it) Color.Black else Color.White
+                            val cardBorderColor =
+                                if (bookingData.selectedTime == it) Color.White else Color(
+                                    0xFF242424
+                                )
+                            val cardFillColor =
+                                if (bookingData.selectedTime == it) Color.White else Color(
+                                    0xFF181818
+                                )
+                            Card(
+                                modifier = Modifier
+                                    .padding(horizontal = 4.dp)
+                                    .clickable {
+                                        bookingData = bookingData.copy(selectedTime = it)
+                                    },
+                                colors = CardColors(
+                                    containerColor = cardFillColor,
+                                    contentColor = cardFillColor,
+                                    disabledContainerColor = cardFillColor,
+                                    disabledContentColor = cardFillColor,
+                                ),
+                                border = BorderStroke(
+                                    width = 1.dp,
+                                    color = cardBorderColor,
+                                ),
+                            ) {
+                                Column(
+                                    modifier = Modifier.padding(8.dp),
+                                    horizontalAlignment = Alignment.CenterHorizontally
+                                ) {
+                                    Text(
+                                        text = it,
+                                        color = textColor,
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            if (bookingData.selectedDate != null && bookingData.selectedTime != null) Button(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 16.dp),
+                shape = RoundedCornerShape(10.dp),
+                onClick = { },
+            ) {
+                Text(
+                    text = "Reserve",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(vertical = 4.dp, horizontal = 16.dp),
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                )
             }
         }
     }

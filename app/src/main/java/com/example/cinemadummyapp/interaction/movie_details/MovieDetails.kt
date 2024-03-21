@@ -39,18 +39,13 @@ fun MovieDetailsScreen(
     modifier: Modifier = Modifier,
     movie: Movie = randomMovie
 ) {
-    var toolbarState by remember {
-        mutableStateOf(ToolbarState.MovieDetails())
-    }
-    Column(
-        modifier = modifier
-    ) {
+    var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails()) }
+    Column(modifier = modifier) {
         AppToolbar(toolbarState) {
             toolbarState = toolbarState.copy(selectedTabIndex = it)
         }
         Image(
-            modifier = Modifier
-                .fillMaxSize(),
+            modifier = Modifier.fillMaxSize(),
             painter = painterResource(movie.image),
             contentDescription = null,
             contentScale = ContentScale.Crop,
