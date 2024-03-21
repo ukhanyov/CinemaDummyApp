@@ -84,7 +84,7 @@ fun MovieDetailsBookingScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                modifier = Modifier,/*.weight(0.2f)*/
+                modifier = Modifier,
                 text = "Sessions this week",
                 color = Color.White,
                 fontSize = 24.sp,
@@ -95,9 +95,7 @@ fun MovieDetailsBookingScreen(
             )
             LazyRow(
                 modifier = Modifier
-                    .fillMaxSize()
                     .padding(top = 16.dp)
-                /*.weight(0.8f)*/
             ) {
                 items(bookingData.schedule, key = { it.toEpochSecond() }) {
                     val textColor = if (bookingData.selectedDate == it) Color.Black else Color.White
@@ -108,7 +106,12 @@ fun MovieDetailsBookingScreen(
                     Card(
                         modifier = Modifier
                             .padding(horizontal = 4.dp)
-                            .clickable { bookingData = bookingData.copy(selectedDate = it) },
+                            .clickable {
+                                bookingData = bookingData.copy(
+                                    selectedDate = it,
+                                    selectedTime = null,
+                                )
+                            },
                         colors = CardColors(
                             containerColor = cardFillColor,
                             contentColor = cardFillColor,
@@ -122,19 +125,63 @@ fun MovieDetailsBookingScreen(
                     ) {
                         Column(
                             modifier = Modifier
-                                .padding(8.dp),
+                                .padding(16.dp),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             Text(
                                 text = it.format(DateTimeFormatter.ofPattern("E"))
                                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
                                 color = textColor,
+                                fontSize = 24.sp,
                             )
                             Text(
                                 text = it.format(DateTimeFormatter.ofPattern("M/d"))
                                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() },
                                 color = textColor,
+                                fontSize = 20.sp,
                             )
+                        }
+                    }
+                }
+            }
+            if (bookingData.selectedDate != null) {
+                LazyRow(
+                    modifier = Modifier
+//                        .fillMaxSize()
+                        .padding(top = 16.dp)
+                ) {
+                    items(bookingData.timeSlots, key = { it }) {
+                        val textColor =
+                            if (bookingData.selectedTime == it) Color.Black else Color.White
+                        val cardBorderColor =
+                            if (bookingData.selectedTime == it) Color.White else Color(0xFF242424)
+                        val cardFillColor =
+                            if (bookingData.selectedTime == it) Color.White else Color(0xFF181818)
+                        Card(
+                            modifier = Modifier
+                                .padding(horizontal = 4.dp)
+                                .clickable { bookingData = bookingData.copy(selectedTime = it) },
+                            colors = CardColors(
+                                containerColor = cardFillColor,
+                                contentColor = cardFillColor,
+                                disabledContainerColor = cardFillColor,
+                                disabledContentColor = cardFillColor,
+                            ),
+                            border = BorderStroke(
+                                width = 1.dp,
+                                color = cardBorderColor,
+                            ),
+                        ) {
+                            Column(
+                                modifier = Modifier
+                                    .padding(8.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = it,
+                                    color = textColor,
+                                )
+                            }
                         }
                     }
                 }
