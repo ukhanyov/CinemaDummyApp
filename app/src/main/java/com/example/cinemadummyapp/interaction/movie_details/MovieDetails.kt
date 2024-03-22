@@ -72,7 +72,7 @@ fun MovieDetailsScreen(
             }
 
             toolbarState.selectedTabIndex == 1 -> {
-
+                MovieDetailsShowcaseScreen(movieDetailsShowcaseScreenDefaultModifier, movie)
             }
         }
     }
