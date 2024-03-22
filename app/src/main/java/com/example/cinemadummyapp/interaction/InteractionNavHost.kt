@@ -5,8 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.example.cinemadummyapp.common.movies.fromArgDataToMovie
-import com.example.cinemadummyapp.common.movies.toArgData
+import com.example.cinemadummyapp.common.movies.allMovies
 import com.example.cinemadummyapp.common.navigateToMovieDetails
 import com.example.cinemadummyapp.common.onBackClicked
 import com.example.cinemadummyapp.interaction.home.HomeScreen
@@ -32,7 +31,7 @@ fun InteractionNavHost(
             HomeScreen(
                 homeState = homeState,
                 onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
-                onMovieSelected = { navController.navigateToMovieDetails(it.toArgData()) },
+                onMovieSelected = { navController.navigateToMovieDetails(it.id) },
             )
             hideBottomNavigation(false)
         }
@@ -48,7 +47,8 @@ fun InteractionNavHost(
             route = MovieDetails.routeWithArgs,
             arguments = MovieDetails.arguments
         ) {
-            val movie = it.arguments?.getString(MovieDetails.movieArg)?.fromArgDataToMovie()!!
+            val movieId = it.arguments?.getString(MovieDetails.movieArg)!!
+            val movie = allMovies.first { it.id == movieId }
             MovieDetailsScreen(
                 movie = movie,
                 modifier = movieDetailsScreenDefaultModifier,

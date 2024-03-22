@@ -170,3 +170,4 @@ val comingSoon = listOf(
 )
 
 val randomMovie = (onTheater + comingSoon).random()
+val allMovies = (onTheater + comingSoon)
