@@ -6,7 +6,9 @@ data class Movie(
     val id: String,
     @DrawableRes val image: Int,
     val title: String,
-    val description: String
+    val description: String,
+    val director: String,
+    val trailerUrl: String,
 )
 
 fun Movie.toArgData(): String {
@@ -19,7 +21,9 @@ fun String.fromArgDataToMovie(): Movie {
         id = split[0],
         image = split[1].toInt(),
         title = split[2],
-        description = split[3]
+        description = split[3],
+        director = split[4],
+        trailerUrl = split[5],
     )
 }
 
