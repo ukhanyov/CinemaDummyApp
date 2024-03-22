@@ -55,12 +55,12 @@ fun MovieDetailsShowcaseScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-            ExoPlayerView(
+            MyYoutubePlayerView(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
 //                videoUrl = movie.trailerUrl,
-                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                videoId = "UKasPpGF6ds",
             )
             Column(
                 modifier = Modifier
