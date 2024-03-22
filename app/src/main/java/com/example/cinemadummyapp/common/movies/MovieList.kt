@@ -10,7 +10,7 @@ val onTheater = listOf(
         title = "The Shawshank Redemption",
         description = "Over the course of several years, two convicts form a friendship, seeking consolation and, eventually, redemption through basic compassion.",
         director = "Frank Darabont",
-        trailerUrl = "https://www.imdb.com/video/vi3877612057/?playlistId=tt0111161&ref_=tt_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -18,7 +18,7 @@ val onTheater = listOf(
         title = "The Godfather",
         description = "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
         director = "Francis Ford Coppola",
-        trailerUrl = "https://www.imdb.com/video/vi1348706585/?playlistId=tt0068646&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -26,7 +26,7 @@ val onTheater = listOf(
         title = "The Dark Knight",
         description = "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
         director = "Christopher Nolan",
-        trailerUrl = "https://www.imdb.com/video/vi324468761/?playlistId=tt0468569&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -34,7 +34,7 @@ val onTheater = listOf(
         title = "The Godfather Part II",
         description = "The early life and career of Vito Corleone in 1920s New York City is portrayed, while his son, Michael, expands and tightens his grip on the family crime syndicate.",
         director = "Francis Ford Coppola",
-        trailerUrl = "https://www.imdb.com/video/vi696162841/?playlistId=tt0071562&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -42,7 +42,7 @@ val onTheater = listOf(
         title = "12 Angry Men",
         description = "The jury in a New York City murder trial is frustrated by a single member whose skeptical caution forces them to more carefully consider the evidence before jumping to a hasty verdict.",
         director = "Sidney Lumet",
-        trailerUrl = "https://www.imdb.com/video/vi2924462873/?playlistId=tt0050083&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -50,7 +50,7 @@ val onTheater = listOf(
         title = "Schindler's List",
         description = "In German-occupied Poland during World War II, industrialist Oskar Schindler gradually becomes concerned for his Jewish workforce after witnessing their persecution by the Nazis.",
         director = "Steven Spielberg",
-        trailerUrl = "https://www.imdb.com/video/vi1158527769/?playlistId=tt0108052&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -58,7 +58,7 @@ val onTheater = listOf(
         title = "The Lord of the Rings: The Return of the King",
         description = "Gandalf and Aragorn lead the World of Men against Sauron's army to draw his gaze from Frodo and Sam as they approach Mount Doom with the One Ring.",
         director = "Peter Jackson",
-        trailerUrl = "https://www.imdb.com/video/vi718127897/?playlistId=tt0167260&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -66,7 +66,7 @@ val onTheater = listOf(
         title = "Pulp Fiction",
         description = "The lives of two mob hitmen, a boxer, a gangster and his wife, and a pair of diner bandits intertwine in four tales of violence and redemption.",
         director = "Quentin Tarantino",
-        trailerUrl = "https://www.imdb.com/video/vi2620371481/?playlistId=tt0110912&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -74,7 +74,7 @@ val onTheater = listOf(
         title = "The Lord of the Rings: The Fellowship of the Ring",
         description = "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring and save Middle-earth from the Dark Lord Sauron.",
         director = "Peter Jackson",
-        trailerUrl = "https://www.imdb.com/video/vi684573465/?playlistId=tt0120737&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -82,7 +82,7 @@ val onTheater = listOf(
         title = "Dune: Part Two",
         description = "Paul Atreides unites with Chani and the Fremen while seeking revenge against the conspirators who destroyed his family.",
         director = "Denis Villeneuve",
-        trailerUrl = "https://www.imdb.com/video/vi3332425241/?playlistId=tt15239678&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
 )
 
@@ -93,7 +93,7 @@ val comingSoon = listOf(
         title = "The Good, the Bad and the Ugly",
         description = "A bounty hunting scam joins two men in an uneasy alliance against a third in a race to find a fortune in gold buried in a remote cemetery.",
         director = "Sergio Leone",
-        trailerUrl = "https://www.imdb.com/video/vi3416964889/?playlistId=tt0060196&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -101,7 +101,7 @@ val comingSoon = listOf(
         title = "Forrest Gump",
         description = "The history of the United States from the 1950s to the '70s unfolds from the perspective of an Alabama man with an IQ of 75, who yearns to be reunited with his childhood sweetheart.",
         director = "Robert Zemeckis",
-        trailerUrl = "https://www.imdb.com/video/vi3567517977/?playlistId=tt0109830&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -109,7 +109,7 @@ val comingSoon = listOf(
         title = "The Lord of the Rings: The Two Towers",
         description = "While Frodo and Sam edge closer to Mordor with the help of the shifty Gollum, the divided fellowship makes a stand against Sauron's new ally, Saruman, and his hordes of Isengard.",
         director = "Peter Jackson",
-        trailerUrl = "https://www.imdb.com/video/vi701350681/?playlistId=tt0167261&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -117,7 +117,7 @@ val comingSoon = listOf(
         title = "Fight Club",
         description = "An insomniac office worker and a devil-may-care soap maker form an underground fight club that evolves into much more.",
         director = "David Fincher",
-        trailerUrl = "https://www.imdb.com/video/vi781228825/?playlistId=tt0137523&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -125,7 +125,7 @@ val comingSoon = listOf(
         title = "Inception",
         description = "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
         director = "Christopher Nolan",
-        trailerUrl = "https://www.imdb.com/video/vi2959588889/?playlistId=tt1375666&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -133,7 +133,7 @@ val comingSoon = listOf(
         title = "Star Wars: Episode V - The Empire Strikes Back",
         description = "After the Rebels are overpowered by the Empire, Luke Skywalker begins his Jedi training with Yoda, while his friends are pursued across the galaxy by Darth Vader and bounty hunter Boba Fett.",
         director = "Irvin Kershner",
-        trailerUrl = "https://www.imdb.com/video/vi221753881/?playlistId=tt0080684&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -141,7 +141,7 @@ val comingSoon = listOf(
         title = "The Matrix",
         description = "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
         director = "Wachowski's",
-        trailerUrl = "https://www.imdb.com/video/vi1032782617/?playlistId=tt0133093&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -149,7 +149,7 @@ val comingSoon = listOf(
         title = "GoodFellas",
         description = "The story of Henry Hill and his life in the mafia, covering his relationship with his wife Karen and his mob partners Jimmy Conway and Tommy DeVito.",
         director = "Martin Scorsese",
-        trailerUrl = "https://www.imdb.com/video/vi2673654553/?playlistId=tt0099685&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -157,7 +157,7 @@ val comingSoon = listOf(
         title = "One Flew Over the Cuckoo's Nest",
         description = "In the Fall of 1963, a Korean War veteran and criminal pleads insanity and is admitted to a mental institution, where he rallies up the scared patients against the tyrannical nurse.",
         director = "Milos Forman",
-        trailerUrl = "https://www.imdb.com/video/vi3943282969/?playlistId=tt0073486&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
     Movie(
         id = UUID.randomUUID().toString(),
@@ -165,7 +165,7 @@ val comingSoon = listOf(
         title = "Seven",
         description = "Two detectives, a rookie and a veteran, hunt a serial killer who uses the seven deadly sins as his motives.",
         director = "David Fincher",
-        trailerUrl = "https://www.imdb.com/video/vi2508831257/?playlistId=tt0114369&ref_=tt_pr_ov_vi",
+        trailerUrl = "",
     ),
 )
 
