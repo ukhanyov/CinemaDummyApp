@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -56,12 +55,17 @@ fun MovieDetailsShowcaseScreen(
                 .fillMaxSize()
                 .padding(16.dp)
         ) {
-
-            Spacer(modifier = Modifier.weight(0.35f))
+            ExoPlayerView(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .weight(1f),
+//                videoUrl = movie.trailerUrl,
+                videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+            )
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .weight(0.65f)
+                    .weight(1f)
                     .scrollable(rememberScrollState(), Orientation.Vertical),
                 verticalArrangement = Arrangement.Center,
             ) {

@@ -25,7 +25,7 @@ fun ExoPlayerViewPreview() {
         ExoPlayerView(
             modifier = Modifier
                 .fillMaxSize(),
-            videoUrl = "https://www.imdb.com/video/vi2673654553/?playlistId=tt0099685&ref_=tt_pr_ov_vi"
+            videoUrl = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
         )
     }
 }
@@ -56,6 +56,11 @@ fun ExoPlayerView(
     // Use AndroidView to embed an Android View (PlayerView) into Compose
     AndroidView(
         modifier = modifier,
-        factory = { ctx -> PlayerView(ctx).apply { player = exoPlayer } },
+        factory = { ctx ->
+            PlayerView(ctx).apply {
+                exoPlayer.playWhenReady = true
+                player = exoPlayer
+            }
+        },
     )
 }
