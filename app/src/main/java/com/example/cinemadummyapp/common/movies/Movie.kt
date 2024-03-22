@@ -8,5 +8,5 @@ data class Movie(
     val title: String,
     val description: String,
     val director: String,
-    val trailerUrl: String,
+    val youtubeTrailerVideoId: String,
 )

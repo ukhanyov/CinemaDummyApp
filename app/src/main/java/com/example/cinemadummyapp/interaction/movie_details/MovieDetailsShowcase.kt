@@ -59,8 +59,7 @@ fun MovieDetailsShowcaseScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
-//                videoUrl = movie.trailerUrl,
-                videoId = "UKasPpGF6ds",
+                videoId = movie.youtubeTrailerVideoId,
             )
             Column(
                 modifier = Modifier
