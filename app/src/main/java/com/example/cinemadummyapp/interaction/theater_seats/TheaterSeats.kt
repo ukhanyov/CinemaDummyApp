@@ -1,6 +1,8 @@
 package com.example.cinemadummyapp.interaction.theater_seats
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -15,6 +17,7 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.randomMovie
+import com.example.cinemadummyapp.common.tickets.makeTicketsGrid
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
@@ -42,6 +45,7 @@ fun TheaterSeatsScreen(
     movie: Movie = randomMovie,
 ) {
     var isButtonEnabled by remember { mutableStateOf(false) }
+    var ticketsGrid by remember { mutableStateOf(makeTicketsGrid(movie)) }
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,6 +55,9 @@ fun TheaterSeatsScreen(
             toolbarState = ToolbarState.TheaterSeats(),
             onBackClicked = { onBackClicked() }
         )
+        LazyVerticalGrid(columns = GridCells.Fixed(6)) {
+
+        }
         Button(
             modifier = Modifier
                 .fillMaxWidth()
