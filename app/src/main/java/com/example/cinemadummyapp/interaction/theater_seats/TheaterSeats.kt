@@ -3,6 +3,7 @@ package com.example.cinemadummyapp.interaction.theater_seats
 import android.app.Activity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -12,6 +13,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
@@ -25,7 +27,7 @@ import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.randomMovie
-import com.example.cinemadummyapp.common.tickets.TicketState
+import com.example.cinemadummyapp.common.tickets.TicketState.*
 import com.example.cinemadummyapp.common.tickets.makeTicketsGrid
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
@@ -70,7 +72,7 @@ fun TheaterSeatsScreen(
     var isButtonEnabled by remember { mutableStateOf(false) }
     var ticketsGrid by remember { mutableStateOf(makeTicketsGrid(movie)) }
     LaunchedEffect(ticketsGrid) {
-        isButtonEnabled = ticketsGrid.any { it.ticketState == TicketState.Selected }
+        isButtonEnabled = ticketsGrid.any { it.ticketState == Selected }
     }
     Column(
         modifier = modifier,
@@ -96,10 +98,42 @@ fun TheaterSeatsScreen(
                         textAlign = TextAlign.Center
                     )
                     tickets.forEach { ticket ->
+                        val color = when (ticket.ticketState) {
+                            Available -> ticketsAvailable
+                            Selected -> ticketsSelected
+                            Reserved -> ticketsReserved
+                        }
                         Image(
-                            modifier = Modifier.size(36.dp),
+                            modifier = Modifier
+                                .size(36.dp)
+                                .clickable {
+                                    when (ticket.ticketState) {
+                                        Available -> {
+                                            val index = ticketsGrid.indexOf(ticket)
+                                            ticketsGrid = ticketsGrid
+                                                .toMutableList()
+                                                .apply {
+                                                    this[index] =
+                                                        ticket.copy(ticketState = Selected)
+                                                }
+                                        }
+
+                                        Selected -> {
+                                            val index = ticketsGrid.indexOf(ticket)
+                                            ticketsGrid = ticketsGrid
+                                                .toMutableList()
+                                                .apply {
+                                                    this[index] =
+                                                        ticket.copy(ticketState = Available)
+                                                }
+                                        }
+
+                                        Reserved -> {}
+                                    }
+                                },
                             imageVector = ImageVector.vectorResource(id = R.drawable.seat),
-                            contentDescription = null
+                            contentDescription = null,
+                            colorFilter = ColorFilter.tint(color)
                         )
                     }
                 }
@@ -133,7 +167,7 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsAvailable)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Available: ${ticketsGrid.count { it.ticketState == TicketState.Available }}")
+                Text(text = "Available: ${ticketsGrid.count { it.ticketState == Available }}")
             }
             Row(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -143,7 +177,7 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsReserved)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Reserved: ${ticketsGrid.count { it.ticketState == TicketState.Reserved }}")
+                Text(text = "Reserved: ${ticketsGrid.count { it.ticketState == Reserved }}")
             }
             Row(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -153,7 +187,7 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsSelected)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Selected: ${ticketsGrid.count { it.ticketState == TicketState.Selected }}")
+                Text(text = "Selected: ${ticketsGrid.count { it.ticketState == Selected }}")
             }
             Text(
                 modifier = Modifier.padding(vertical = 4.dp),
