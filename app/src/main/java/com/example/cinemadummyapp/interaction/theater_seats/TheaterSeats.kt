@@ -3,6 +3,7 @@ package com.example.cinemadummyapp.interaction.theater_seats
 import android.app.Activity
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -36,6 +37,7 @@ import com.example.cinemadummyapp.ui.theme.ticketsSelected
 
 val theaterSeatsScreenDefaultModifier = Modifier
     .fillMaxSize()
+    .background(color = Color.White)
 
 //@Preview
 //@PreviewScreenSizes
@@ -168,7 +170,10 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsAvailable)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Available: ${ticketsGrid.count { it.ticketState == Available }}")
+                Text(
+                    text = "Available: ${ticketsGrid.count { it.ticketState == Available }}",
+                    color = Color.Black,
+                )
             }
             Row(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -178,7 +183,10 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsReserved)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Reserved: ${ticketsGrid.count { it.ticketState == Reserved }}")
+                Text(
+                    text = "Reserved: ${ticketsGrid.count { it.ticketState == Reserved }}",
+                    color = Color.Black,
+                )
             }
             Row(
                 modifier = Modifier.padding(vertical = 4.dp),
@@ -188,19 +196,25 @@ fun TheaterSeatsScreen(
                     drawCircle(color = ticketsSelected)
                 }
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                Text(text = "Selected: ${ticketsGrid.count { it.ticketState == Selected }}")
+                Text(
+                    text = "Selected: ${ticketsGrid.count { it.ticketState == Selected }}",
+                    color = Color.Black,
+                )
             }
             Text(
                 modifier = Modifier.padding(vertical = 4.dp),
                 text = "Movie: ${movie.title}",
+                color = Color.Black,
             )
             Text(
                 modifier = Modifier.padding(vertical = 4.dp),
-                text = "Date: ${dateText}",
+                text = "Date: $dateText",
+                color = Color.Black,
             )
             Text(
                 modifier = Modifier.padding(vertical = 4.dp),
-                text = "Session: ${timeText}",
+                text = "Session: $timeText",
+                color = Color.Black,
             )
         }
         Button(
