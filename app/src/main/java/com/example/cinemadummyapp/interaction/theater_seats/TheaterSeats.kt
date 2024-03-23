@@ -20,38 +20,39 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.movies.Movie
-import com.example.cinemadummyapp.common.movies.randomMovie
 import com.example.cinemadummyapp.common.tickets.TicketState.*
 import com.example.cinemadummyapp.common.tickets.makeTicketsGrid
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.*
+import com.example.cinemadummyapp.ui.theme.AppMainAccent
+import com.example.cinemadummyapp.ui.theme.ticketsAvailable
+import com.example.cinemadummyapp.ui.theme.ticketsReserved
+import com.example.cinemadummyapp.ui.theme.ticketsSelected
 
 val theaterSeatsScreenDefaultModifier = Modifier
     .fillMaxSize()
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun MovieDetailsShowcaseScreenPreview() {
-    CinemaDummyAppTheme {
-        TheaterSeatsScreen(
-            modifier = theaterSeatsScreenDefaultModifier,
-            movie = randomMovie,
-            dateText = "Mon 22/11",
-            timeText = "19:00"
-        )
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun MovieDetailsShowcaseScreenPreview() {
+//    CinemaDummyAppTheme {
+//        TheaterSeatsScreen(
+//            modifier = theaterSeatsScreenDefaultModifier,
+//            movie = randomMovie,
+//            dateText = "Mon 22/11",
+//            timeText = "19:00"
+//        )
+//    }
+//}
 
 @Composable
 fun TheaterSeatsScreen(
