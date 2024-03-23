@@ -21,37 +21,37 @@ private fun makeRow(
             movie = movie,
             row = row,
             seat = "A",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
             movie = movie,
             row = row,
             seat = "B",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
             movie = movie,
             row = row,
             seat = "C",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
             movie = movie,
             row = row,
             seat = "D",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
             movie = movie,
             row = row,
             seat = "E",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
             movie = movie,
             row = row,
             seat = "F",
-            ticketState = TicketState.entries.random()
+            ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
     )
 }
