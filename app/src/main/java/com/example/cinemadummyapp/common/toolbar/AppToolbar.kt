@@ -44,6 +44,10 @@ fun AppToolbar(
                 onTabSelected = { onTabSelected(it) },
                 onBackClicked = { onBackClicked() },
             )
+
+            is ToolbarState.TheaterSeats -> TheaterSeatsToolbar(
+                onBackClicked = { onBackClicked() },
+            )
         }
     }
 }
