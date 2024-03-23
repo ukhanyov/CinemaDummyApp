@@ -25,15 +25,21 @@ val movieDetailsScreenDefaultModifier = Modifier
 @Composable
 fun MovieDetailsScreenPreview() {
     CinemaDummyAppTheme {
-        MovieDetailsScreen(modifier = movieDetailsScreenDefaultModifier) {}
+        MovieDetailsScreen(
+            modifier = movieDetailsScreenDefaultModifier,
+            movie = randomMovie,
+            onBackClicked = {},
+            onSessionSelected = {},
+        )
     }
 }
 
 @Composable
 fun MovieDetailsScreen(
     modifier: Modifier = Modifier,
-    movie: Movie = randomMovie,
-    onBackClicked: () -> Unit
+    movie: Movie,
+    onBackClicked: () -> Unit,
+    onSessionSelected: () -> Unit,
 ) {
     var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails()) }
     Column(modifier = modifier) {
@@ -44,7 +50,10 @@ fun MovieDetailsScreen(
         )
         when {
             toolbarState.selectedTabIndex == 0 -> {
-                MovieDetailsBookingScreen(movieDetailsBookingScreenDefaultModifier, movie)
+                MovieDetailsBookingScreen(
+                    movieDetailsBookingScreenDefaultModifier,
+                    movie,
+                    onSessionSelected = { onSessionSelected() })
             }
 
             toolbarState.selectedTabIndex == 1 -> {

@@ -43,14 +43,18 @@ val movieDetailsBookingScreenDefaultModifier = Modifier
 @Composable
 fun MovieDetailsBookingScreenPreview() {
     CinemaDummyAppTheme {
-        MovieDetailsBookingScreen(modifier = movieDetailsBookingScreenDefaultModifier)
+        MovieDetailsBookingScreen(
+            modifier = movieDetailsBookingScreenDefaultModifier,
+            movie = randomMovie
+        )
     }
 }
 
 @Composable
 fun MovieDetailsBookingScreen(
     modifier: Modifier = Modifier,
-    movie: Movie = randomMovie
+    movie: Movie,
+    onSessionSelected: () -> Unit = {},
 ) {
     val screenWidthDp = with(LocalDensity.current) {
         LocalConfiguration.current.screenWidthDp.dp.toPx()
@@ -253,7 +257,7 @@ fun MovieDetailsBookingScreen(
                     modifier = Modifier
                         .padding(horizontal = 48.dp, vertical = 16.dp),
                     shape = RoundedCornerShape(10.dp),
-                    onClick = { },
+                    onClick = { onSessionSelected() },
                 ) {
                     Text(
                         text = "Reserve",

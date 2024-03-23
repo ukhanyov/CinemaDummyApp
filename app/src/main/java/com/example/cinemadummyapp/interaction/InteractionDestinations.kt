@@ -8,7 +8,6 @@ import androidx.compose.material.icons.filled.Star
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
-import com.example.cinemadummyapp.common.movies.Movie
 
 interface InteractionDestination {
     val icon: ImageVector
@@ -34,11 +33,23 @@ object MovieDetails : InteractionDestination {
     override val icon = Icons.Filled.Star
     override val route = "interaction/movie_details"
 
-    const val movieArg = "movie_arg"
-    val routeWithArgs = "$route/{$movieArg}"
+    const val movieIdArg = "movie_id_arg"
+    val routeWithArgs = "$route/{$movieIdArg}"
 
     val arguments = listOf(
-        navArgument(movieArg) { type = NavType.StringType }
+        navArgument(movieIdArg) { type = NavType.StringType }
+    )
+}
+
+object MovieSeats : InteractionDestination {
+    override val icon = Icons.Filled.Star
+    override val route = "interaction/movie_seats"
+
+    const val movieIdArg = "movie_id_arg"
+    val routeWithArgs = "$route/{$movieIdArg}"
+
+    val arguments = listOf(
+        navArgument(movieIdArg) { type = NavType.StringType }
     )
 }
 

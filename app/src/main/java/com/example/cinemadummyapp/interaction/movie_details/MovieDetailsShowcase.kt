@@ -32,14 +32,17 @@ val movieDetailsShowcaseScreenDefaultModifier = Modifier
 @Composable
 fun MovieDetailsShowcaseScreenPreview() {
     CinemaDummyAppTheme {
-        MovieDetailsShowcaseScreen(modifier = movieDetailsShowcaseScreenDefaultModifier)
+        MovieDetailsShowcaseScreen(
+            modifier = movieDetailsShowcaseScreenDefaultModifier,
+            movie = randomMovie
+        )
     }
 }
 
 @Composable
 fun MovieDetailsShowcaseScreen(
     modifier: Modifier = Modifier,
-    movie: Movie = randomMovie
+    movie: Movie
 ) {
     Box(modifier = modifier) {
         Image(

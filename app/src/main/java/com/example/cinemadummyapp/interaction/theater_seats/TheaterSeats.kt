@@ -36,7 +36,10 @@ val theaterSeatsScreenDefaultModifier = Modifier
 @Composable
 fun MovieDetailsShowcaseScreenPreview() {
     CinemaDummyAppTheme {
-        TheaterSeatsScreen(modifier = theaterSeatsScreenDefaultModifier)
+        TheaterSeatsScreen(
+            modifier = theaterSeatsScreenDefaultModifier,
+            movie = randomMovie
+        )
     }
 }
 
@@ -44,7 +47,7 @@ fun MovieDetailsShowcaseScreenPreview() {
 fun TheaterSeatsScreen(
     modifier: Modifier = Modifier,
     onBackClicked: () -> Unit = {},
-    movie: Movie = randomMovie,
+    movie: Movie,
 ) {
     var isButtonEnabled by remember { mutableStateOf(false) }
     var ticketsGrid by remember { mutableStateOf(makeTicketsGrid(movie)) }
