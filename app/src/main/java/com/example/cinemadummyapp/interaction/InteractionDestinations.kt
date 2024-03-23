@@ -33,11 +33,11 @@ object MovieDetails : InteractionDestination {
     override val icon = Icons.Filled.Star
     override val route = "interaction/movie_details"
 
-    const val movieIdArg = "movie_id_arg"
-    val routeWithArgs = "$route/{$movieIdArg}"
+    const val MOVIE_ID_ARF = "movie_id_arg"
+    val routeWithArgs = "$route/{$MOVIE_ID_ARF}"
 
     val arguments = listOf(
-        navArgument(movieIdArg) { type = NavType.StringType }
+        navArgument(MOVIE_ID_ARF) { type = NavType.StringType }
     )
 }
 
@@ -45,11 +45,13 @@ object MovieSeats : InteractionDestination {
     override val icon = Icons.Filled.Star
     override val route = "interaction/movie_seats"
 
-    const val movieIdArg = "movie_id_arg"
-    val routeWithArgs = "$route/{$movieIdArg}"
+    const val MOVIE_ID_ARF = "movie_id_arg"
+    const val DATE_ARG = "date_arg"
+    const val TIME_ARG = "time_arg"
+    val routeWithArgs = "$route/{$MOVIE_ID_ARF}/{$DATE_ARG}/{$TIME_ARG}"
 
     val arguments = listOf(
-        navArgument(movieIdArg) { type = NavType.StringType }
+        navArgument(MOVIE_ID_ARF) { type = NavType.StringType }
     )
 }
 

@@ -45,7 +45,8 @@ fun MovieDetailsBookingScreenPreview() {
     CinemaDummyAppTheme {
         MovieDetailsBookingScreen(
             modifier = movieDetailsBookingScreenDefaultModifier,
-            movie = randomMovie
+            movie = randomMovie,
+            onSessionSelected = { date, time -> }
         )
     }
 }
@@ -54,7 +55,7 @@ fun MovieDetailsBookingScreenPreview() {
 fun MovieDetailsBookingScreen(
     modifier: Modifier = Modifier,
     movie: Movie,
-    onSessionSelected: () -> Unit = {},
+    onSessionSelected: (String, String) -> Unit,
 ) {
     val screenWidthDp = with(LocalDensity.current) {
         LocalConfiguration.current.screenWidthDp.dp.toPx()
@@ -257,7 +258,12 @@ fun MovieDetailsBookingScreen(
                     modifier = Modifier
                         .padding(horizontal = 48.dp, vertical = 16.dp),
                     shape = RoundedCornerShape(10.dp),
-                    onClick = { onSessionSelected() },
+                    onClick = {
+                        onSessionSelected(
+                            bookingData.selectedDate!!.format(DateTimeFormatter.ofPattern("E MMMM dd")),
+                            bookingData.selectedTime!!.format(DateTimeFormatter.ofPattern("HH:mm")),
+                        )
+                    },
                 ) {
                     Text(
                         text = "Reserve",

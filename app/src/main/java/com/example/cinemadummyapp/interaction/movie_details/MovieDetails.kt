@@ -29,7 +29,7 @@ fun MovieDetailsScreenPreview() {
             modifier = movieDetailsScreenDefaultModifier,
             movie = randomMovie,
             onBackClicked = {},
-            onSessionSelected = {},
+            onSessionSelected = { date, time -> },
         )
     }
 }
@@ -39,7 +39,7 @@ fun MovieDetailsScreen(
     modifier: Modifier = Modifier,
     movie: Movie,
     onBackClicked: () -> Unit,
-    onSessionSelected: () -> Unit,
+    onSessionSelected: (String, String) -> Unit,
 ) {
     var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails()) }
     Column(modifier = modifier) {
@@ -53,7 +53,7 @@ fun MovieDetailsScreen(
                 MovieDetailsBookingScreen(
                     movieDetailsBookingScreenDefaultModifier,
                     movie,
-                    onSessionSelected = { onSessionSelected() })
+                    onSessionSelected = { date, time -> onSessionSelected(date, time) })
             }
 
             toolbarState.selectedTabIndex == 1 -> {

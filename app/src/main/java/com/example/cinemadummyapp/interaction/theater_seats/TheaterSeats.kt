@@ -44,7 +44,9 @@ fun MovieDetailsShowcaseScreenPreview() {
     CinemaDummyAppTheme {
         TheaterSeatsScreen(
             modifier = theaterSeatsScreenDefaultModifier,
-            movie = randomMovie
+            movie = randomMovie,
+            dateText = "Mon 22/11",
+            timeText = "19:00"
         )
     }
 }
@@ -54,6 +56,8 @@ fun TheaterSeatsScreen(
     modifier: Modifier = Modifier,
     onBackClicked: () -> Unit = {},
     movie: Movie,
+    dateText: String,
+    timeText: String,
 ) {
 
     val activity = LocalView.current.context as Activity
@@ -151,6 +155,18 @@ fun TheaterSeatsScreen(
                 Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
                 Text(text = "Selected: ${ticketsGrid.count { it.ticketState == TicketState.Selected }}")
             }
+            Text(
+                modifier = Modifier.padding(vertical = 4.dp),
+                text = "Movie: ${movie.title}",
+            )
+            Text(
+                modifier = Modifier.padding(vertical = 4.dp),
+                text = "Date: ${dateText}",
+            )
+            Text(
+                modifier = Modifier.padding(vertical = 4.dp),
+                text = "Session: ${timeText}",
+            )
         }
         Button(
             modifier = Modifier

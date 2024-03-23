@@ -50,13 +50,19 @@ fun InteractionNavHost(
             route = MovieDetails.routeWithArgs,
             arguments = MovieDetails.arguments
         ) {
-            val movieId = it.arguments?.getString(MovieDetails.movieIdArg)!!
+            val movieId = it.arguments?.getString(MovieDetails.MOVIE_ID_ARF)!!
             val movie = allMovies.first { it.id == movieId }
             MovieDetailsScreen(
                 movie = movie,
                 modifier = movieDetailsScreenDefaultModifier,
                 onBackClicked = { navController.onBackClicked() },
-                onSessionSelected = { navController.navigateToMovieSeats(movieId) }
+                onSessionSelected = { date, time ->
+                    navController.navigateToMovieSeats(
+                        movieId,
+                        date,
+                        time
+                    )
+                }
             )
             hideBottomNavigation(true)
         }
@@ -64,12 +70,16 @@ fun InteractionNavHost(
             route = MovieSeats.routeWithArgs,
             arguments = MovieSeats.arguments
         ) {
-            val movieId = it.arguments?.getString(MovieSeats.movieIdArg)!!
+            val movieId = it.arguments?.getString(MovieSeats.MOVIE_ID_ARF)!!
+            val date = it.arguments?.getString(MovieSeats.DATE_ARG)!!
+            val time = it.arguments?.getString(MovieSeats.TIME_ARG)!!
             val movie = allMovies.first { it.id == movieId }
             TheaterSeatsScreen(
                 movie = movie,
                 modifier = theaterSeatsScreenDefaultModifier,
                 onBackClicked = { navController.onBackClicked() },
+                dateText = date,
+                timeText = time,
             )
             hideBottomNavigation(true)
         }

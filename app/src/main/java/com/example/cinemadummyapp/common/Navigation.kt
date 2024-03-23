@@ -19,8 +19,8 @@ fun NavHostController.navigateToMovieDetails(movieId: String) {
     this.navigateSingleTopTo("${MovieDetails.route}/$movieId")
 }
 
-fun NavHostController.navigateToMovieSeats(movieId: String) {
-    this.navigateSingleTopTo("${MovieSeats.route}/$movieId")
+fun NavHostController.navigateToMovieSeats(movieId: String, date: String, time: String) {
+    this.navigateSingleTopTo("${MovieSeats.route}/$movieId/$date/$time")
 }
 
 fun NavHostController.onBackClicked() {
