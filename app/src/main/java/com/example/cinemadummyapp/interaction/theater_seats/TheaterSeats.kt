@@ -1,6 +1,7 @@
 package com.example.cinemadummyapp.interaction.theater_seats
 
 import android.app.Activity
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,8 +29,7 @@ import com.example.cinemadummyapp.common.tickets.TicketState
 import com.example.cinemadummyapp.common.tickets.makeTicketsGrid
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.AppMainAccent
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import com.example.cinemadummyapp.ui.theme.*
 
 val theaterSeatsScreenDefaultModifier = Modifier
     .fillMaxSize()
@@ -114,20 +114,44 @@ fun TheaterSeatsScreen(
                 }
             }
         }
-//        LazyVerticalGrid(
-//            modifier = Modifier.sizeIn(maxWidth = (19.dp * 6 + (4.dp * 6))),
-//            verticalArrangement = Arrangement.spacedBy(4.dp), // Adjust spacing as needed
-//            horizontalArrangement = Arrangement.Center,
-//            columns = GridCells.Fixed(6)
-//        ) {
-//            items(ticketsGrid, key = { it.id }) {
-//                Image(
-//                    modifier = Modifier,
-//                    imageVector = ImageVector.vectorResource(id = R.drawable.seat),
-//                    contentDescription = null
-//                )
-//            }
-//        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 48.dp),
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Row(
+                modifier = Modifier.padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Canvas(modifier = Modifier.size(25.dp)) {
+                    drawCircle(color = ticketsAvailable)
+                }
+                Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                Text(text = "Available: ${ticketsGrid.count { it.ticketState == TicketState.Available }}")
+            }
+            Row(
+                modifier = Modifier.padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Canvas(modifier = Modifier.size(25.dp)) {
+                    drawCircle(color = ticketsReserved)
+                }
+                Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                Text(text = "Reserved: ${ticketsGrid.count { it.ticketState == TicketState.Reserved }}")
+            }
+            Row(
+                modifier = Modifier.padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Canvas(modifier = Modifier.size(25.dp)) {
+                    drawCircle(color = ticketsSelected)
+                }
+                Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                Text(text = "Selected: ${ticketsGrid.count { it.ticketState == TicketState.Selected }}")
+            }
+        }
         Button(
             modifier = Modifier
                 .fillMaxWidth()
