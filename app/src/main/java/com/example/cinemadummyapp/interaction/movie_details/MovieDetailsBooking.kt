@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.movies.randomMovie
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import kotlinx.coroutines.delay
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -65,6 +66,10 @@ fun MovieDetailsBookingScreen(
         bookingData = bookingData.copy(
             selectedDate = bookingData.schedule.firstOrNull { it.isToday() }
         )
+    }
+    var buttonEnabled by remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = bookingData.selectedDate, key2 = bookingData.selectedTime) {
+        buttonEnabled = bookingData.selectedDate != null && bookingData.selectedTime != null
     }
     Box(modifier = modifier) {
         Image(
@@ -198,9 +203,10 @@ fun MovieDetailsBookingScreen(
                             }
                         }
                     }
-                    if (withScrollToSelectedDate && bookingData.selectedDate != null) {
-                        withScrollToSelectedDate = false
-                        LaunchedEffect(true) {
+                    LaunchedEffect(key1 = bookingData.selectedDate) {
+                        if (withScrollToSelectedDate) {
+                            withScrollToSelectedDate = false
+                            delay(350)
                             datesListState.animateScrollToItem(
                                 bookingData.schedule.indexOf(bookingData.selectedDate),
                                 -(screenWidthDp / 2).toInt()
@@ -254,10 +260,12 @@ fun MovieDetailsBookingScreen(
                         }
                     }
                 }
-                if (bookingData.selectedDate != null && bookingData.selectedTime != null) Button(
+                Button(
                     modifier = Modifier
+                        .fillMaxWidth()
                         .padding(horizontal = 48.dp, vertical = 16.dp),
                     shape = RoundedCornerShape(10.dp),
+                    enabled = buttonEnabled,
                     onClick = {
                         onSessionSelected(
                             bookingData.selectedDate!!.format(DateTimeFormatter.ofPattern("E MMMM dd")),
@@ -267,7 +275,7 @@ fun MovieDetailsBookingScreen(
                 ) {
                     Text(
                         text = "Reserve",
-                        color = Color.White,
+                        color = if (buttonEnabled) Color.White else Color.LightGray,
                         fontWeight = FontWeight.Bold,
                         modifier = Modifier
                             .padding(vertical = 4.dp, horizontal = 16.dp),
