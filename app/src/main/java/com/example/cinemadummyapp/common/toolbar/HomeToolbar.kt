@@ -1,11 +1,7 @@
 package com.example.cinemadummyapp.common.toolbar
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ShoppingCart
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -51,14 +47,6 @@ fun HomeToolbar(state: ToolbarState.Home) {
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
         )
-        Icon(
-            modifier = Modifier
-                .padding(8.dp)
-                .size(48.dp)
-                .clickable { },
-            imageVector = Icons.Filled.ShoppingCart,
-            tint = Color.White,
-            contentDescription = null,
-        )
+        Cart(tint = Color.White)
     }
 }

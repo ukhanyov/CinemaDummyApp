@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -60,15 +59,7 @@ fun MovieDetailsToolbar(
                 )
             }
         }
-        Icon(
-            modifier = Modifier
-                .padding(8.dp)
-                .size(48.dp)
-                .clickable { },
-            imageVector = Icons.Filled.ShoppingCart,
-            tint = Color.White,
-            contentDescription = null,
-        )
+        Cart(tint = Color.White)
     }
 
 }

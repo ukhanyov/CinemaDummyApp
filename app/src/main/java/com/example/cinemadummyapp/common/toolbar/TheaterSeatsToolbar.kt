@@ -60,14 +60,6 @@ fun TheaterSeatsToolbar(
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
         )
-        Icon(
-            modifier = Modifier
-                .padding(8.dp)
-                .size(48.dp)
-                .clickable { },
-            imageVector = Icons.Filled.ShoppingCart,
-            tint = Color.Black,
-            contentDescription = null,
-        )
+        Cart(tint = Color.Black)
     }
 }
