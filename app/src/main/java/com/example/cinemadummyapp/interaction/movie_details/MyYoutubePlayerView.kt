@@ -1,7 +1,7 @@
 package com.example.cinemadummyapp.interaction.movie_details
 
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.viewinterop.AndroidView
@@ -31,6 +31,12 @@ fun MyYoutubePlayerView(
     modifier: Modifier = Modifier,
     videoId: String
 ) {
+    var view by remember {
+        mutableStateOf<YouTubePlayerView?>(null)
+    }
+
+    DisposableEffect(Unit) { onDispose { view?.release() } }
+
     AndroidView(
         modifier = modifier,
         factory = { ctx ->
@@ -40,6 +46,7 @@ fun MyYoutubePlayerView(
                         youTubePlayer.loadVideo(videoId, 0f)
                     }
                 })
+                view = it
                 it
             }
         },
