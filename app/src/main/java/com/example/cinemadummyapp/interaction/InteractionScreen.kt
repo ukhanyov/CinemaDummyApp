@@ -1,6 +1,5 @@
 package com.example.cinemadummyapp.interaction
 
-import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,13 +11,10 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
-import androidx.core.view.WindowCompat
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.TabHeight
@@ -40,23 +36,12 @@ fun InteractionScreenPreview() {
 
 @Composable
 fun InteractionScreen() {
-    val activity = LocalView.current.context as Activity
-    activity.window.statusBarColor = Color.Black.toArgb()
-    WindowCompat.getInsetsController(
-        activity.window,
-        LocalView.current
-    ).isAppearanceLightStatusBars = false
-
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(AppMainAccent)
     ) {
         val navController = rememberNavController()
-//        val currentBackStack by navController.currentBackStackEntryAsState()
-//        val currentDestination = currentBackStack?.destination
-//        val currentScreen =
-//            interactionScreens.find { it.route == currentDestination?.route } ?: Home
 
         var hideBottomNavigation by remember { mutableStateOf(false) }
 

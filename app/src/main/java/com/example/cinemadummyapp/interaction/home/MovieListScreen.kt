@@ -44,7 +44,6 @@ fun MovieListScreen(
     list: List<Movie>,
     onMovieSelected: (Movie) -> Unit = {},
 ) {
-
     val screenWidthDp = with(LocalDensity.current) {
         LocalConfiguration.current.screenWidthDp.dp.toPx()
     }

@@ -9,6 +9,7 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -25,6 +26,7 @@ import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import kotlinx.coroutines.delay
 
 @Preview
 @PreviewScreenSizes
@@ -45,12 +47,15 @@ fun HomeScreen(
     onTabSelected: (Int) -> Unit = {},
     onMovieSelected: (Movie) -> Unit = {},
 ) {
+    val localView = LocalView.current
     val activity = LocalView.current.context as Activity
-    activity.window.statusBarColor = Color.Black.toArgb()
-    WindowCompat.getInsetsController(
-        activity.window,
-        LocalView.current
-    ).isAppearanceLightStatusBars = false
+
+    LaunchedEffect(key1 = true) {
+        delay(150)
+        activity.window.statusBarColor = Color.Black.toArgb()
+        WindowCompat.getInsetsController(activity.window, localView)
+            .isAppearanceLightStatusBars = false
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         AppToolbar(homeState.toolbarState)
