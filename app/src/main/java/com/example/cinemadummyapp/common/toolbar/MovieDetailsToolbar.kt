@@ -2,13 +2,10 @@ package com.example.cinemadummyapp.common.toolbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
@@ -28,8 +25,10 @@ fun MovieDetailsToolbar(
 ) {
     Row(
         modifier = Modifier
-            .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically
+            .fillMaxWidth()
+            .background(Color.Black),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Icon(
             modifier = Modifier
@@ -41,7 +40,6 @@ fun MovieDetailsToolbar(
             contentDescription = null,
         )
         TabRow(
-            modifier = Modifier,
             selectedTabIndex = state.selectedTabIndex,
             containerColor = Color.Black,
             divider = {}
@@ -61,6 +59,15 @@ fun MovieDetailsToolbar(
                 )
             }
         }
+        Icon(
+            modifier = Modifier
+                .padding(8.dp)
+                .size(48.dp)
+                .clickable { },
+            imageVector = Icons.Filled.ShoppingCart,
+            tint = Color.White,
+            contentDescription = null,
+        )
     }
 
 }

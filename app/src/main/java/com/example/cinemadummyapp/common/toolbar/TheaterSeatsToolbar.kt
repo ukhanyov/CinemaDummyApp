@@ -2,12 +2,10 @@ package com.example.cinemadummyapp.common.toolbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,6 +41,7 @@ fun TheaterSeatsToolbar(
             .fillMaxWidth()
             .background(Color.White),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Icon(
             modifier = Modifier
@@ -54,14 +53,21 @@ fun TheaterSeatsToolbar(
             contentDescription = null,
         )
         Text(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(end = 48.dp),
+            modifier = Modifier,
             text = state.title,
             color = Color.Black,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
+        )
+        Icon(
+            modifier = Modifier
+                .padding(8.dp)
+                .size(48.dp)
+                .clickable { },
+            imageVector = Icons.Filled.ShoppingCart,
+            tint = Color.Black,
+            contentDescription = null,
         )
     }
 }
