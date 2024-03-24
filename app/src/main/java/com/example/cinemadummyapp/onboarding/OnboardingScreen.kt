@@ -55,15 +55,15 @@ fun OnboardingScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(AppMainAccent)
+            .background(AppMainAccent),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceAround,
     ) {
-
         val painter = painterResource(R.drawable.logo)
         Image(
             modifier = Modifier
-                .weight(1f)
+                .weight(1.5f)
                 .aspectRatio(136.dp / 102.dp)
-                .padding(top = 16.dp)
                 .fillMaxWidth()
                 .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
             painter = painter,
@@ -74,7 +74,7 @@ fun OnboardingScreen(
         Column(
             modifier = Modifier
                 .weight(1f),
-            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
             OutlinedButton(
                 modifier = Modifier
@@ -94,20 +94,25 @@ fun OnboardingScreen(
                 )
             }
             Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                    .clickable { goToLogin() },
                 text = "Already have an account?",
                 color = Color.White,
                 fontWeight = FontWeight.Light,
-                modifier = Modifier
-                    .padding(vertical = 8.dp, horizontal = 16.dp)
-                    .clickable { goToLogin() },
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Center,
             )
         }
 
         Biometric(
-            modifier = Modifier.size(80.dp),
+            modifier = Modifier
+                .size(80.dp)
+                .padding(vertical = 48.dp)
+                .weight(1f),
             promptManager = promptManager,
             success = { goToUsage() }
         )
+
     }
 }
