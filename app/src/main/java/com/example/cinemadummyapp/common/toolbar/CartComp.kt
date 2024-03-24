@@ -1,16 +1,22 @@
 package com.example.cinemadummyapp.common.toolbar
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
@@ -21,19 +27,35 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @Composable
 fun CartPreview() {
     CinemaDummyAppTheme {
-        Cart()
+        Cart(Color.White, 2)
     }
 }
 
 @Composable
-fun Cart(tint: Color = Color.White) {
-    Icon(
-        modifier = Modifier
-            .padding(8.dp)
-            .size(48.dp)
-            .clickable { },
-        imageVector = Icons.Filled.ShoppingCart,
-        tint = tint,
-        contentDescription = null,
-    )
+fun Cart(
+    tint: Color = Color.White,
+    count: Int = 0,
+) {
+    Box {
+        Icon(
+            modifier = Modifier
+                .padding(8.dp)
+                .size(48.dp)
+                .clickable { },
+            imageVector = Icons.Filled.ShoppingCart,
+            tint = tint,
+            contentDescription = null,
+        )
+        if (count > 0) {
+            Text(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+                    .background(color = Color.Red, shape = CircleShape),
+                text = "  $count  ",
+                color = Color.White,
+                fontSize = 14.sp
+            )
+        }
+    }
 }
