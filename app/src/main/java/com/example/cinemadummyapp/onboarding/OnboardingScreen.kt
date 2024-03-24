@@ -57,65 +57,57 @@ fun OnboardingScreen(
             .fillMaxSize()
             .background(AppMainAccent)
     ) {
-        Box(
+
+        val painter = painterResource(R.drawable.logo)
+        Image(
             modifier = Modifier
                 .weight(1f)
-                .align(Alignment.CenterHorizontally)
+                .aspectRatio(136.dp / 102.dp)
+                .padding(top = 16.dp)
+                .fillMaxWidth()
+                .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
+            painter = painter,
+            contentDescription = null,
+            contentScale = ContentScale.Fit
+        )
+
+        Column(
+            modifier = Modifier
+                .weight(1f),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            val painter = painterResource(R.drawable.logo)
-            Image(
+            OutlinedButton(
                 modifier = Modifier
-                    .aspectRatio(136.dp / 102.dp)
-                    .padding(top = 16.dp)
                     .fillMaxWidth()
-                    .align(Alignment.Center)
-                    .sizeIn(maxWidth = 136.dp, maxHeight = 102.dp),
-                painter = painter,
-                contentDescription = null,
-                contentScale = ContentScale.Fit
-            )
-        }
-        Box(
-            modifier = Modifier
-                .weight(1f)
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .padding(horizontal = 48.dp),
+                shape = RoundedCornerShape(10.dp),
+                border = BorderStroke(width = 1.dp, color = Color.White),
+                onClick = { goToCreateAccount() }
             ) {
-                OutlinedButton(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 48.dp),
-                    shape = RoundedCornerShape(10.dp),
-                    border = BorderStroke(width = 1.dp, color = Color.White),
-                    onClick = { goToCreateAccount() }
-                ) {
-                    Text(
-                        text = "SIGN UP WITH EMAIL",
-                        color = Color.White,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier
-                            .padding(vertical = 4.dp, horizontal = 16.dp),
-                        textAlign = TextAlign.Center
-                    )
-                }
                 Text(
-                    text = "Already have an account?",
+                    text = "SIGN UP WITH EMAIL",
                     color = Color.White,
-                    fontWeight = FontWeight.Light,
+                    fontWeight = FontWeight.Bold,
                     modifier = Modifier
-                        .padding(vertical = 8.dp, horizontal = 16.dp)
-                        .clickable { goToLogin() },
+                        .padding(vertical = 4.dp, horizontal = 16.dp),
                     textAlign = TextAlign.Center
                 )
             }
-
-            Biometric(
-                promptManager = promptManager,
-                success = { goToUsage() }
+            Text(
+                text = "Already have an account?",
+                color = Color.White,
+                fontWeight = FontWeight.Light,
+                modifier = Modifier
+                    .padding(vertical = 8.dp, horizontal = 16.dp)
+                    .clickable { goToLogin() },
+                textAlign = TextAlign.Center
             )
         }
+
+        Biometric(
+            modifier = Modifier.size(80.dp),
+            promptManager = promptManager,
+            success = { goToUsage() }
+        )
     }
 }

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricManager
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -23,7 +22,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.*
-import androidx.compose.ui.unit.dp
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -36,16 +34,24 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 fun BiometricPreview() {
     CinemaDummyAppTheme {
         val activity = LocalView.current.context as Activity
-        Biometric(BiometricPromptManager(activity as AppCompatActivity))
+        Biometric(
+            modifier = Modifier,
+            promptManager = BiometricPromptManager(activity as AppCompatActivity),
+            success = {}
+        )
     }
 }
 
 @Composable
 fun Biometric(
+    modifier: Modifier = Modifier,
     promptManager: BiometricPromptManager,
     success: () -> Unit = {},
 ) {
-    Box {
+    Box(
+        modifier = modifier
+            .clickable { promptManager.showBiometricPrompt("Login", "via biometrics") },
+    ) {
         val activity = LocalView.current.context as Activity
         val biometricResult by promptManager.promptResults.collectAsState(initial = null)
         val enrollActivityResult = rememberLauncherForActivityResult(
@@ -66,9 +72,6 @@ fun Biometric(
             }
         }
         Icon(
-            modifier = Modifier
-                .size(120.dp)
-                .clickable { promptManager.showBiometricPrompt("Login", "via biometrics") },
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_biometric),
             tint = Color.White,
             contentDescription = null
