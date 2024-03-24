@@ -40,6 +40,7 @@ fun MovieDetailsToolbar(
             contentDescription = null,
         )
         TabRow(
+            modifier = Modifier.weight(1f),
             selectedTabIndex = state.selectedTabIndex,
             containerColor = Color.Black,
             divider = {}
