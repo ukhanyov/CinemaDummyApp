@@ -57,6 +57,54 @@ fun ProfileScreen(
             toolbarState = ToolbarState.Profile(),
             onBackClicked = { onBackClicked() }
         )
+        Column {
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 2.dp),
+                text = "User email:",
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black,
+                fontSize = 16.sp,
+            )
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 2.dp),
+                text = "username@email.com",
+                color = Color.Black,
+                fontSize = 16.sp,
+            )
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 2.dp),
+                text = "Password:",
+                fontWeight = FontWeight.SemiBold,
+                color = Color.Black,
+                fontSize = 16.sp,
+            )
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 2.dp),
+                text = "**********",
+                color = Color.Black,
+                fontSize = 16.sp,
+            )
+            Button(
+                modifier = Modifier
+                    .padding(horizontal = 48.dp, vertical = 16.dp),
+                shape = RoundedCornerShape(10.dp),
+                onClick = { onProfileDeleted() },
+            ) {
+                Text(
+                    text = "Change",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier
+                        .padding(vertical = 4.dp, horizontal = 16.dp),
+                    textAlign = TextAlign.Center,
+                    fontSize = 20.sp,
+                )
+            }
+        }
         Button(
             modifier = Modifier
                 .fillMaxWidth()
