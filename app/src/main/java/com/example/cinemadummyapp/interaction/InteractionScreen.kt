@@ -30,13 +30,14 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @Composable
 fun InteractionScreenPreview() {
     CinemaDummyAppTheme {
-        InteractionScreen(onProfileDeleted = {})
+        InteractionScreen(onProfileDeleted = {}, onProfileChange = {})
     }
 }
 
 @Composable
 fun InteractionScreen(
-    onProfileDeleted: () -> Unit
+    onProfileDeleted: () -> Unit,
+    onProfileChange: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -86,7 +87,8 @@ fun InteractionScreen(
                 navController = navController,
                 modifier = Modifier.padding(innerPadding),
                 hideBottomNavigation = { hideBottomNavigation = it },
-                onProfileDeleted = { onProfileDeleted() }
+                onProfileDeleted = { onProfileDeleted() },
+                onProfileChange = { onProfileChange() },
             )
         }
     }

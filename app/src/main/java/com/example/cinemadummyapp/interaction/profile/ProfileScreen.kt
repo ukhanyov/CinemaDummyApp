@@ -37,7 +37,8 @@ fun ProfileScreenPreview() {
 @Composable
 fun ProfileScreen(
     onBackClicked: () -> Unit = {},
-    onProfileDeleted: () -> Unit = {}
+    onProfileDeleted: () -> Unit = {},
+    onProfileChange: () -> Unit = {},
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
@@ -92,7 +93,7 @@ fun ProfileScreen(
                 modifier = Modifier
                     .padding(horizontal = 48.dp, vertical = 16.dp),
                 shape = RoundedCornerShape(10.dp),
-                onClick = { onProfileDeleted() },
+                onClick = { onProfileChange() },
             ) {
                 Text(
                     text = "Change",

@@ -24,6 +24,7 @@ fun InteractionNavHost(
     navController: NavHostController,
     hideBottomNavigation: (Boolean) -> Unit,
     onProfileDeleted: () -> Unit,
+    onProfileChange: () -> Unit,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
@@ -47,6 +48,7 @@ fun InteractionNavHost(
             ProfileScreen(
                 onBackClicked = { navController.onBackClicked() },
                 onProfileDeleted = { onProfileDeleted() },
+                onProfileChange = { onProfileChange() },
             )
             hideBottomNavigation(false)
         }

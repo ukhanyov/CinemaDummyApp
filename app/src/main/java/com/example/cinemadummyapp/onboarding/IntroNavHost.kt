@@ -56,7 +56,10 @@ fun CinemaNavHost(
             )
         }
         composable(route = Usage.route) {
-            InteractionScreen(onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) })
+            InteractionScreen(
+                onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) },
+                onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
+            )
         }
     }
 }
