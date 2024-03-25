@@ -16,4 +16,8 @@ sealed class ToolbarState {
         val title: String = "Choose Seats",
     ) : ToolbarState()
 
+    data class Profile(
+        val title: String = "Account",
+    ) : ToolbarState()
+
 }

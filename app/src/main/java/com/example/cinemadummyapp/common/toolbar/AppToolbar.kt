@@ -48,6 +48,10 @@ fun AppToolbar(
             is ToolbarState.TheaterSeats -> TheaterSeatsToolbar(
                 onBackClicked = { onBackClicked() },
             )
+
+            is ToolbarState.Profile -> ProfileToolbar(
+                onBackClicked = { onBackClicked() },
+            )
         }
     }
 }

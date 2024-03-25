@@ -1,17 +1,27 @@
 package com.example.cinemadummyapp.interaction.profile
 
 import android.app.Activity
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.cinemadummyapp.common.toolbar.AppToolbar
+import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import kotlinx.coroutines.delay
 
 @Preview
 @PreviewScreenSizes
@@ -27,17 +37,43 @@ fun ProfileScreenPreview() {
 
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(
+    onBackClicked: () -> Unit = {},
+) {
     val activity = LocalView.current.context as Activity
-    activity.window.statusBarColor = Color.Black.toArgb()
+    activity.window.statusBarColor = Color.White.toArgb()
     WindowCompat.getInsetsController(
         activity.window,
         LocalView.current
-    ).isAppearanceLightStatusBars = false
+    ).isAppearanceLightStatusBars = true
 
-    Text(
-        text = "ProfileScreen",
-        textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxSize()
-    )
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+            .padding(bottom = 36.dp),
+        verticalArrangement = Arrangement.SpaceBetween
+    ) {
+        AppToolbar(
+            toolbarState = ToolbarState.Profile(),
+            onBackClicked = { onBackClicked() }
+        )
+        Button(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 48.dp, vertical = 16.dp),
+            shape = RoundedCornerShape(10.dp),
+            onClick = {},
+        ) {
+            Text(
+                text = "Delete Account",
+                color = Color.White,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier
+                    .padding(vertical = 4.dp, horizontal = 16.dp),
+                textAlign = TextAlign.Center,
+                fontSize = 20.sp,
+            )
+        }
+    }
 }

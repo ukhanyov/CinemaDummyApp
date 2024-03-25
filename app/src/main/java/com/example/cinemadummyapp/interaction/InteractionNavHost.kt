@@ -43,7 +43,7 @@ fun InteractionNavHost(
             hideBottomNavigation(false)
         }
         composable(route = Profile.route) {
-            ProfileScreen()
+            ProfileScreen(onBackClicked = { navController.onBackClicked() })
             hideBottomNavigation(false)
         }
         composable(
