@@ -36,7 +36,7 @@ fun CinemaApp(promptManager: BiometricPromptManager) {
                 navController = navController,
                 startDestination = Onboarding.route,
 //                startDestination = Usage.route,
-                promptManager = promptManager
+                promptManager = promptManager,
             )
         }
     }

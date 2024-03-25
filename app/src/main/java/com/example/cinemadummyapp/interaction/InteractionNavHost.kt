@@ -22,7 +22,8 @@ import com.example.cinemadummyapp.interaction.tickets.TicketsScreen
 fun InteractionNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController,
-    hideBottomNavigation: (Boolean) -> Unit
+    hideBottomNavigation: (Boolean) -> Unit,
+    onProfileDeleted: () -> Unit,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
@@ -43,7 +44,10 @@ fun InteractionNavHost(
             hideBottomNavigation(false)
         }
         composable(route = Profile.route) {
-            ProfileScreen(onBackClicked = { navController.onBackClicked() })
+            ProfileScreen(
+                onBackClicked = { navController.onBackClicked() },
+                onProfileDeleted = { onProfileDeleted() },
+            )
             hideBottomNavigation(false)
         }
         composable(

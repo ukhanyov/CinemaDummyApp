@@ -13,7 +13,7 @@ fun CinemaNavHost(
     modifier: Modifier = Modifier,
     startDestination: String = Usage.route,
     navController: NavHostController,
-    promptManager: BiometricPromptManager
+    promptManager: BiometricPromptManager,
 ) {
     NavHost(
         navController = navController,
@@ -56,7 +56,7 @@ fun CinemaNavHost(
             )
         }
         composable(route = Usage.route) {
-            InteractionScreen()
+            InteractionScreen(onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) })
         }
     }
 }

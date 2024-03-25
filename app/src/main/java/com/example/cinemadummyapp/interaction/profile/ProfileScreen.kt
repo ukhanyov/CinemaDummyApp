@@ -7,7 +7,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -21,7 +20,6 @@ import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
-import kotlinx.coroutines.delay
 
 @Preview
 @PreviewScreenSizes
@@ -39,6 +37,7 @@ fun ProfileScreenPreview() {
 @Composable
 fun ProfileScreen(
     onBackClicked: () -> Unit = {},
+    onProfileDeleted: () -> Unit = {}
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
@@ -63,7 +62,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
                 .padding(horizontal = 48.dp, vertical = 16.dp),
             shape = RoundedCornerShape(10.dp),
-            onClick = {},
+            onClick = { onProfileDeleted() },
         ) {
             Text(
                 text = "Delete Account",
