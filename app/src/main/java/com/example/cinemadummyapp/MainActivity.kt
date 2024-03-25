@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
 import com.example.cinemadummyapp.onboarding.Onboarding
@@ -28,7 +29,10 @@ class MainActivity : AppCompatActivity() {
 }
 
 @Composable
-fun CinemaApp(promptManager: BiometricPromptManager) {
+fun CinemaApp(
+    promptManager: BiometricPromptManager,
+    gameViewModel: MainViewModel = viewModel(),
+) {
     CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
         Box(modifier = Modifier.fillMaxSize()) {
