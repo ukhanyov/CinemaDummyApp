@@ -49,8 +49,7 @@ fun Biometric(
     success: () -> Unit = {},
 ) {
     Box(
-        modifier = modifier
-            .clickable { promptManager.showBiometricPrompt("Login", "via biometrics") },
+        modifier = modifier,
     ) {
         val activity = LocalView.current.context as Activity
         val biometricResult by promptManager.promptResults.collectAsState(initial = null)
@@ -72,6 +71,8 @@ fun Biometric(
             }
         }
         Icon(
+            modifier = Modifier
+                .clickable { promptManager.showBiometricPrompt("Login", "via biometrics") },
             imageVector = ImageVector.vectorResource(id = R.drawable.ic_biometric),
             tint = Color.White,
             contentDescription = null
