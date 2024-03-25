@@ -9,6 +9,7 @@ import com.example.cinemadummyapp.common.movies.allMovies
 import com.example.cinemadummyapp.common.navigateToMovieDetails
 import com.example.cinemadummyapp.common.navigateToMovieSeats
 import com.example.cinemadummyapp.common.onBackClicked
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.interaction.home.HomeScreen
 import com.example.cinemadummyapp.interaction.home.HomeState
 import com.example.cinemadummyapp.interaction.movie_details.MovieDetailsScreen
@@ -25,6 +26,7 @@ fun InteractionNavHost(
     hideBottomNavigation: (Boolean) -> Unit,
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
+    goToCheckout: (List<Ticket>) -> Unit = {},
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
@@ -86,6 +88,7 @@ fun InteractionNavHost(
                 onBackClicked = { navController.onBackClicked() },
                 dateText = date,
                 timeText = time,
+                goToCheckout = { tickets -> goToCheckout(tickets) },
             )
             hideBottomNavigation(true)
         }

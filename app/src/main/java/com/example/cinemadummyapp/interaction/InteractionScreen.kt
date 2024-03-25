@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.TabHeight
 import com.example.cinemadummyapp.common.navigateSingleTopTo
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -38,6 +39,7 @@ fun InteractionScreenPreview() {
 fun InteractionScreen(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
+    goToCheckout: (List<Ticket>) -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -89,6 +91,7 @@ fun InteractionScreen(
                 hideBottomNavigation = { hideBottomNavigation = it },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
+                goToCheckout = { tickets -> goToCheckout(tickets) },
             )
         }
     }

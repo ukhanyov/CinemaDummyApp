@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.movies.Movie
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.tickets.TicketState.*
 import com.example.cinemadummyapp.common.tickets.makeTicketsGrid
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
@@ -63,6 +64,7 @@ fun TheaterSeatsScreen(
     movie: Movie,
     dateText: String,
     timeText: String,
+    goToCheckout: (List<Ticket>) -> Unit = {},
 ) {
 
     val activity = LocalView.current.context as Activity
@@ -224,7 +226,10 @@ fun TheaterSeatsScreen(
             shape = RoundedCornerShape(10.dp),
             colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
             enabled = isButtonEnabled,
-            onClick = { /*todo*/ },
+            onClick = {
+                goToCheckout(ticketsGrid.filter { it.ticketState == Selected })
+                onBackClicked()
+            },
         ) {
             Text(
                 modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),

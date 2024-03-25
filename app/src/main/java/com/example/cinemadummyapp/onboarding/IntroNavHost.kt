@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
 import com.example.cinemadummyapp.common.navigateSingleTopTo
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.interaction.InteractionScreen
 import com.example.cinemadummyapp.onboarding.*
 
@@ -14,6 +15,7 @@ fun CinemaNavHost(
     startDestination: String = Usage.route,
     navController: NavHostController,
     promptManager: BiometricPromptManager,
+    goToCheckout: (List<Ticket>) -> Unit = {},
 ) {
     NavHost(
         navController = navController,
@@ -59,6 +61,7 @@ fun CinemaNavHost(
             InteractionScreen(
                 onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) },
                 onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
+                goToCheckout = { tickets -> goToCheckout(tickets) },
             )
         }
     }

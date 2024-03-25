@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun CinemaApp(
     promptManager: BiometricPromptManager,
-    gameViewModel: MainViewModel = viewModel(),
+    mainViewModel: MainViewModel = viewModel(),
 ) {
     CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
@@ -41,6 +41,7 @@ fun CinemaApp(
                 startDestination = Onboarding.route,
 //                startDestination = Usage.route,
                 promptManager = promptManager,
+                goToCheckout = { mainViewModel.addToCart(it) }
             )
         }
     }
