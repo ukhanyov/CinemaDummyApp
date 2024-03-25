@@ -59,7 +59,7 @@ fun MovieDetailsToolbar(
                 )
             }
         }
-        Cart(tint = Color.White)
+        Cart(tint = Color.White, count = state.cart.count())
     }
 
 }

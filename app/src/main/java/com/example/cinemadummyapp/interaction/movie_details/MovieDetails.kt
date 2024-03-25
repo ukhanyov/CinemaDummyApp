@@ -6,33 +6,31 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.*
 import com.example.cinemadummyapp.common.movies.Movie
-import com.example.cinemadummyapp.common.movies.randomMovie
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 val movieDetailsScreenDefaultModifier = Modifier
     .fillMaxSize()
     .background(Color.Black)
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun MovieDetailsScreenPreview() {
-    CinemaDummyAppTheme {
-        MovieDetailsScreen(
-            modifier = movieDetailsScreenDefaultModifier,
-            movie = randomMovie,
-            onBackClicked = {},
-            onSessionSelected = { date, time -> },
-        )
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun MovieDetailsScreenPreview() {
+//    CinemaDummyAppTheme {
+//        MovieDetailsScreen(
+//            modifier = movieDetailsScreenDefaultModifier,
+//            movie = randomMovie,
+//            onBackClicked = {},
+//            onSessionSelected = { date, time -> },
+//        )
+//    }
+//}
 
 @Composable
 fun MovieDetailsScreen(
@@ -40,8 +38,9 @@ fun MovieDetailsScreen(
     movie: Movie,
     onBackClicked: () -> Unit,
     onSessionSelected: (String, String) -> Unit,
+    cart: List<Ticket>,
 ) {
-    var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails()) }
+    var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails(cart = cart)) }
     Column(modifier = modifier) {
         AppToolbar(
             toolbarState = toolbarState,

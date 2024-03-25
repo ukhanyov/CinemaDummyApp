@@ -27,6 +27,7 @@ fun InteractionNavHost(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
     goToCheckout: (List<Ticket>) -> Unit = {},
+    cart: List<Ticket>,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
@@ -37,6 +38,7 @@ fun InteractionNavHost(
         composable(route = Home.route) {
             HomeScreen(
                 homeState = homeState,
+                cart= cart,
                 onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
                 onMovieSelected = { navController.navigateToMovieDetails(it.id) },
             )
@@ -48,6 +50,7 @@ fun InteractionNavHost(
         }
         composable(route = Profile.route) {
             ProfileScreen(
+                cart = cart,
                 onBackClicked = { navController.onBackClicked() },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
@@ -70,7 +73,8 @@ fun InteractionNavHost(
                         date,
                         time
                     )
-                }
+                },
+                cart = cart,
             )
             hideBottomNavigation(true)
         }
@@ -83,11 +87,12 @@ fun InteractionNavHost(
             val time = it.arguments?.getString(MovieSeats.TIME_ARG)!!
             val movie = allMovies.first { it.id == movieId }
             TheaterSeatsScreen(
-                movie = movie,
                 modifier = theaterSeatsScreenDefaultModifier,
-                onBackClicked = { navController.onBackClicked() },
+                movie = movie,
                 dateText = date,
                 timeText = time,
+                cart = cart,
+                onBackClicked = { navController.onBackClicked() },
                 goToCheckout = { tickets -> goToCheckout(tickets) },
             )
             hideBottomNavigation(true)

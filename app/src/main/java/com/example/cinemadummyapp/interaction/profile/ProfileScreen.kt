@@ -13,29 +13,29 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun ProfileScreenPreview() {
-    CinemaDummyAppTheme {
-        ProfileScreen()
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun ProfileScreenPreview() {
+//    CinemaDummyAppTheme {
+//        ProfileScreen()
+//    }
+//}
 
 
 @Composable
 fun ProfileScreen(
+    cart: List<Ticket>,
     onBackClicked: () -> Unit = {},
     onProfileDeleted: () -> Unit = {},
     onProfileChange: () -> Unit = {},
@@ -55,7 +55,7 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppToolbar(
-            toolbarState = ToolbarState.Profile(),
+            toolbarState = ToolbarState.Profile(cart = cart),
             onBackClicked = { onBackClicked() }
         )
         Column {

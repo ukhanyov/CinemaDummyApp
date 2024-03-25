@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -24,29 +23,34 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
 import com.example.cinemadummyapp.common.movies.Movie
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
+import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 import kotlinx.coroutines.delay
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun HomeScreenPreview() {
-    CinemaDummyAppTheme {
-        HomeScreen()
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun HomeScreenPreview() {
+//    CinemaDummyAppTheme {
+//        HomeScreen()
+//    }
+//}
 
 
 @Composable
 fun HomeScreen(
     homeState: HomeState = HomeState(),
+    cart: List<Ticket>,
     onTabSelected: (Int) -> Unit = {},
     onMovieSelected: (Movie) -> Unit = {},
 ) {
+    val toolbarState by remember { mutableStateOf(ToolbarState.Home(cart = cart)) }
+
     val localView = LocalView.current
     val activity = LocalView.current.context as Activity
 
@@ -58,7 +62,7 @@ fun HomeScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        AppToolbar(homeState.toolbarState)
+        AppToolbar(toolbarState)
         Column(
             modifier = Modifier
                 .fillMaxSize()

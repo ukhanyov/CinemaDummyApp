@@ -60,10 +60,11 @@ val theaterSeatsScreenDefaultModifier = Modifier
 @Composable
 fun TheaterSeatsScreen(
     modifier: Modifier = Modifier,
-    onBackClicked: () -> Unit = {},
+    cart: List<Ticket>,
     movie: Movie,
     dateText: String,
     timeText: String,
+    onBackClicked: () -> Unit = {},
     goToCheckout: (List<Ticket>) -> Unit = {},
 ) {
 
@@ -85,7 +86,7 @@ fun TheaterSeatsScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppToolbar(
-            toolbarState = ToolbarState.TheaterSeats(),
+            toolbarState = ToolbarState.TheaterSeats(cart = cart),
             onBackClicked = { onBackClicked() }
         )
         Column {

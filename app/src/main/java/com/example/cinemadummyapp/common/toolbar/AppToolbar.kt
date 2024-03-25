@@ -8,25 +8,23 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun HomeScreenPreview() {
-    CinemaDummyAppTheme {
-        AppToolbar()
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun HomeScreenPreview() {
+//    CinemaDummyAppTheme {
+//        AppToolbar()
+//    }
+//}
 
 @Composable
 fun AppToolbar(
-    toolbarState: ToolbarState = ToolbarState.MovieDetails(),
+    toolbarState: ToolbarState,
     onTabSelected: (Int) -> Unit = {},
     onBackClicked: () -> Unit = {},
 ) {
@@ -38,7 +36,10 @@ fun AppToolbar(
         contentAlignment = Alignment.Center
     ) {
         when (toolbarState) {
-            is ToolbarState.Home -> HomeToolbar(toolbarState)
+            is ToolbarState.Home -> HomeToolbar(
+                state = toolbarState
+            )
+
             is ToolbarState.MovieDetails -> MovieDetailsToolbar(
                 state = toolbarState,
                 onTabSelected = { onTabSelected(it) },
@@ -46,10 +47,12 @@ fun AppToolbar(
             )
 
             is ToolbarState.TheaterSeats -> TheaterSeatsToolbar(
+                state = toolbarState,
                 onBackClicked = { onBackClicked() },
             )
 
             is ToolbarState.Profile -> ProfileToolbar(
+                state = toolbarState,
                 onBackClicked = { onBackClicked() },
             )
         }

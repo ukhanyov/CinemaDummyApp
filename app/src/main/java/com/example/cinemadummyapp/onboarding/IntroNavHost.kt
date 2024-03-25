@@ -16,6 +16,7 @@ fun CinemaNavHost(
     navController: NavHostController,
     promptManager: BiometricPromptManager,
     goToCheckout: (List<Ticket>) -> Unit = {},
+    cart: List<Ticket>,
 ) {
     NavHost(
         navController = navController,
@@ -62,6 +63,7 @@ fun CinemaNavHost(
                 onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) },
                 onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
                 goToCheckout = { tickets -> goToCheckout(tickets) },
+                cart = cart,
             )
         }
     }
