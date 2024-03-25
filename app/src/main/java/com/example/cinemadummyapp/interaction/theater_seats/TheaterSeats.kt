@@ -233,7 +233,7 @@ fun TheaterSeatsScreen(
         ) {
             Text(
                 modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),
-                text = "Continue",
+                text = "Add to Cart",
                 color = if (isButtonEnabled) Color.White else Color.DarkGray,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center
