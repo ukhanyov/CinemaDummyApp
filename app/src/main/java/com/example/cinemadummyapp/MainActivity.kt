@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
@@ -37,7 +38,7 @@ fun CinemaApp(
 ) {
     CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
-        val cart by mainViewModel.cartTickets.collectAsState()
+        val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
 
         Box(modifier = Modifier.fillMaxSize()) {
             CinemaNavHost(
