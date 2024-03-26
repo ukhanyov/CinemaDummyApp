@@ -1,13 +1,16 @@
 package com.example.cinemadummyapp
 
 import CinemaNavHost
+import android.app.Activity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalView
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
@@ -47,6 +50,7 @@ fun CinemaApp(
         }
 
         Box(modifier = Modifier.fillMaxSize()) {
+            val activity = LocalView.current.context as Activity
             CinemaNavHost(
                 navController = navController,
                 startDestination = Onboarding.route,
@@ -54,6 +58,14 @@ fun CinemaApp(
                 promptManager = promptManager,
                 addToCart = { mainViewModel.addToCart(it) },
                 cart = cart,
+                onCartClicked = {
+                    Toast.makeText(
+                        activity,
+                        "click registered",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    showCartSheet = true
+                }
             )
         }
     }

@@ -39,13 +39,15 @@ fun MovieDetailsScreen(
     onBackClicked: () -> Unit,
     onSessionSelected: (String, String) -> Unit,
     cart: List<Ticket>,
+    onCartClicked: () -> Unit,
 ) {
     var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails(cart = cart)) }
     Column(modifier = modifier) {
         AppToolbar(
             toolbarState = toolbarState,
             onTabSelected = { toolbarState = toolbarState.copy(selectedTabIndex = it) },
-            onBackClicked = { onBackClicked() }
+            onBackClicked = { onBackClicked() },
+            onCartClicked = { onCartClicked() }
         )
         when {
             toolbarState.selectedTabIndex == 0 -> {

@@ -15,12 +15,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.common.tickets.Ticket
 
 @Composable
 fun MovieDetailsToolbar(
     state: ToolbarState.MovieDetails,
     onTabSelected: (Int) -> Unit = {},
     onBackClicked: () -> Unit = {},
+    onCartClicked: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -59,7 +61,7 @@ fun MovieDetailsToolbar(
                 )
             }
         }
-        Cart(tint = Color.White, count = state.cart.count())
+        Cart(tint = Color.White, cart = state.cart, onCartClicked = { onCartClicked() })
     }
 
 }

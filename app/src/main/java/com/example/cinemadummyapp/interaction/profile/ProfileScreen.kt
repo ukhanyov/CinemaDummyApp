@@ -39,6 +39,7 @@ fun ProfileScreen(
     onBackClicked: () -> Unit = {},
     onProfileDeleted: () -> Unit = {},
     onProfileChange: () -> Unit = {},
+    onCartClicked: () -> Unit,
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
@@ -56,7 +57,8 @@ fun ProfileScreen(
     ) {
         AppToolbar(
             toolbarState = ToolbarState.Profile(cart = cart),
-            onBackClicked = { onBackClicked() }
+            onBackClicked = { onBackClicked() },
+            onCartClicked = { onCartClicked() }
         )
         Column {
             Text(

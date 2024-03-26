@@ -27,6 +27,7 @@ fun AppToolbar(
     toolbarState: ToolbarState,
     onTabSelected: (Int) -> Unit = {},
     onBackClicked: () -> Unit = {},
+    onCartClicked: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -37,23 +38,27 @@ fun AppToolbar(
     ) {
         when (toolbarState) {
             is ToolbarState.Home -> HomeToolbar(
-                state = toolbarState
+                state = toolbarState,
+                onCartClicked = { onCartClicked() },
             )
 
             is ToolbarState.MovieDetails -> MovieDetailsToolbar(
                 state = toolbarState,
                 onTabSelected = { onTabSelected(it) },
                 onBackClicked = { onBackClicked() },
+                onCartClicked = { onCartClicked() },
             )
 
             is ToolbarState.TheaterSeats -> TheaterSeatsToolbar(
                 state = toolbarState,
                 onBackClicked = { onBackClicked() },
+                onCartClicked = { onCartClicked() },
             )
 
             is ToolbarState.Profile -> ProfileToolbar(
                 state = toolbarState,
                 onBackClicked = { onBackClicked() },
+                onCartClicked = { onCartClicked() },
             )
         }
     }

@@ -31,7 +31,11 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @Composable
 fun InteractionScreenPreview() {
     CinemaDummyAppTheme {
-        InteractionScreen(onProfileDeleted = {}, onProfileChange = {}, cart = emptyList())
+        InteractionScreen(
+            onProfileDeleted = {},
+            onProfileChange = {},
+            cart = emptyList(),
+            onCartClicked = {})
     }
 }
 
@@ -41,6 +45,7 @@ fun InteractionScreen(
     onProfileChange: () -> Unit,
     addToCart: (List<Ticket>) -> Unit = {},
     cart: List<Ticket>,
+    onCartClicked: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -94,6 +99,7 @@ fun InteractionScreen(
                 onProfileChange = { onProfileChange() },
                 addToCart = { tickets -> addToCart(tickets) },
                 cart = cart,
+                onCartClicked = { onCartClicked() }
             )
         }
     }

@@ -28,6 +28,7 @@ fun InteractionNavHost(
     onProfileChange: () -> Unit,
     addToCart: (List<Ticket>) -> Unit = {},
     cart: List<Ticket>,
+    onCartClicked: () -> Unit,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
@@ -38,9 +39,10 @@ fun InteractionNavHost(
         composable(route = Home.route) {
             HomeScreen(
                 homeState = homeState,
-                cart= cart,
+                cart = cart,
                 onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
                 onMovieSelected = { navController.navigateToMovieDetails(it.id) },
+                onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(false)
         }
@@ -54,6 +56,7 @@ fun InteractionNavHost(
                 onBackClicked = { navController.onBackClicked() },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
+                onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(false)
         }
@@ -75,6 +78,7 @@ fun InteractionNavHost(
                     )
                 },
                 cart = cart,
+                onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(true)
         }
@@ -94,6 +98,7 @@ fun InteractionNavHost(
                 cart = cart,
                 onBackClicked = { navController.onBackClicked() },
                 addToCart = { tickets -> addToCart(tickets) },
+                onCartClicked = { onCartClicked() }
             )
             hideBottomNavigation(true)
         }

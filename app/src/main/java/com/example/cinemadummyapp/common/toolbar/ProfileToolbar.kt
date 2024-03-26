@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.common.tickets.Ticket
 
 //@Preview
 //@PreviewScreenSizes
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.sp
 fun ProfileToolbar(
     state: ToolbarState.Profile,
     onBackClicked: () -> Unit = {},
+    onCartClicked: () -> Unit = {}
 ) {
     Row(
         modifier = Modifier
@@ -57,6 +59,6 @@ fun ProfileToolbar(
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
         )
-        Cart(tint = Color.Black, count = state.cart.count())
+        Cart(tint = Color.Black, cart = state.cart, onCartClicked = { onCartClicked() })
     }
 }

@@ -18,7 +18,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
@@ -26,7 +25,6 @@ import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 import kotlinx.coroutines.delay
 
 //@Preview
@@ -48,6 +46,7 @@ fun HomeScreen(
     cart: List<Ticket>,
     onTabSelected: (Int) -> Unit = {},
     onMovieSelected: (Movie) -> Unit = {},
+    onCartClicked: () -> Unit,
 ) {
     val toolbarState by remember { mutableStateOf(ToolbarState.Home(cart = cart)) }
 
@@ -62,7 +61,7 @@ fun HomeScreen(
     }
 
     Column(modifier = Modifier.fillMaxSize()) {
-        AppToolbar(toolbarState)
+        AppToolbar(toolbarState, onCartClicked = { onCartClicked() })
         Column(
             modifier = Modifier
                 .fillMaxSize()

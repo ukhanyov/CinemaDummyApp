@@ -66,6 +66,7 @@ fun TheaterSeatsScreen(
     timeText: String,
     onBackClicked: () -> Unit = {},
     addToCart: (List<Ticket>) -> Unit = {},
+    onCartClicked: () -> Unit,
 ) {
 
     val activity = LocalView.current.context as Activity
@@ -87,7 +88,8 @@ fun TheaterSeatsScreen(
     ) {
         AppToolbar(
             toolbarState = ToolbarState.TheaterSeats(cart = cart),
-            onBackClicked = { onBackClicked() }
+            onBackClicked = { onBackClicked() },
+            onCartClicked = { onCartClicked() },
         )
         Column {
             ticketsGrid.groupBy { it.row }.forEach { (row, tickets) ->

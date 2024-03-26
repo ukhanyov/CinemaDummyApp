@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
@@ -27,16 +28,17 @@ import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 @Composable
 fun CartPreview() {
     CinemaDummyAppTheme {
-        Cart(Color.White, 2)
+        Cart(Color.White, listOf(), onCartClicked = {})
     }
 }
 
 @Composable
 fun Cart(
     tint: Color = Color.White,
-    count: Int = 0,
+    cart: List<Ticket>,
+    onCartClicked: () -> Unit
 ) {
-    Box {
+    Box(modifier = Modifier.clickable { onCartClicked() }) {
         Icon(
             modifier = Modifier
                 .padding(8.dp)
@@ -46,13 +48,13 @@ fun Cart(
             tint = tint,
             contentDescription = null,
         )
-        if (count > 0) {
+        if (cart.isNotEmpty()) {
             Text(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(horizontal = 8.dp, vertical = 4.dp)
                     .background(color = Color.Red, shape = CircleShape),
-                text = "  $count  ",
+                text = "  ${cart.count()}  ",
                 color = Color.White,
                 fontSize = 14.sp
             )

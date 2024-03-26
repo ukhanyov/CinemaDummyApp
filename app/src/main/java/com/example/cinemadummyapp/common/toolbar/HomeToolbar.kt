@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.common.tickets.Ticket
 
 //@Preview
 //@PreviewScreenSizes
@@ -25,7 +26,10 @@ import androidx.compose.ui.unit.sp
 //}
 
 @Composable
-fun HomeToolbar(state: ToolbarState.Home) {
+fun HomeToolbar(
+    state: ToolbarState.Home,
+    onCartClicked: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -45,6 +49,6 @@ fun HomeToolbar(state: ToolbarState.Home) {
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp
         )
-        Cart(tint = Color.White, count = state.cart.count())
+        Cart(tint = Color.White, cart = state.cart, onCartClicked = { onCartClicked() })
     }
 }
