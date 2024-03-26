@@ -6,12 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
+import com.example.cinemadummyapp.common.CartBottomSheet
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
 import com.example.cinemadummyapp.onboarding.Onboarding
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
@@ -38,6 +38,13 @@ fun CinemaApp(
     CinemaDummyAppTheme(dynamicColor = false) {
         val navController = rememberNavController()
         val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
+
+        var showCartSheet by remember { mutableStateOf(false) }
+        if (showCartSheet) {
+            CartBottomSheet() {
+                showCartSheet = false
+            }
+        }
 
         Box(modifier = Modifier.fillMaxSize()) {
             CinemaNavHost(
