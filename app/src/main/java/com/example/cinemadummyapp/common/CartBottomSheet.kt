@@ -124,8 +124,7 @@ fun CartTickets(
                         )
                     }
                     Button(
-                        modifier = Modifier
-                            .padding(horizontal = 48.dp, vertical = 16.dp),
+                        modifier = Modifier.padding(vertical = 8.dp),
                         shape = RoundedCornerShape(10.dp),
                         onClick = { removeItem() },
                     ) {
