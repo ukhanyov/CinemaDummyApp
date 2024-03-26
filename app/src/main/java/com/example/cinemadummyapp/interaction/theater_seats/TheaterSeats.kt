@@ -230,7 +230,15 @@ fun TheaterSeatsScreen(
             colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
             enabled = isButtonEnabled,
             onClick = {
-                addToCart(ticketsGrid.filter { it.ticketState == Selected })
+                addToCart(
+                    ticketsGrid.filter { it.ticketState == Selected }
+                        .map {
+                            it.copy(
+                                date = dateText,
+                                time = timeText,
+                            )
+                        }
+                )
                 onBackClicked()
             },
         ) {

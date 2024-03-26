@@ -82,7 +82,7 @@ fun CartTickets(
                         )
                         Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
                         Text(
-                            text = "${ticket.id}",
+                            text = "${ticket.date} - ${ticket.time}",
                             color = Color.Black,
                             fontSize = 14.sp,
                         )

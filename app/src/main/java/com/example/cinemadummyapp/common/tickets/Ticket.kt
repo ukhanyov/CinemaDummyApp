@@ -5,6 +5,8 @@ import java.util.UUID
 
 data class Ticket(
     val id: String = UUID.randomUUID().toString(),
+    val date: String,
+    val time: String,
     val movie: Movie,
     val row: Int,
     val seat: String,

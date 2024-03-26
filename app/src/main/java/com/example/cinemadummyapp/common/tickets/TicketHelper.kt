@@ -18,36 +18,48 @@ private fun makeRow(
 ): List<Ticket> {
     return listOf(
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "A",
             ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "B",
             ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "C",
             ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "D",
             ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "E",
             ticketState = listOf(TicketState.Available, TicketState.Reserved).random()
         ),
         Ticket(
+            date = "",
+            time = "",
             movie = movie,
             row = row,
             seat = "F",
