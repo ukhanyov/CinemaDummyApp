@@ -12,6 +12,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -58,12 +59,13 @@ fun CartTickets(
             ) {
                 Image(
                     modifier = Modifier
-                        .size(width = 49.dp, height = 74.dp)
+                        .size(width = 120.dp, height = 180.dp)
                         .padding(16.dp)
-                        .weight(1f),
+                        .weight(1f)
+                        .clip(RoundedCornerShape(16.dp)),
                     painter = painterResource(ticket.movie.image),
                     contentDescription = null,
-//                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Crop,
                 )
                 Column(
                     modifier = Modifier
