@@ -73,14 +73,16 @@ fun CartTickets(
                         .weight(2f)
                 ) {
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             imageVector = Icons.Filled.DateRange,
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = Color.Black,
                         )
-                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
                         Text(
                             text = "${ticket.date} - ${ticket.time}",
                             color = Color.Black,
@@ -88,14 +90,16 @@ fun CartTickets(
                         )
                     }
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             imageVector = ImageVector.vectorResource(id = R.drawable.ic_ticket_logo_cart_sheet),
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = Color.Black,
                         )
-                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
                         Text(
                             text = "Seat: ${ticket.row}${ticket.seat}",
                             color = Color.Black,
@@ -103,14 +107,16 @@ fun CartTickets(
                         )
                     }
                     Row(
-                        verticalAlignment = Alignment.CenterVertically
+                        modifier = Modifier.padding(vertical = 4.dp),
+                        verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Icon(
                             modifier = Modifier.size(24.dp),
                             imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = null
+                            contentDescription = null,
+                            tint = Color.Black,
                         )
-                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
                         Text(
                             text = "$${ticket.price}",
                             color = Color.Black,
