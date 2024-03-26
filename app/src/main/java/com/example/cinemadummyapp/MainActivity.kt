@@ -44,9 +44,11 @@ fun CinemaApp(
 
         var showCartSheet by remember { mutableStateOf(false) }
         if (showCartSheet) {
-            CartBottomSheet() {
-                showCartSheet = false
-            }
+            CartBottomSheet(
+                cart = mainViewModel.cartTickets.value,
+                onDismiss = { showCartSheet = false },
+                onSuccess = {}
+            )
         }
 
         Box(modifier = Modifier.fillMaxSize()) {

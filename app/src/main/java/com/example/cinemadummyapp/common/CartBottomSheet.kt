@@ -1,58 +1,137 @@
 package com.example.cinemadummyapp.common
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.R
+import com.example.cinemadummyapp.common.tickets.Ticket
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CartBottomSheet(onDismiss: () -> Unit) {
+fun CartBottomSheet(
+    cart: List<Ticket>,
+    onDismiss: () -> Unit,
+    onSuccess: () -> Unit,
+) {
     val modalBottomSheetState = rememberModalBottomSheetState()
 
     ModalBottomSheet(
+        contentColor = Color.White,
+        containerColor = Color.White,
         onDismissRequest = { onDismiss() },
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
-        CountryList()
+        CartTickets(cart = cart, removeItem = { })
     }
 }
 
 @Composable
-fun CountryList() {
-    val countries = listOf(
-        Pair("United States", "\uD83C\uDDFA\uD83C\uDDF8"),
-        Pair("Canada", "\uD83C\uDDE8\uD83C\uDDE6"),
-        Pair("India", "\uD83C\uDDEE\uD83C\uDDF3"),
-        Pair("Germany", "\uD83C\uDDE9\uD83C\uDDEA"),
-        Pair("France", "\uD83C\uDDEB\uD83C\uDDF7"),
-        Pair("Japan", "\uD83C\uDDEF\uD83C\uDDF5"),
-        Pair("China", "\uD83C\uDDE8\uD83C\uDDF3"),
-        Pair("Brazil", "\uD83C\uDDE7\uD83C\uDDF7"),
-        Pair("Australia", "\uD83C\uDDE6\uD83C\uDDFA"),
-        Pair("Russia", "\uD83C\uDDF7\uD83C\uDDFA"),
-        Pair("United Kingdom", "\uD83C\uDDEC\uD83C\uDDE7"),
-    )
-
+fun CartTickets(
+    cart: List<Ticket>,
+    removeItem: () -> Unit,
+) {
     LazyColumn {
-        items(countries) { (country, flag) ->
+        items(cart, key = { it.id }) { ticket ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp, horizontal = 20.dp)
+                    .padding(16.dp)
             ) {
-                Text(
-                    text = flag,
-                    modifier = Modifier.padding(end = 20.dp)
+                Image(
+                    modifier = Modifier
+                        .size(width = 49.dp, height = 74.dp)
+                        .padding(16.dp)
+                        .weight(1f),
+                    painter = painterResource(ticket.movie.image),
+                    contentDescription = null,
+//                    contentScale = ContentScale.Crop,
                 )
-                Text(text = country)
+                Column(
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .weight(2f)
+                ) {
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = Icons.Filled.DateRange,
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Text(
+                            text = "${ticket.id}",
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_ticket_logo_cart_sheet),
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Text(
+                            text = "Seat: ${ticket.row}${ticket.seat}",
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                        )
+                    }
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = Icons.Filled.ShoppingCart,
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+                        Text(
+                            text = "$19",
+                            color = Color.Black,
+                            fontSize = 14.sp,
+                        )
+                    }
+                    Button(
+                        modifier = Modifier
+                            .padding(horizontal = 48.dp, vertical = 16.dp),
+                        shape = RoundedCornerShape(10.dp),
+                        onClick = { removeItem() },
+                    ) {
+                        Text(
+                            text = "Remove",
+                            color = Color.White,
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.Center,
+                            fontSize = 14.sp,
+                        )
+                    }
+                }
             }
+            HorizontalDivider()
         }
     }
 }
