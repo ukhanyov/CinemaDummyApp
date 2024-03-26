@@ -112,7 +112,7 @@ fun CartTickets(
                         )
                         Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
                         Text(
-                            text = "$19",
+                            text = "$${ticket.price}",
                             color = Color.Black,
                             fontSize = 14.sp,
                         )

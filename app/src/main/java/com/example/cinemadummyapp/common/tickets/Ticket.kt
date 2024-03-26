@@ -10,5 +10,6 @@ data class Ticket(
     val movie: Movie,
     val row: Int,
     val seat: String,
-    val ticketState: TicketState
+    val ticketState: TicketState,
+    val price: Int,
 )
