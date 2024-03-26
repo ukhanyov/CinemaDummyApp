@@ -65,7 +65,7 @@ fun TheaterSeatsScreen(
     dateText: String,
     timeText: String,
     onBackClicked: () -> Unit = {},
-    goToCheckout: (List<Ticket>) -> Unit = {},
+    addToCart: (List<Ticket>) -> Unit = {},
 ) {
 
     val activity = LocalView.current.context as Activity
@@ -228,7 +228,7 @@ fun TheaterSeatsScreen(
             colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
             enabled = isButtonEnabled,
             onClick = {
-                goToCheckout(ticketsGrid.filter { it.ticketState == Selected })
+                addToCart(ticketsGrid.filter { it.ticketState == Selected })
                 onBackClicked()
             },
         ) {

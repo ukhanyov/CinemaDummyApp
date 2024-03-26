@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -46,7 +45,7 @@ fun CinemaApp(
                 startDestination = Onboarding.route,
 //                startDestination = Usage.route,
                 promptManager = promptManager,
-                goToCheckout = { mainViewModel.addToCart(it) },
+                addToCart = { mainViewModel.addToCart(it) },
                 cart = cart,
             )
         }

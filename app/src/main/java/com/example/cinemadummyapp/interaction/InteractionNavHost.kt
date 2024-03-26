@@ -26,7 +26,7 @@ fun InteractionNavHost(
     hideBottomNavigation: (Boolean) -> Unit,
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
-    goToCheckout: (List<Ticket>) -> Unit = {},
+    addToCart: (List<Ticket>) -> Unit = {},
     cart: List<Ticket>,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
@@ -93,7 +93,7 @@ fun InteractionNavHost(
                 timeText = time,
                 cart = cart,
                 onBackClicked = { navController.onBackClicked() },
-                goToCheckout = { tickets -> goToCheckout(tickets) },
+                addToCart = { tickets -> addToCart(tickets) },
             )
             hideBottomNavigation(true)
         }

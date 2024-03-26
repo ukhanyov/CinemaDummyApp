@@ -39,7 +39,7 @@ fun InteractionScreenPreview() {
 fun InteractionScreen(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
-    goToCheckout: (List<Ticket>) -> Unit = {},
+    addToCart: (List<Ticket>) -> Unit = {},
     cart: List<Ticket>,
 ) {
     Box(
@@ -92,7 +92,7 @@ fun InteractionScreen(
                 hideBottomNavigation = { hideBottomNavigation = it },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
-                goToCheckout = { tickets -> goToCheckout(tickets) },
+                addToCart = { tickets -> addToCart(tickets) },
                 cart = cart,
             )
         }
