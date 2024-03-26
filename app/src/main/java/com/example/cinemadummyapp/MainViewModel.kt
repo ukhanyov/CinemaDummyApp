@@ -19,6 +19,10 @@ class MainViewModel : ViewModel() {
         _cartTickets.getAndUpdate { it.toMutableList().apply { addAll(newTickets) } }
     }
 
+    fun removeFromCart(ticket: Ticket) {
+        _cartTickets.getAndUpdate { it.toMutableList().apply { remove(ticket) } }
+    }
+
     fun checkoutSuccess() {
         cartTickets.value.let { tickets ->
             if (tickets.isEmpty()) return

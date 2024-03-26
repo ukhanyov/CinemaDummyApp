@@ -45,7 +45,8 @@ fun CinemaApp(
             CartBottomSheet(
                 cart = cart,
                 onDismiss = { showCartSheet = false },
-                onSuccess = {}
+                onSuccess = {},
+                removeItem = { mainViewModel.removeFromCart(it) }
             )
         }
 

@@ -31,6 +31,7 @@ fun CartBottomSheet(
     cart: List<Ticket>,
     onDismiss: () -> Unit,
     onSuccess: () -> Unit,
+    removeItem: (Ticket) -> Unit,
 ) {
     val modalBottomSheetState = rememberModalBottomSheetState()
 
@@ -41,14 +42,15 @@ fun CartBottomSheet(
         sheetState = modalBottomSheetState,
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
-        CartTickets(cart = cart, removeItem = { })
+        if (cart.isEmpty()) onDismiss()
+        CartTickets(cart = cart, removeItem = { removeItem(it) })
     }
 }
 
 @Composable
 fun CartTickets(
     cart: List<Ticket>,
-    removeItem: () -> Unit,
+    removeItem: (Ticket) -> Unit,
 ) {
     LazyColumn {
         items(cart, key = { it.id }) { ticket ->
@@ -126,7 +128,7 @@ fun CartTickets(
                     Button(
                         modifier = Modifier.padding(vertical = 8.dp),
                         shape = RoundedCornerShape(10.dp),
-                        onClick = { removeItem() },
+                        onClick = { removeItem(ticket) },
                     ) {
                         Text(
                             text = "Remove",
