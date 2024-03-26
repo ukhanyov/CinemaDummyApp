@@ -42,8 +42,7 @@ fun Cart(
         Icon(
             modifier = Modifier
                 .padding(8.dp)
-                .size(48.dp)
-                .clickable { },
+                .size(48.dp),
             imageVector = Icons.Filled.ShoppingCart,
             tint = tint,
             contentDescription = null,
