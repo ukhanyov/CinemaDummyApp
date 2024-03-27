@@ -54,4 +54,10 @@ class MainViewModel : ViewModel() {
         _cards.getAndUpdate { it.toMutableList().apply { add(card) } }
     }
 
+    fun selectCard(card: Card) {
+        _cards.getAndUpdate {
+            it.map { it.copy(isSelected = card.id == it.id) }
+        }
+    }
+
 }
