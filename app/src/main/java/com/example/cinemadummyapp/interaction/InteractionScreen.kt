@@ -13,38 +13,37 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.rememberNavController
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.TabHeight
 import com.example.cinemadummyapp.common.navigateSingleTopTo
 import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun InteractionScreenPreview() {
-    CinemaDummyAppTheme {
-        InteractionScreen(
-            onProfileDeleted = {},
-            onProfileChange = {},
-            cart = emptyList(),
-            onCartClicked = {})
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun InteractionScreenPreview() {
+//    CinemaDummyAppTheme {
+//        InteractionScreen(
+//            onProfileDeleted = {},
+//            onProfileChange = {},
+//            cart = emptyList(),
+//            onCartClicked = {})
+//    }
+//}
 
 @Composable
 fun InteractionScreen(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
     addToCart: (List<Ticket>) -> Unit = {},
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onCartClicked: () -> Unit,
 ) {
     Box(
@@ -98,7 +97,7 @@ fun InteractionScreen(
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
                 addToCart = { tickets -> addToCart(tickets) },
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onCartClicked = { onCartClicked() }
             )
         }

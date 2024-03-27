@@ -11,33 +11,34 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cinemadummyapp.common.tickets.Ticket
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.cinemadummyapp.MainViewModel
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
-@Composable
-fun CartPreview() {
-    CinemaDummyAppTheme {
-        Cart(Color.White, listOf(), onCartClicked = {})
-    }
-}
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun CartPreview() {
+//    CinemaDummyAppTheme {
+//        Cart(Color.White, listOf(), onCartClicked = {})
+//    }
+//}
 
 @Composable
 fun Cart(
     tint: Color = Color.White,
-    cart: List<Ticket>,
-    onCartClicked: () -> Unit
+    mainViewModel: MainViewModel,
+    onCartClicked: () -> Unit,
 ) {
+    val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
     Box(modifier = Modifier.clickable { onCartClicked() }) {
         Icon(
             modifier = Modifier

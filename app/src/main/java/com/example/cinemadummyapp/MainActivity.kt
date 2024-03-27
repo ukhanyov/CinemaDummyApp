@@ -57,7 +57,7 @@ fun CinemaApp(
 //                startDestination = Usage.route,
                 promptManager = promptManager,
                 addToCart = { mainViewModel.addToCart(it) },
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onCartClicked = { showCartSheet = cart.isNotEmpty() }
             )
         }

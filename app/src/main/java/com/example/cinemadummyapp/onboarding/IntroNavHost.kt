@@ -3,6 +3,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
 import com.example.cinemadummyapp.common.navigateSingleTopTo
 import com.example.cinemadummyapp.common.tickets.Ticket
@@ -16,7 +17,7 @@ fun CinemaNavHost(
     navController: NavHostController,
     promptManager: BiometricPromptManager,
     addToCart: (List<Ticket>) -> Unit = {},
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onCartClicked: () -> Unit,
 ) {
     NavHost(
@@ -64,7 +65,7 @@ fun CinemaNavHost(
                 onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) },
                 onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
                 addToCart = { tickets -> addToCart(tickets) },
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onCartClicked = { onCartClicked() }
             )
         }

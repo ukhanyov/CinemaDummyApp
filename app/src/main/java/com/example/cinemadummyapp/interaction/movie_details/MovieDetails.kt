@@ -6,8 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.movies.Movie
-import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 
@@ -38,10 +38,10 @@ fun MovieDetailsScreen(
     movie: Movie,
     onBackClicked: () -> Unit,
     onSessionSelected: (String, String) -> Unit,
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onCartClicked: () -> Unit,
 ) {
-    var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails(cart = cart)) }
+    var toolbarState by remember { mutableStateOf(ToolbarState.MovieDetails(mainViewModel = mainViewModel)) }
     Column(modifier = modifier) {
         AppToolbar(
             toolbarState = toolbarState,

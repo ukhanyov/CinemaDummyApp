@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.movies.allMovies
 import com.example.cinemadummyapp.common.navigateToMovieDetails
 import com.example.cinemadummyapp.common.navigateToMovieSeats
@@ -27,7 +28,7 @@ fun InteractionNavHost(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
     addToCart: (List<Ticket>) -> Unit = {},
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onCartClicked: () -> Unit,
 ) {
     var homeState by remember { mutableStateOf(HomeState()) }
@@ -39,7 +40,7 @@ fun InteractionNavHost(
         composable(route = Home.route) {
             HomeScreen(
                 homeState = homeState,
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
                 onMovieSelected = { navController.navigateToMovieDetails(it.id) },
                 onCartClicked = { onCartClicked() },
@@ -52,7 +53,7 @@ fun InteractionNavHost(
         }
         composable(route = Profile.route) {
             ProfileScreen(
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onBackClicked = { navController.onBackClicked() },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
@@ -77,7 +78,7 @@ fun InteractionNavHost(
                         time
                     )
                 },
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(true)
@@ -95,10 +96,10 @@ fun InteractionNavHost(
                 movie = movie,
                 dateText = date,
                 timeText = time,
-                cart = cart,
+                mainViewModel = mainViewModel,
                 onBackClicked = { navController.onBackClicked() },
                 addToCart = { tickets -> addToCart(tickets) },
-                onCartClicked = { onCartClicked() }
+                onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(true)
         }

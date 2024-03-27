@@ -24,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.movies.Movie
 import com.example.cinemadummyapp.common.tickets.Ticket
@@ -60,7 +61,7 @@ val theaterSeatsScreenDefaultModifier = Modifier
 @Composable
 fun TheaterSeatsScreen(
     modifier: Modifier = Modifier,
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     movie: Movie,
     dateText: String,
     timeText: String,
@@ -87,7 +88,7 @@ fun TheaterSeatsScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppToolbar(
-            toolbarState = ToolbarState.TheaterSeats(cart = cart),
+            toolbarState = ToolbarState.TheaterSeats(mainViewModel = mainViewModel),
             onBackClicked = { onBackClicked() },
             onCartClicked = { onCartClicked() },
         )

@@ -21,8 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.movies.Movie
-import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import kotlinx.coroutines.delay
@@ -43,12 +43,12 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeScreen(
     homeState: HomeState = HomeState(),
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onTabSelected: (Int) -> Unit = {},
     onMovieSelected: (Movie) -> Unit = {},
     onCartClicked: () -> Unit,
 ) {
-    val toolbarState by remember { mutableStateOf(ToolbarState.Home(cart = cart)) }
+    val toolbarState by remember { mutableStateOf(ToolbarState.Home(mainViewModel = mainViewModel)) }
 
     val localView = LocalView.current
     val activity = LocalView.current.context as Activity

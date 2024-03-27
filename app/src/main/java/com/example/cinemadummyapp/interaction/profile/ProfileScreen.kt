@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.WindowCompat
-import com.example.cinemadummyapp.common.tickets.Ticket
+import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 
@@ -35,7 +35,7 @@ import com.example.cinemadummyapp.common.toolbar.ToolbarState
 
 @Composable
 fun ProfileScreen(
-    cart: List<Ticket>,
+    mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
     onProfileDeleted: () -> Unit = {},
     onProfileChange: () -> Unit = {},
@@ -56,7 +56,7 @@ fun ProfileScreen(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppToolbar(
-            toolbarState = ToolbarState.Profile(cart = cart),
+            toolbarState = ToolbarState.Profile(mainViewModel = mainViewModel),
             onBackClicked = { onBackClicked() },
             onCartClicked = { onCartClicked() }
         )

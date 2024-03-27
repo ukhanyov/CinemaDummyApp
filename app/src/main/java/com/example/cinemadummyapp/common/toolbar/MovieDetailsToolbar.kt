@@ -15,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.cinemadummyapp.common.tickets.Ticket
 
 @Composable
 fun MovieDetailsToolbar(
@@ -61,7 +60,10 @@ fun MovieDetailsToolbar(
                 )
             }
         }
-        Cart(tint = Color.White, cart = state.cart, onCartClicked = { onCartClicked() })
+        Cart(
+            tint = Color.White,
+            mainViewModel = state.mainViewModel,
+            onCartClicked = { onCartClicked() })
     }
 
 }
