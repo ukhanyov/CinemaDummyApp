@@ -55,4 +55,9 @@ object MovieSeats : InteractionDestination {
     )
 }
 
+object Payment : InteractionDestination {
+    override val icon = Icons.Filled.Star
+    override val route = "interaction/payment"
+}
+
 val interactionScreens = listOf(Home, /*Tickets,*/ Profile)

@@ -15,6 +15,7 @@ import com.example.cinemadummyapp.interaction.home.HomeScreen
 import com.example.cinemadummyapp.interaction.home.HomeState
 import com.example.cinemadummyapp.interaction.movie_details.MovieDetailsScreen
 import com.example.cinemadummyapp.interaction.movie_details.movieDetailsScreenDefaultModifier
+import com.example.cinemadummyapp.interaction.payment.PaymentScreen
 import com.example.cinemadummyapp.interaction.profile.ProfileScreen
 import com.example.cinemadummyapp.interaction.theater_seats.TheaterSeatsScreen
 import com.example.cinemadummyapp.interaction.theater_seats.theaterSeatsScreenDefaultModifier
@@ -101,6 +102,10 @@ fun InteractionNavHost(
                 addToCart = { tickets -> addToCart(tickets) },
                 onCartClicked = { onCartClicked() },
             )
+            hideBottomNavigation(true)
+        }
+        composable(route = Payment.route) {
+            PaymentScreen(mainViewModel)
             hideBottomNavigation(true)
         }
     }
