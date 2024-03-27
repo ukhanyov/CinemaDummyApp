@@ -2,6 +2,7 @@ package com.example.cinemadummyapp.interaction.payment
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -12,6 +13,7 @@ import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -52,8 +54,10 @@ fun PaymentSelectCardsComp(
                         .fillMaxWidth()
                         .padding(16.dp)
                         .clip(RoundedCornerShape(10.dp))
-                        .background(backgroundColor),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                        .background(backgroundColor)
+                        .clickable { mainViewModel.selectCard(card) },
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically,
                 ) {
                     val painter = when (card.cardType) {
                         CardType.Visa -> painterResource(id = R.drawable.ic_card_visa)
