@@ -39,7 +39,9 @@ fun PaymentSelectCardsComp(
         verticalArrangement = Arrangement.SpaceBetween
     ) {
         AppToolbar(toolbarState = ToolbarState.Payment(), onBackClicked = { onBackClicked() })
-        LazyColumn {
+        LazyColumn(
+            verticalArrangement = Arrangement.Top,
+        ) {
             items(cards, key = { it.id }) { card ->
                 val backgroundColor = when (card.cardType) {
                     CardType.Visa -> Color(0xFFF5F5F5)
@@ -47,8 +49,10 @@ fun PaymentSelectCardsComp(
                 }
                 Row(
                     modifier = Modifier
-                        .background(backgroundColor)
-                        .clip(RoundedCornerShape(10.dp)),
+                        .fillMaxWidth()
+                        .padding(16.dp)
+                        .clip(RoundedCornerShape(10.dp))
+                        .background(backgroundColor),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     val painter = when (card.cardType) {
@@ -56,6 +60,9 @@ fun PaymentSelectCardsComp(
                         CardType.Mastercard -> painterResource(id = R.drawable.ic_card_master)
                     }
                     Image(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .size(64.dp),
                         painter = painter,
                         contentDescription = null,
                     )
@@ -69,15 +76,18 @@ fun PaymentSelectCardsComp(
                             CardType.Mastercard -> Color.White
                         }
                         Text(
+                            modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
                             text = header,
                             color = textColor
                         )
                         Text(
+                            modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
                             text = card.cardNumber,
                             color = textColor
                         )
                     }
                     RadioButton(
+                        modifier = Modifier.padding(8.dp),
                         selected = card.isSelected,
                         onClick = { mainViewModel.selectCard(card) })
                 }
