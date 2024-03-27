@@ -9,10 +9,10 @@ fun NavHostController.navigateSingleTopTo(route: String) = this.navigate(route) 
     popUpTo(
         this@navigateSingleTopTo.graph.findStartDestination().id
     ) {
-        saveState = true
+        saveState = false
     }
     launchSingleTop = true
-    restoreState = true
+    restoreState = false
 }
 
 fun NavHostController.navigateToMovieDetails(movieId: String) {
