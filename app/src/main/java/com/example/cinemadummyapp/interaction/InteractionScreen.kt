@@ -21,7 +21,6 @@ import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.CartBottomSheet
 import com.example.cinemadummyapp.common.TabHeight
 import com.example.cinemadummyapp.common.navigateSingleTopTo
-import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.ui.theme.AppMainAccent
 
 //@Preview
@@ -98,7 +97,10 @@ fun InteractionScreen(
                 CartBottomSheet(
                     cart = cart,
                     onDismiss = { showCartSheet = false },
-                    onSuccess = { navController.navigateSingleTopTo(Payment.route) },
+                    onSuccess = {
+                        showCartSheet = false
+                        navController.navigateSingleTopTo(Payment.route)
+                    },
                     removeItem = { mainViewModel.removeFromCart(it) }
                 )
             }
