@@ -66,7 +66,7 @@ fun CinemaNavHost(
                 onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
                 addToCart = { tickets -> addToCart(tickets) },
                 mainViewModel = mainViewModel,
-                onCartClicked = { onCartClicked() }
+                onCartClicked = { onCartClicked() },
             )
         }
     }

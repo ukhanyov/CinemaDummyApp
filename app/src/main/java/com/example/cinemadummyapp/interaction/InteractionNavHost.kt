@@ -105,7 +105,7 @@ fun InteractionNavHost(
             hideBottomNavigation(true)
         }
         composable(route = Payment.route) {
-            PaymentScreen(mainViewModel)
+            PaymentScreen(mainViewModel, onBackClicked = { navController.onBackClicked() })
             hideBottomNavigation(true)
         }
     }

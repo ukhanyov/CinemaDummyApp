@@ -45,7 +45,7 @@ fun CartBottomSheet(
         dragHandle = { BottomSheetDefaults.DragHandle() },
     ) {
         if (cart.isEmpty()) onDismiss()
-        CartTickets(cart = cart, removeItem = { removeItem(it) })
+        CartTickets(cart = cart, removeItem = { removeItem(it) }, onSuccess = { onSuccess() })
     }
 }
 
@@ -53,6 +53,7 @@ fun CartBottomSheet(
 fun CartTickets(
     cart: List<Ticket>,
     removeItem: (Ticket) -> Unit,
+    onSuccess: () -> Unit,
 ) {
     LazyColumn(
         modifier = Modifier
@@ -87,7 +88,7 @@ fun CartTickets(
                     Button(
                         modifier = Modifier.padding(vertical = 8.dp),
                         shape = RoundedCornerShape(10.dp),
-                        onClick = { },
+                        onClick = { onSuccess() },
                     ) {
                         Text(
                             text = "To payment",

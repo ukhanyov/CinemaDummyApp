@@ -27,7 +27,7 @@ fun AppToolbar(
     toolbarState: ToolbarState,
     onTabSelected: (Int) -> Unit = {},
     onBackClicked: () -> Unit = {},
-    onCartClicked: () -> Unit,
+    onCartClicked: () -> Unit = {},
 ) {
     Box(
         modifier = Modifier
@@ -59,6 +59,11 @@ fun AppToolbar(
                 state = toolbarState,
                 onBackClicked = { onBackClicked() },
                 onCartClicked = { onCartClicked() },
+            )
+
+            is ToolbarState.Payment -> PaymentToolbar(
+                state = toolbarState,
+                onBackClicked = { onBackClicked() },
             )
         }
     }

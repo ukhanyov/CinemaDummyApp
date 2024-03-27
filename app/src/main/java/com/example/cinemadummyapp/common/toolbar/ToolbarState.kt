@@ -26,4 +26,8 @@ sealed class ToolbarState {
         val mainViewModel: MainViewModel,
     ) : ToolbarState()
 
+    data class Payment(
+        val title: String = "Check Out",
+    ) : ToolbarState()
+
 }

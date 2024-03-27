@@ -13,6 +13,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.common.CartBottomSheet
 import com.example.cinemadummyapp.common.biometric.BiometricPromptManager
+import com.example.cinemadummyapp.common.navigateSingleTopTo
+import com.example.cinemadummyapp.interaction.Payment
 import com.example.cinemadummyapp.onboarding.Onboarding
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
@@ -45,7 +47,7 @@ fun CinemaApp(
             CartBottomSheet(
                 cart = cart,
                 onDismiss = { showCartSheet = false },
-                onSuccess = {},
+                onSuccess = { navController.navigateSingleTopTo(Payment.route) },
                 removeItem = { mainViewModel.removeFromCart(it) }
             )
         }
