@@ -16,9 +16,7 @@ fun CinemaNavHost(
     startDestination: String = Usage.route,
     navController: NavHostController,
     promptManager: BiometricPromptManager,
-    addToCart: (List<Ticket>) -> Unit = {},
     mainViewModel: MainViewModel,
-    onCartClicked: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -64,9 +62,7 @@ fun CinemaNavHost(
             InteractionScreen(
                 onProfileDeleted = { navController.navigateSingleTopTo(Onboarding.route) },
                 onProfileChange = { navController.navigateSingleTopTo(CreateAccount.route) },
-                addToCart = { tickets -> addToCart(tickets) },
                 mainViewModel = mainViewModel,
-                onCartClicked = { onCartClicked() },
             )
         }
     }

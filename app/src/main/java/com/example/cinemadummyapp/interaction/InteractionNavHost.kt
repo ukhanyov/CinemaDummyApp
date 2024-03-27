@@ -62,10 +62,7 @@ fun InteractionNavHost(
             )
             hideBottomNavigation(false)
         }
-        composable(
-            route = MovieDetails.routeWithArgs,
-            arguments = MovieDetails.arguments
-        ) {
+        composable(route = MovieDetails.routeWithArgs, arguments = MovieDetails.arguments) {
             val movieId = it.arguments?.getString(MovieDetails.MOVIE_ID_ARF)!!
             val movie = allMovies.first { it.id == movieId }
             MovieDetailsScreen(
@@ -84,10 +81,7 @@ fun InteractionNavHost(
             )
             hideBottomNavigation(true)
         }
-        composable(
-            route = MovieSeats.routeWithArgs,
-            arguments = MovieSeats.arguments
-        ) {
+        composable(route = MovieSeats.routeWithArgs, arguments = MovieSeats.arguments) {
             val movieId = it.arguments?.getString(MovieSeats.MOVIE_ID_ARF)!!
             val date = it.arguments?.getString(MovieSeats.DATE_ARG)!!
             val time = it.arguments?.getString(MovieSeats.TIME_ARG)!!

@@ -14,9 +14,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
+import com.example.cinemadummyapp.common.CartBottomSheet
 import com.example.cinemadummyapp.common.TabHeight
 import com.example.cinemadummyapp.common.navigateSingleTopTo
 import com.example.cinemadummyapp.common.tickets.Ticket
@@ -42,9 +44,7 @@ import com.example.cinemadummyapp.ui.theme.AppMainAccent
 fun InteractionScreen(
     onProfileDeleted: () -> Unit,
     onProfileChange: () -> Unit,
-    addToCart: (List<Ticket>) -> Unit = {},
     mainViewModel: MainViewModel,
-    onCartClicked: () -> Unit,
 ) {
     Box(
         modifier = Modifier
@@ -90,15 +90,28 @@ fun InteractionScreen(
                 )
             }
         ) { innerPadding ->
+            val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
+
+            var showCartSheet by remember { mutableStateOf(false) }
+
+            if (showCartSheet) {
+                CartBottomSheet(
+                    cart = cart,
+                    onDismiss = { showCartSheet = false },
+                    onSuccess = { navController.navigateSingleTopTo(Payment.route) },
+                    removeItem = { mainViewModel.removeFromCart(it) }
+                )
+            }
+
             InteractionNavHost(
                 navController = navController,
                 modifier = Modifier.padding(innerPadding),
                 hideBottomNavigation = { hideBottomNavigation = it },
                 onProfileDeleted = { onProfileDeleted() },
                 onProfileChange = { onProfileChange() },
-                addToCart = { tickets -> addToCart(tickets) },
+                addToCart = { mainViewModel.addToCart(it) },
                 mainViewModel = mainViewModel,
-                onCartClicked = { onCartClicked() }
+                onCartClicked = { showCartSheet = true }
             )
         }
     }
