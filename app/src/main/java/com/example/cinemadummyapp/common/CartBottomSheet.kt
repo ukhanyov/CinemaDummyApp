@@ -23,7 +23,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.R
+import com.example.cinemadummyapp.common.movies.randomMovie
 import com.example.cinemadummyapp.common.tickets.Ticket
+import com.example.cinemadummyapp.common.tickets.TicketState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -52,86 +54,43 @@ fun CartTickets(
     cart: List<Ticket>,
     removeItem: (Ticket) -> Unit,
 ) {
-    LazyColumn {
-        items(cart, key = { it.id }) { ticket ->
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp)
-            ) {
-                Image(
-                    modifier = Modifier
-                        .size(width = 120.dp, height = 180.dp)
-                        .padding(16.dp)
-                        .weight(1f)
-                        .clip(RoundedCornerShape(16.dp)),
-                    painter = painterResource(ticket.movie.image),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop,
-                )
-                Column(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .weight(2f)
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp)
+    ) {
+        items(cart + listOf(
+            Ticket(
+                id = "Sum row",
+                date = "",
+                time = "",
+                movie = randomMovie,
+                row = 0,
+                seat = "",
+                ticketState = TicketState.Selected,
+                price = 0,
+            )
+        ), key = { it.id }) { ticket ->
+            if (ticket.id == "Sum row") {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End,
                 ) {
-                    Row(
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            imageVector = Icons.Filled.DateRange,
-                            contentDescription = null,
-                            tint = Color.Black,
-                        )
-                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                        Text(
-                            text = "${ticket.date} - ${ticket.time}",
-                            color = Color.Black,
-                            fontSize = 14.sp,
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            imageVector = ImageVector.vectorResource(id = R.drawable.ic_ticket_logo_cart_sheet),
-                            contentDescription = null,
-                            tint = Color.Black,
-                        )
-                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                        Text(
-                            text = "Seat: ${ticket.row}${ticket.seat}",
-                            color = Color.Black,
-                            fontSize = 14.sp,
-                        )
-                    }
-                    Row(
-                        modifier = Modifier.padding(vertical = 4.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                    ) {
-                        Icon(
-                            modifier = Modifier.size(24.dp),
-                            imageVector = Icons.Filled.ShoppingCart,
-                            contentDescription = null,
-                            tint = Color.Black,
-                        )
-                        Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
-                        Text(
-                            text = "$${ticket.price}",
-                            color = Color.Black,
-                            fontSize = 14.sp,
-                        )
-                    }
+                    Text(
+                        text = "Total: $${cart.sumOf { it.price }}",
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
                     Button(
                         modifier = Modifier.padding(vertical = 8.dp),
                         shape = RoundedCornerShape(10.dp),
-                        onClick = { removeItem(ticket) },
+                        onClick = { },
                     ) {
                         Text(
-                            text = "Remove",
+                            text = "To payment",
                             color = Color.White,
                             fontWeight = FontWeight.Bold,
                             textAlign = TextAlign.Center,
@@ -139,8 +98,94 @@ fun CartTickets(
                         )
                     }
                 }
+            } else {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .size(width = 120.dp, height = 180.dp)
+                            .padding(16.dp)
+                            .weight(1f)
+                            .clip(RoundedCornerShape(16.dp)),
+                        painter = painterResource(ticket.movie.image),
+                        contentDescription = null,
+                        contentScale = ContentScale.Crop,
+                    )
+                    Column(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .weight(2f)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                imageVector = Icons.Filled.DateRange,
+                                contentDescription = null,
+                                tint = Color.Black,
+                            )
+                            Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                            Text(
+                                text = "${ticket.date} - ${ticket.time}",
+                                color = Color.Black,
+                                fontSize = 14.sp,
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                imageVector = ImageVector.vectorResource(id = R.drawable.ic_ticket_logo_cart_sheet),
+                                contentDescription = null,
+                                tint = Color.Black,
+                            )
+                            Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                            Text(
+                                text = "Seat: ${ticket.row}${ticket.seat}",
+                                color = Color.Black,
+                                fontSize = 14.sp,
+                            )
+                        }
+                        Row(
+                            modifier = Modifier.padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                        ) {
+                            Icon(
+                                modifier = Modifier.size(24.dp),
+                                imageVector = Icons.Filled.ShoppingCart,
+                                contentDescription = null,
+                                tint = Color.Black,
+                            )
+                            Spacer(modifier = Modifier.size(width = 8.dp, height = 0.dp))
+                            Text(
+                                text = "$${ticket.price}",
+                                color = Color.Black,
+                                fontSize = 14.sp,
+                            )
+                        }
+                        Button(
+                            modifier = Modifier.padding(vertical = 8.dp),
+                            shape = RoundedCornerShape(10.dp),
+                            onClick = { removeItem(ticket) },
+                        ) {
+                            Text(
+                                text = "Remove",
+                                color = Color.White,
+                                fontWeight = FontWeight.Bold,
+                                textAlign = TextAlign.Center,
+                                fontSize = 14.sp,
+                            )
+                        }
+                    }
+                }
+                HorizontalDivider()
             }
-            HorizontalDivider()
         }
     }
 }
