@@ -8,7 +8,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,18 +21,19 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
-import com.example.cinemadummyapp.ui.theme.AppMainAccent
 
 @Composable
 fun PaymentSelectCardsComp(
     mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
 ) {
+    val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
     val cards by mainViewModel.cards.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier
@@ -98,21 +98,34 @@ fun PaymentSelectCardsComp(
                 }
             }
         }
-        Button(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(48.dp),
-            shape = RoundedCornerShape(10.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = AppMainAccent),
-            onClick = { },
+                .padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End,
         ) {
             Text(
-                modifier = Modifier.padding(vertical = 4.dp, horizontal = 16.dp),
-                text = "Confirm",
-                color = Color.White,
+                text = "Total: $${cart.sumOf { it.price }}",
+                color = Color.Black,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center
             )
+            Spacer(modifier = Modifier.size(width = 16.dp, height = 0.dp))
+            Button(
+                modifier = Modifier.padding(vertical = 8.dp),
+                shape = RoundedCornerShape(10.dp),
+                enabled = cards.any { it.isSelected },
+                onClick = { },
+            ) {
+                Text(
+                    text = "Confirm",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center,
+                    fontSize = 14.sp,
+                )
+            }
         }
     }
 }
