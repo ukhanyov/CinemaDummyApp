@@ -65,7 +65,7 @@ fun PaymentSelectCardsComp(
                             .padding(16.dp)
                             .clip(RoundedCornerShape(10.dp))
                             .background(Color(0xFFF5F5F5))
-                            .clickable { },
+                            .clickable { onAddNewCardClicked() },
                         horizontalArrangement = Arrangement.Start,
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
