@@ -24,7 +24,12 @@ fun PaymentScreen(
     var state by remember { mutableStateOf(SelectCards) }
 
     when (state) {
-        SelectCards -> PaymentSelectCardsComp(mainViewModel, onBackClicked = { onBackClicked() })
+        SelectCards -> PaymentSelectCardsComp(
+            mainViewModel,
+            onBackClicked = { onBackClicked() },
+            onAddNewCardClicked = { state = AddNewCard }
+        )
+
         AddNewCard -> TODO()
         PaymentProgress -> TODO()
         PaymentSuccess -> TODO()

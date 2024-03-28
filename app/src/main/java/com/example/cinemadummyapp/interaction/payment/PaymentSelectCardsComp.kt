@@ -35,6 +35,7 @@ import com.example.cinemadummyapp.common.toolbar.ToolbarState
 fun PaymentSelectCardsComp(
     mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
+    onAddNewCardClicked: () -> Unit = {},
 ) {
     val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
     val cards by mainViewModel.cards.collectAsStateWithLifecycle()
