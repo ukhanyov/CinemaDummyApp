@@ -7,7 +7,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,56 +48,96 @@ fun PaymentSelectCardsComp(
         LazyColumn(
             verticalArrangement = Arrangement.Top,
         ) {
-            items(cards, key = { it.id }) { card ->
-                val backgroundColor = when (card.cardType) {
-                    CardType.Visa -> Color(0xFFF5F5F5)
-                    CardType.Mastercard -> Color(0xFF151B3A)
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                        .clip(RoundedCornerShape(10.dp))
-                        .background(backgroundColor)
-                        .clickable { mainViewModel.selectCard(card) },
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    val imageVector = when (card.cardType) {
-                        CardType.Visa -> ImageVector.vectorResource(id = R.drawable.ic_card_visa)
-                        CardType.Mastercard -> ImageVector.vectorResource(id = R.drawable.ic_card_master)
-                    }
-                    Image(
+            items(cards + listOf(
+                Card(
+                    id = "Add card",
+                    cardNumber = "1234 4321 1234 4321",
+                    cardDate = "31/09",
+                    cardHolderName = "Your Name",
+                    cardType = CardType.Mastercard,
+                ),
+            ), key = { it.id }) { card ->
+                if (card.id == "Add card") {
+                    Row(
                         modifier = Modifier
-                            .padding(8.dp)
-                            .size(64.dp),
-                        imageVector = imageVector,
-                        contentDescription = null,
-                    )
-                    Column {
-                        val header = when (card.cardType2) {
-                            CardType2.Credit -> "Credit Card"
-                            CardType2.Debit -> "Debit Card"
-                        }
-                        val textColor = when (card.cardType) {
-                            CardType.Visa -> Color.Black
-                            CardType.Mastercard -> Color.White
-                        }
-                        Text(
-                            modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
-                            text = header,
-                            color = textColor
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(Color(0xFFF5F5F5))
+                            .clickable { },
+                        horizontalArrangement = Arrangement.Start,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        Spacer(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .size(height = 64.dp, width = 0.dp),
+                        )
+                        Icon(
+                            modifier = Modifier
+                                .padding(8.dp),
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = null,
+                            tint = Color.Black,
                         )
                         Text(
-                            modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
-                            text = card.cardNumber,
-                            color = textColor
+                            modifier = Modifier
+                                .padding(8.dp),
+                            text = "Add new card",
+                            color = Color.Black,
                         )
                     }
-                    RadioButton(
-                        modifier = Modifier.padding(8.dp),
-                        selected = card.isSelected,
-                        onClick = { mainViewModel.selectCard(card) })
+                } else {
+                    val backgroundColor = when (card.cardType) {
+                        CardType.Visa -> Color(0xFFF5F5F5)
+                        CardType.Mastercard -> Color(0xFF151B3A)
+                    }
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                            .clip(RoundedCornerShape(10.dp))
+                            .background(backgroundColor)
+                            .clickable { mainViewModel.selectCard(card) },
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically,
+                    ) {
+                        val imageVector = when (card.cardType) {
+                            CardType.Visa -> ImageVector.vectorResource(id = R.drawable.ic_card_visa)
+                            CardType.Mastercard -> ImageVector.vectorResource(id = R.drawable.ic_card_master)
+                        }
+                        Image(
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .size(64.dp),
+                            imageVector = imageVector,
+                            contentDescription = null,
+                        )
+                        Column {
+                            val header = when (card.cardType2) {
+                                CardType2.Credit -> "Credit Card"
+                                CardType2.Debit -> "Debit Card"
+                            }
+                            val textColor = when (card.cardType) {
+                                CardType.Visa -> Color.Black
+                                CardType.Mastercard -> Color.White
+                            }
+                            Text(
+                                modifier = Modifier.padding(top = 8.dp, bottom = 2.dp),
+                                text = header,
+                                color = textColor
+                            )
+                            Text(
+                                modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
+                                text = card.cardNumber,
+                                color = textColor
+                            )
+                        }
+                        RadioButton(
+                            modifier = Modifier.padding(8.dp),
+                            selected = card.isSelected,
+                            onClick = { mainViewModel.selectCard(card) })
+                    }
                 }
             }
         }
