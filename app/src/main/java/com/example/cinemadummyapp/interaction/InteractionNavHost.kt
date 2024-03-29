@@ -35,7 +35,7 @@ fun InteractionNavHost(
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
         navController = navController,
-        startDestination = Home.route,
+        startDestination = Payment.route,
         modifier = modifier
     ) {
         composable(route = Home.route) {
