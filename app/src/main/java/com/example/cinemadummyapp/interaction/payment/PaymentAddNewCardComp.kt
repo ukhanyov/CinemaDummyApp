@@ -17,8 +17,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -132,27 +134,31 @@ fun PaymentAddNewCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
-                    value = newCard.cardNumber,
+                    value = TextFieldValue(
+                        newCard.cardNumber,
+                        selection = TextRange(newCard.cardNumber.length),
+                    ),
                     onValueChange = {
+                        val text = it.text
                         when {
                             // prevent over typing
-                            it.length > "1234 1234 1234 1234".length -> {
+                            text.length > "1234 1234 1234 1234".length -> {
                             }
 
                             // prevent pasting text
-                            it.length > newCard.cardNumber.length + 1 -> {}
+                            text.length > newCard.cardNumber.length + 1 -> {}
 
-                            it.isBlank() -> {
+                            text.isBlank() -> {
                                 newCard = newCard.copy(cardNumber = "")
                             }
 
-                            it.isEmpty() -> {
+                            text.isEmpty() -> {
                                 newCard = newCard.copy(cardNumber = "")
                             }
 
-                            it.last().isDigit() -> {
+                            text.last().isDigit() -> {
                                 val result = StringBuilder()
-                                it.replace(" ", "").chunked(4).forEach {
+                                text.replace(" ", "").chunked(4).forEach {
                                     result.append(it)
                                     result.append(" ")
                                 }
@@ -160,6 +166,15 @@ fun PaymentAddNewCard(
                                 newCard = newCard.copy(
                                     cardNumber = result.toString().trim(),
                                     cardType = if (result.toString().trim().length < 5)
+                                        CardType.entries.random()
+                                    else newCard.cardType
+                                )
+                            }
+
+                            text.last().toString() == " " -> {
+                                newCard = newCard.copy(
+                                    cardNumber = text.trim(),
+                                    cardType = if (text.trim().length < 5)
                                         CardType.entries.random()
                                     else newCard.cardType
                                 )
