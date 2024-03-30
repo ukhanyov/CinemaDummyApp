@@ -40,6 +40,7 @@ fun PaymentSuccessComp(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Column(
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -59,6 +60,7 @@ fun PaymentSuccessComp(
             )
         }
         Column(
+            modifier = Modifier.weight(1f),
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
@@ -71,8 +73,7 @@ fun PaymentSuccessComp(
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 16.dp)
-                    .weight(1f),
+                    .padding(16.dp),
                 shape = RoundedCornerShape(10.dp),
                 onClick = { goToTickets() },
             ) {
