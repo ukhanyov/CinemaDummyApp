@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,6 +14,7 @@ import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import kotlinx.coroutines.delay
 
 @Preview
 @PreviewScreenSizes
@@ -27,7 +29,10 @@ fun OnboardingScreenPreview() {
 }
 
 @Composable
-fun PaymentProgressComp() {
+fun PaymentProgressComp(
+    onSuccess: () -> Unit = {},
+    onFailure: () -> Unit = {},
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,5 +55,10 @@ fun PaymentProgressComp() {
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp,
         )
+
+        LaunchedEffect(key1 = true) {
+            delay(1500)
+            onSuccess()
+        }
     }
 }

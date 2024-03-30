@@ -38,7 +38,11 @@ fun PaymentScreen(
             )
         }
 
-        PaymentProgress -> PaymentProgressComp()
+        PaymentProgress -> PaymentProgressComp(
+            onSuccess = { state = PaymentSuccess },
+            onFailure = { state = PaymentError },
+        )
+
         PaymentSuccess -> TODO()
         PaymentError -> TODO()
     }
