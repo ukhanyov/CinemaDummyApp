@@ -45,7 +45,10 @@ fun PaymentScreen(
         )
 
         PaymentSuccess -> PaymentSuccessComp(
-            goToTickets = { goToTickets() },
+            goToTickets = {
+                mainViewModel.checkoutSuccess()
+                goToTickets()
+            },
         )
 
         PaymentError -> TODO()

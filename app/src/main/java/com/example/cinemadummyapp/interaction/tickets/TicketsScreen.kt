@@ -1,43 +1,62 @@
 package com.example.cinemadummyapp.interaction.tickets
 
 import android.app.Activity
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.*
 import androidx.core.view.WindowCompat
-import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.example.cinemadummyapp.MainViewModel
+import com.example.cinemadummyapp.common.TicketComp
+import kotlinx.coroutines.delay
 
-@Preview
-@PreviewScreenSizes
-@PreviewDynamicColors
-@PreviewFontScale
-@PreviewLightDark
+//@Preview
+//@PreviewScreenSizes
+//@PreviewDynamicColors
+//@PreviewFontScale
+//@PreviewLightDark
+//@Composable
+//fun TicketsScreenPreview() {
+//    CinemaDummyAppTheme {
+//        TicketsScreen()
+//    }
+//}
+
+
 @Composable
-fun TicketsScreenPreview() {
-    CinemaDummyAppTheme {
-        TicketsScreen()
-    }
-}
+fun TicketsScreen(
+    mainViewModel: MainViewModel
+) {
 
-
-@Composable
-fun TicketsScreen() {
+    val localView = LocalView.current
     val activity = LocalView.current.context as Activity
-    activity.window.statusBarColor = Color.Black.toArgb()
-    WindowCompat.getInsetsController(
-        activity.window,
-        LocalView.current
-    ).isAppearanceLightStatusBars = false
 
-    Text(
-        text = "TicketsScreen",
-        textAlign = TextAlign.Center,
-        modifier = Modifier.fillMaxSize()
-    )
+    LaunchedEffect(key1 = true) {
+        delay(150)
+        activity.window.statusBarColor = Color.Black.toArgb()
+        WindowCompat.getInsetsController(activity.window, localView)
+            .isAppearanceLightStatusBars = false
+    }
+
+    val boughtTickets by mainViewModel.boughtTickets.collectAsStateWithLifecycle()
+
+    LazyColumn {
+        items(boughtTickets, key = { it.id }) { ticket ->
+            TicketComp(
+                modifier = Modifier.fillMaxWidth(),
+                ticket = ticket,
+                buttonText = "Remove",
+                buttonAction = { }
+            )
+            HorizontalDivider()
+        }
+    }
 }

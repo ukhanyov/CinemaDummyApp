@@ -36,7 +36,7 @@ fun InteractionNavHost(
     var homeState by remember { mutableStateOf(HomeState()) }
     NavHost(
         navController = navController,
-        startDestination = Payment.route,
+        startDestination = Home.route,
         modifier = modifier
     ) {
         composable(route = Home.route) {
@@ -50,7 +50,7 @@ fun InteractionNavHost(
             hideBottomNavigation(false)
         }
         composable(route = Tickets.route) {
-            TicketsScreen()
+            TicketsScreen(mainViewModel = mainViewModel)
             hideBottomNavigation(false)
         }
         composable(route = Profile.route) {
