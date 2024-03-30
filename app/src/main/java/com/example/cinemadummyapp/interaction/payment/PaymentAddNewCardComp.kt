@@ -24,7 +24,6 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
 import java.util.UUID
@@ -34,7 +33,6 @@ fun PaymentAddNewCard(
     mainViewModel: MainViewModel,
     returnToCardSelect: () -> Unit = {}
 ) {
-    val cards by mainViewModel.cards.collectAsStateWithLifecycle()
     var newCard by remember {
         mutableStateOf(
             Card(
@@ -46,6 +44,13 @@ fun PaymentAddNewCard(
                 cvv = "",
             )
         )
+    }
+    var isNewCardValid by remember { mutableStateOf(false) }
+    LaunchedEffect(key1 = newCard) {
+        isNewCardValid = newCard.cardNumber.length == "0000 0000 0000 0000".length &&
+                newCard.cardDate.length == "00/00".length &&
+                newCard.cardHolderName.isNotBlank() &&
+                newCard.cvv.length == "000".length
     }
     Column(
         modifier = Modifier
@@ -268,7 +273,7 @@ fun PaymentAddNewCard(
                                     }
                                 }
 
-                                text.length == "00/".length  -> {
+                                text.length == "00/".length -> {
                                     newCard = newCard.copy(cardDate = text.substringBefore("/"))
                                 }
 
@@ -369,8 +374,11 @@ fun PaymentAddNewCard(
                     .padding(vertical = 40.dp)
                     .weight(1f),
                 shape = RoundedCornerShape(10.dp),
-                enabled = false,
-                onClick = { },
+                enabled = isNewCardValid,
+                onClick = {
+                    mainViewModel.addNewCard(newCard)
+                    returnToCardSelect()
+                },
             ) {
                 Text(
                     text = "Confirm",
@@ -383,11 +391,4 @@ fun PaymentAddNewCard(
             Spacer(modifier = Modifier.size(16.dp))
         }
     }
-}
-
-private fun formatCardNumber(inputString: String): String {
-    // Ensure the initial string is 16 characters long
-//    if (inputString.length != 16) return inputString
-
-    return inputString.chunked(4).joinToString(" ")
 }
