@@ -8,7 +8,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.OutlinedTextFieldDefaults.MinHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -28,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
+import java.time.ZonedDateTime
 import java.util.UUID
 
 @Composable
@@ -244,8 +244,32 @@ fun PaymentAddNewCard(
                         ),
                         onValueChange = {
                             val text = it.text
-                            if (text.length < 30) {
-                                newCard = newCard.copy(cardDate = text)
+                            when {
+                                text.isEmpty() || text.isBlank() -> {
+                                    newCard = newCard.copy(cardDate = "")
+                                }
+
+                                text.last().isDigit() && text.length <= "00/00".length -> {
+                                    val year =
+                                        if (text.contains("/")) text.substringAfter("/") else null
+                                    val month = text.substringBefore("/").toIntOrNull()
+
+                                    if (year != null && year < ZonedDateTime.now().year.toString()) return@OutlinedTextField
+                                    if (month == null) return@OutlinedTextField
+                                    if ((month in 1..12).not()) return@OutlinedTextField
+
+                                    newCard =
+                                        newCard.copy(cardDate = if (text.length == 2) "$text/" else text)
+                                }
+
+                                text.isNotEmpty() && text.last().toString() == "/" -> {
+                                    newCard =
+                                        newCard.copy(cardDate = text.substringBefore("/"))
+                                }
+
+                                else -> {
+
+                                }
                             }
                         },
                         label = { Text("Expire Date") },
