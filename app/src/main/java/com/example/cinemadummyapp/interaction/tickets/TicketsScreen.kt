@@ -19,6 +19,8 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.TicketComp
+import com.example.cinemadummyapp.common.toolbar.AppToolbar
+import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import kotlinx.coroutines.delay
 
 //@Preview
@@ -36,7 +38,9 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun TicketsScreen(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    onBackClicked: () -> Unit = {},
+    onCartClicked: () -> Unit = {},
 ) {
 
     val localView = LocalView.current
@@ -55,6 +59,11 @@ fun TicketsScreen(
             .fillMaxSize()
             .background(Color.White)
     ) {
+        AppToolbar(
+            toolbarState = ToolbarState.Tickets(mainViewModel = mainViewModel),
+            onBackClicked = { onBackClicked() },
+            onCartClicked = { onCartClicked() }
+        )
         LazyColumn {
             items(boughtTickets, key = { it.id }) { ticket ->
                 TicketComp(

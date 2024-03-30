@@ -30,4 +30,9 @@ sealed class ToolbarState {
         val title: String = "Check Out",
     ) : ToolbarState()
 
+    data class Tickets(
+        val title: String = "Tickets",
+        val mainViewModel: MainViewModel,
+    ) : ToolbarState()
+
 }

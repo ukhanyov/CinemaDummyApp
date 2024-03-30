@@ -50,7 +50,11 @@ fun InteractionNavHost(
             hideBottomNavigation(false)
         }
         composable(route = Tickets.route) {
-            TicketsScreen(mainViewModel = mainViewModel)
+            TicketsScreen(
+                mainViewModel = mainViewModel,
+                onBackClicked = { navController.onBackClicked() },
+                onCartClicked = { onCartClicked() },
+            )
             hideBottomNavigation(false)
         }
         composable(route = Profile.route) {

@@ -65,6 +65,12 @@ fun AppToolbar(
                 state = toolbarState,
                 onBackClicked = { onBackClicked() },
             )
+
+            is ToolbarState.Tickets -> TicketsToolbar(
+                state = toolbarState,
+                onBackClicked = { onBackClicked() },
+                onCartClicked = { onCartClicked() },
+            )
         }
     }
 }
