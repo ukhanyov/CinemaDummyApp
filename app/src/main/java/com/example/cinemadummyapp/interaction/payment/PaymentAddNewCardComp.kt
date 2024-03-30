@@ -1,6 +1,5 @@
 package com.example.cinemadummyapp.interaction.payment
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -34,10 +33,10 @@ fun PaymentAddNewCard(
 ) {
     val cards by mainViewModel.cards.collectAsStateWithLifecycle()
     var newCard by remember {
-        mutableStateOf<Card?>(
+        mutableStateOf<Card>(
             Card(
                 id = "Add card",
-                cardNumber = "1234 4321 1234 4321",
+                cardNumber = "",
                 cardDate = "31/09",
                 cardHolderName = "Your Name",
                 cardType = CardType.Mastercard,
@@ -133,30 +132,46 @@ fun PaymentAddNewCard(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
-                    value = newCard?.cardNumber ?: "",
+                    value = newCard.cardNumber,
                     onValueChange = {
-                        if (it.isNotEmpty() && it.last().toString() == " ") {
-                            newCard = newCard?.copy(cardNumber = it.trim())
-                        } else if (it.isNotEmpty() && it.last().isDigit()) {
-                            Log.d("my_tag", "start -> $it")
-                            val inputText = it.replace(" ", "")
-                            Log.d("my_tag", "inputText -> $inputText")
-                            if (inputText.length <= 16) {
-                                Log.d(
-                                    "my_tag",
-                                    "formatCardNumber -> ${formatCardNumber(inputText)}"
-                                )
-                                newCard = newCard?.copy(cardNumber = formatCardNumber(inputText))
+                        when {
+                            // prevent over typing
+                            it.length > "1234 1234 1234 1234".length -> {
                             }
-                            Log.d("my_tag", "----------------")
-                        } else if (it.isBlank() || it.isEmpty()) {
-                            newCard = newCard?.copy(cardNumber = "")
+
+                            // prevent pasting text
+                            it.length > newCard.cardNumber.length + 1 -> {}
+
+                            it.isBlank() -> {
+                                newCard = newCard.copy(cardNumber = "")
+                            }
+
+                            it.isEmpty() -> {
+                                newCard = newCard.copy(cardNumber = "")
+                            }
+
+                            it.last().isDigit() -> {
+                                val result = StringBuilder()
+                                it.replace(" ", "").chunked(4).forEach {
+                                    result.append(it)
+                                    result.append(" ")
+                                }
+
+                                newCard = newCard.copy(
+                                    cardNumber = result.toString().trim(),
+                                    cardType = if (result.toString().trim().length < 5)
+                                        CardType.entries.random()
+                                    else newCard.cardType
+                                )
+                            }
+
+                            else -> {}
                         }
                     },
                     label = { Text("Card number") },
                     placeholder = {
                         Text(
-                            text = "xxxx-xxxx-xxxx-2024",
+                            text = "xxxx-xxxx-xxxx-xxxx",
                             color = Color.LightGray
                         )
                     },
