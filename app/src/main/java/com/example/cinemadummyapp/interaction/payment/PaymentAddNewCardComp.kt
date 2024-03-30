@@ -105,7 +105,7 @@ fun PaymentAddNewCard(
                             color = Color.White
                         )
                         Text(
-                            text = "Name",
+                            text = newCard.cardHolderName,
                             color = Color.White
                         )
                     }
@@ -115,7 +115,7 @@ fun PaymentAddNewCard(
                             color = Color.White
                         )
                         Text(
-                            text = "31/9",
+                            text = newCard.cardDate,
                             color = Color.White
                         )
                     }
@@ -125,7 +125,7 @@ fun PaymentAddNewCard(
         Box(modifier = Modifier.weight(1f)) {
             Column(
                 modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.SpaceEvenly,
+                verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 OutlinedTextField(
@@ -197,6 +197,38 @@ fun PaymentAddNewCard(
                     ),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                )
+                Spacer(modifier = Modifier.size(8.dp))
+                OutlinedTextField(
+                    value = TextFieldValue(
+                        newCard.cardHolderName,
+                        selection = TextRange(newCard.cardHolderName.length),
+                    ),
+                    onValueChange = {
+                        val text = it.text
+                        if (text.length < 30) {
+                            newCard = newCard.copy(cardHolderName = text)
+                        }
+                    },
+                    label = { Text("Your Name") },
+                    placeholder = {
+                        Text(
+                            text = "John Smith",
+                            color = Color.LightGray
+                        )
+                    },
+                    colors = OutlinedTextFieldDefaults.colors(
+                        disabledTextColor = Color.Black,
+                        disabledSupportingTextColor = Color.Black,
+                        errorTextColor = Color.Red,
+                        errorSupportingTextColor = Color.Red,
+                        focusedTextColor = Color.Black,
+                        focusedSupportingTextColor = Color.Black,
+                        unfocusedSupportingTextColor = Color.Black,
+                        unfocusedTextColor = Color.Black,
+                    ),
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 )
             }
         }
