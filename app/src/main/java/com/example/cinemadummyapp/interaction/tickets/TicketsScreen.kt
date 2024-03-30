@@ -19,6 +19,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.TicketComp
+import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.common.toolbar.AppToolbar
 import com.example.cinemadummyapp.common.toolbar.ToolbarState
 import kotlinx.coroutines.delay
@@ -41,6 +42,7 @@ fun TicketsScreen(
     mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
     onCartClicked: () -> Unit = {},
+    onTicketClicked: (Ticket) -> Unit = {},
 ) {
 
     val localView = LocalView.current
@@ -70,7 +72,7 @@ fun TicketsScreen(
                     modifier = Modifier.fillMaxWidth(),
                     ticket = ticket,
                     buttonText = "View ticket",
-                    buttonAction = { }
+                    buttonAction = { onTicketClicked(it) }
                 )
                 HorizontalDivider()
             }

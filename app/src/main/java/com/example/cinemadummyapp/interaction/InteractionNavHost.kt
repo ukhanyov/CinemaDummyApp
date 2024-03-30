@@ -6,11 +6,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cinemadummyapp.MainViewModel
+import com.example.cinemadummyapp.common.*
 import com.example.cinemadummyapp.common.movies.allMovies
-import com.example.cinemadummyapp.common.navigateSingleTopTo
-import com.example.cinemadummyapp.common.navigateToMovieDetails
-import com.example.cinemadummyapp.common.navigateToMovieSeats
-import com.example.cinemadummyapp.common.onBackClicked
 import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.interaction.home.HomeScreen
 import com.example.cinemadummyapp.interaction.home.HomeState
@@ -20,6 +17,7 @@ import com.example.cinemadummyapp.interaction.payment.PaymentScreen
 import com.example.cinemadummyapp.interaction.profile.ProfileScreen
 import com.example.cinemadummyapp.interaction.theater_seats.TheaterSeatsScreen
 import com.example.cinemadummyapp.interaction.theater_seats.theaterSeatsScreenDefaultModifier
+import com.example.cinemadummyapp.interaction.ticket_details.TicketDetailsScreen
 import com.example.cinemadummyapp.interaction.tickets.TicketsScreen
 
 @Composable
@@ -44,7 +42,7 @@ fun InteractionNavHost(
                 homeState = homeState,
                 mainViewModel = mainViewModel,
                 onTabSelected = { homeState = homeState.copy(selectedTabIndex = it) },
-                onMovieSelected = { navController.navigateToMovieDetails(it.id) },
+                onMovieSelected = { movie -> navController.navigateToMovieDetails(movie.id) },
                 onCartClicked = { onCartClicked() },
             )
             hideBottomNavigation(false)
@@ -54,6 +52,7 @@ fun InteractionNavHost(
                 mainViewModel = mainViewModel,
                 onBackClicked = { navController.onBackClicked() },
                 onCartClicked = { onCartClicked() },
+                onTicketClicked = { ticket -> navController.navigateToTicketDetails(ticket.id) }
             )
             hideBottomNavigation(false)
         }
@@ -106,6 +105,14 @@ fun InteractionNavHost(
         composable(route = Payment.route) {
             PaymentScreen(
                 mainViewModel,
+                onBackClicked = { navController.onBackClicked() },
+                goToTickets = { navController.navigateSingleTopTo(Tickets.route) })
+            hideBottomNavigation(true)
+        }
+        composable(route = TicketDetails.routeWithArgs, arguments = TicketDetails.arguments) {
+            TicketDetailsScreen(
+                mainViewModel = mainViewModel,
+                ticketId = it.arguments?.getString(TicketDetails.ID_ARF)!!,
                 onBackClicked = { navController.onBackClicked() },
                 goToTickets = { navController.navigateSingleTopTo(Tickets.route) })
             hideBottomNavigation(true)

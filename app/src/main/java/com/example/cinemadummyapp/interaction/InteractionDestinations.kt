@@ -51,13 +51,27 @@ object MovieSeats : InteractionDestination {
     val routeWithArgs = "$route/{$MOVIE_ID_ARF}/{$DATE_ARG}/{$TIME_ARG}"
 
     val arguments = listOf(
-        navArgument(MOVIE_ID_ARF) { type = NavType.StringType }
+        navArgument(MOVIE_ID_ARF) { type = NavType.StringType },
+        navArgument(DATE_ARG) { type = NavType.StringType },
+        navArgument(TIME_ARG) { type = NavType.StringType },
     )
 }
 
 object Payment : InteractionDestination {
     override val icon = Icons.Filled.Star
     override val route = "interaction/payment"
+}
+
+object TicketDetails : InteractionDestination {
+    override val icon = Icons.Filled.Star
+    override val route = "interaction/ticket_details"
+
+    const val ID_ARF = "id_arg"
+    val routeWithArgs = "${route}/{${ID_ARF}}"
+
+    val arguments = listOf(
+        navArgument(ID_ARF) { type = NavType.StringType }
+    )
 }
 
 val interactionScreens = listOf(Home, /*Tickets,*/ Profile)
