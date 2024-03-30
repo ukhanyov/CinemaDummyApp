@@ -1,5 +1,6 @@
 package com.example.cinemadummyapp.interaction.payment
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,11 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.*
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cinemadummyapp.R
 import com.example.cinemadummyapp.ui.theme.CinemaDummyAppTheme
 
 @Preview
@@ -44,6 +48,11 @@ fun PaymentSuccessComp(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            Image(
+                modifier = Modifier.size(200.dp),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_payment_success),
+                contentDescription = null
+            )
             Spacer(modifier = Modifier.size(16.dp))
             Text(
                 text = "Payment Successful!",
