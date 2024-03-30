@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
+import java.util.UUID
 
 @Composable
 fun PaymentAddNewCard(
@@ -35,13 +36,13 @@ fun PaymentAddNewCard(
 ) {
     val cards by mainViewModel.cards.collectAsStateWithLifecycle()
     var newCard by remember {
-        mutableStateOf<Card>(
+        mutableStateOf(
             Card(
-                id = "Add card",
+                id = UUID.randomUUID().toString(),
                 cardNumber = "",
-                cardDate = "31/09",
-                cardHolderName = "Your Name",
-                cardType = CardType.Mastercard,
+                cardDate = "",
+                cardHolderName = "",
+                cardType = CardType.entries.random(),
             )
         )
     }
@@ -74,31 +75,25 @@ fun PaymentAddNewCard(
                 verticalArrangement = Arrangement.SpaceEvenly,
                 horizontalAlignment = Alignment.Start,
             ) {
-//                val imageVector = when (card.cardType) {
-//                    CardType.Visa -> ImageVector.vectorResource(id = R.drawable.ic_card_visa)
-//                    CardType.Mastercard -> ImageVector.vectorResource(id = R.drawable.ic_card_master)
-//                }
+                val imageVector = when (newCard.cardType) {
+                    CardType.Visa -> ImageVector.vectorResource(id = R.drawable.ic_card_visa)
+                    CardType.Mastercard -> ImageVector.vectorResource(id = R.drawable.ic_card_master)
+                }
                 Image(
                     modifier = Modifier
                         .padding(8.dp)
                         .size(64.dp),
-                    imageVector = ImageVector.vectorResource(id = R.drawable.ic_card_master),
+                    imageVector = imageVector,
                     contentDescription = null,
                 )
-                newCard?.cardNumber?.let { cardNumber ->
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        cardNumber.split(" ").forEach {
-                            Text(
-                                text = it,
-                                color = Color.White
-                            )
-                        }
-                    }
-                }
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    text = newCard.cardNumber,
+                    color = Color.White,
+                    textAlign = TextAlign.End,
+                )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
