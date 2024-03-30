@@ -36,6 +36,7 @@ fun PaymentSelectCardsComp(
     mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
     onAddNewCardClicked: () -> Unit = {},
+    onConfirmClicked: () -> Unit = {},
 ) {
     val cart by mainViewModel.cartTickets.collectAsStateWithLifecycle()
     val cards by mainViewModel.cards.collectAsStateWithLifecycle()
@@ -160,7 +161,7 @@ fun PaymentSelectCardsComp(
                 modifier = Modifier.padding(vertical = 8.dp),
                 shape = RoundedCornerShape(10.dp),
                 enabled = cards.any { it.isSelected },
-                onClick = { },
+                onClick = { onConfirmClicked() },
             ) {
                 Text(
                     text = "Confirm",

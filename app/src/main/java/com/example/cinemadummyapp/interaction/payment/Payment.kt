@@ -27,7 +27,8 @@ fun PaymentScreen(
         SelectCards -> PaymentSelectCardsComp(
             mainViewModel = mainViewModel,
             onBackClicked = { onBackClicked() },
-            onAddNewCardClicked = { state = AddNewCard }
+            onAddNewCardClicked = { state = AddNewCard },
+            onConfirmClicked = { state = PaymentProgress },
         )
 
         AddNewCard -> {
@@ -37,7 +38,7 @@ fun PaymentScreen(
             )
         }
 
-        PaymentProgress -> TODO()
+        PaymentProgress -> PaymentProgressComp()
         PaymentSuccess -> TODO()
         PaymentError -> TODO()
     }
