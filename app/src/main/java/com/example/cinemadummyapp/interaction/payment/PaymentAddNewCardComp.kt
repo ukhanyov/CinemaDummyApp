@@ -8,6 +8,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.OutlinedTextFieldDefaults.MinHeight
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -43,6 +44,7 @@ fun PaymentAddNewCard(
                 cardDate = "",
                 cardHolderName = "",
                 cardType = CardType.entries.random(),
+                cvv = "",
             )
         )
     }
@@ -230,13 +232,92 @@ fun PaymentAddNewCard(
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
                 )
+                Spacer(modifier = Modifier.size(8.dp))
+                Row(
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    OutlinedTextField(
+                        modifier = Modifier.sizeIn(maxWidth = 120.dp),
+                        value = TextFieldValue(
+                            newCard.cardDate,
+                            selection = TextRange(newCard.cardDate.length),
+                        ),
+                        onValueChange = {
+                            val text = it.text
+                            if (text.length < 30) {
+                                newCard = newCard.copy(cardDate = text)
+                            }
+                        },
+                        label = { Text("Expire Date") },
+                        placeholder = {
+                            Text(
+                                text = "08/29",
+                                color = Color.LightGray
+                            )
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            disabledTextColor = Color.Black,
+                            disabledSupportingTextColor = Color.Black,
+                            errorTextColor = Color.Red,
+                            errorSupportingTextColor = Color.Red,
+                            focusedTextColor = Color.Black,
+                            focusedSupportingTextColor = Color.Black,
+                            unfocusedSupportingTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                        ),
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    )
+                    Spacer(modifier = Modifier.size(8.dp))
+                    OutlinedTextField(
+                        modifier = Modifier.sizeIn(maxWidth = 100.dp),
+                        value = TextFieldValue(
+                            newCard.cvv,
+                            selection = TextRange(newCard.cvv.length),
+                        ),
+                        onValueChange = {
+                            val text = it.text
+                            when {
+                                text.isEmpty() || text.isBlank() -> {
+                                    newCard = newCard.copy(cvv = text)
+                                }
+
+                                text.length < 4 && text.last().isDigit() -> {
+                                    newCard = newCard.copy(cvv = text)
+                                }
+
+                                else -> {
+                                }
+                            }
+                        },
+                        label = { Text("CVV") },
+                        placeholder = {
+                            Text(
+                                text = "123",
+                                color = Color.LightGray
+                            )
+                        },
+                        colors = OutlinedTextFieldDefaults.colors(
+                            disabledTextColor = Color.Black,
+                            disabledSupportingTextColor = Color.Black,
+                            errorTextColor = Color.Red,
+                            errorSupportingTextColor = Color.Red,
+                            focusedTextColor = Color.Black,
+                            focusedSupportingTextColor = Color.Black,
+                            unfocusedSupportingTextColor = Color.Black,
+                            unfocusedTextColor = Color.Black,
+                        ),
+                        singleLine = true,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                    )
+                }
             }
         }
         Row {
             Spacer(modifier = Modifier.size(16.dp))
             Button(
                 modifier = Modifier
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 40.dp)
                     .weight(1f),
                 shape = RoundedCornerShape(10.dp),
                 onClick = { returnToCardSelect() },
@@ -252,7 +333,7 @@ fun PaymentAddNewCard(
             Spacer(modifier = Modifier.size(16.dp))
             Button(
                 modifier = Modifier
-                    .padding(vertical = 8.dp)
+                    .padding(vertical = 40.dp)
                     .weight(1f),
                 shape = RoundedCornerShape(10.dp),
                 enabled = false,

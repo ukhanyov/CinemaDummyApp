@@ -10,6 +10,7 @@ data class Card(
     val cardType: CardType,
     val isSelected: Boolean = false,
     val cardType2: CardType2 = CardType2.entries.toTypedArray().random(),
+    val cvv: String,
 )
 
 enum class CardType {

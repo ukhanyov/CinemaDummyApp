@@ -57,6 +57,7 @@ fun PaymentSelectCardsComp(
                     cardDate = "31/09",
                     cardHolderName = "Your Name",
                     cardType = CardType.Mastercard,
+                    cvv = "",
                 ),
             ), key = { it.id }) { card ->
                 if (card.id == "Add card") {

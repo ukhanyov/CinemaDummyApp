@@ -24,12 +24,14 @@ class MainViewModel : ViewModel() {
                 cardDate = "31/09",
                 cardHolderName = "Your Name",
                 cardType = CardType.Mastercard,
+                cvv = "",
             ),
             Card(
                 cardNumber = "1234 4321 1234 4321",
                 cardDate = "31/09",
                 cardHolderName = "Your Name",
                 cardType = CardType.Visa,
+                cvv = "",
             ),
         )
     )
