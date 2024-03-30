@@ -27,7 +27,6 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.R
-import java.time.ZonedDateTime
 import java.util.UUID
 
 @Composable
@@ -249,26 +248,36 @@ fun PaymentAddNewCard(
                                     newCard = newCard.copy(cardDate = "")
                                 }
 
-                                text.last().isDigit() && text.length <= "00/00".length -> {
-                                    val year =
-                                        if (text.contains("/")) text.substringAfter("/") else null
-                                    val month = text.substringBefore("/").toIntOrNull()
-
-                                    if (year != null && year < ZonedDateTime.now().year.toString()) return@OutlinedTextField
-                                    if (month == null) return@OutlinedTextField
-                                    if ((month in 1..12).not()) return@OutlinedTextField
-
-                                    newCard =
-                                        newCard.copy(cardDate = if (text.length == 2) "$text/" else text)
+                                text.length == "0".length && text.last().isDigit() -> {
+                                    newCard = newCard.copy(cardDate = text)
                                 }
 
-                                text.isNotEmpty() && text.last().toString() == "/" -> {
-                                    newCard =
-                                        newCard.copy(cardDate = text.substringBefore("/"))
+                                text.length == "00".length && text.last().isDigit() -> {
+                                    newCard = when {
+                                        text.toInt() == 0 -> {
+                                            newCard.copy(cardDate = "0")
+                                        }
+
+                                        text.toInt() in 1..12 -> {
+                                            newCard.copy(cardDate = "$text/")
+                                        }
+
+                                        else -> {
+                                            newCard.copy(cardDate = "0${text.first()}/${text.last()}")
+                                        }
+                                    }
                                 }
 
-                                else -> {
+                                text.length == "00/".length  -> {
+                                    newCard = newCard.copy(cardDate = text.substringBefore("/"))
+                                }
 
+                                text.length == "00/0".length && text.last().isDigit() -> {
+                                    newCard = newCard.copy(cardDate = text)
+                                }
+
+                                text.length == "00/00".length && text.last().isDigit() -> {
+                                    newCard = newCard.copy(cardDate = text)
                                 }
                             }
                         },
