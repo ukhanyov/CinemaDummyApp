@@ -60,4 +60,8 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun getTicket(id: String): Ticket {
+        return (cartTickets.value + boughtTickets.value).first { it.id == id }
+    }
+
 }
