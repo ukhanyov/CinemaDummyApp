@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cinemadummyapp.MainViewModel
 import com.example.cinemadummyapp.common.movies.allMovies
+import com.example.cinemadummyapp.common.navigateSingleTopTo
 import com.example.cinemadummyapp.common.navigateToMovieDetails
 import com.example.cinemadummyapp.common.navigateToMovieSeats
 import com.example.cinemadummyapp.common.onBackClicked
@@ -99,7 +100,10 @@ fun InteractionNavHost(
             hideBottomNavigation(true)
         }
         composable(route = Payment.route) {
-            PaymentScreen(mainViewModel, onBackClicked = { navController.onBackClicked() })
+            PaymentScreen(
+                mainViewModel,
+                onBackClicked = { navController.onBackClicked() },
+                goToTickets = { navController.navigateSingleTopTo(Tickets.route) })
             hideBottomNavigation(true)
         }
     }

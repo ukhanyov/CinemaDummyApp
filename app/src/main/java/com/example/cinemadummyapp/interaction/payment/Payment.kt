@@ -13,6 +13,7 @@ import com.example.cinemadummyapp.interaction.payment.PaymentStates.*
 fun PaymentScreen(
     mainViewModel: MainViewModel,
     onBackClicked: () -> Unit = {},
+    goToTickets: () -> Unit = {},
 ) {
     val activity = LocalView.current.context as Activity
     activity.window.statusBarColor = Color.White.toArgb()
@@ -43,7 +44,10 @@ fun PaymentScreen(
             onFailure = { state = PaymentError },
         )
 
-        PaymentSuccess -> TODO()
+        PaymentSuccess -> PaymentSuccessComp(
+            goToTickets = { goToTickets() },
+        )
+
         PaymentError -> TODO()
     }
 
