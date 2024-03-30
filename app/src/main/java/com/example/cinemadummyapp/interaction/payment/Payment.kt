@@ -40,13 +40,15 @@ fun PaymentScreen(
         }
 
         PaymentProgress -> PaymentProgressComp(
-            onSuccess = { state = PaymentSuccess },
+            onSuccess = {
+                mainViewModel.checkoutSuccess()
+                state = PaymentSuccess
+            },
             onFailure = { state = PaymentError },
         )
 
         PaymentSuccess -> PaymentSuccessComp(
             goToTickets = {
-                mainViewModel.checkoutSuccess()
                 goToTickets()
             },
         )

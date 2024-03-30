@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.interaction.payment.Card
 import com.example.cinemadummyapp.interaction.payment.CardType
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.getAndUpdate
+import kotlinx.coroutines.flow.*
 
 class MainViewModel : ViewModel() {
 
@@ -49,6 +46,7 @@ class MainViewModel : ViewModel() {
         cartTickets.value.let { tickets ->
             if (tickets.isEmpty()) return
             _boughtTickets.getAndUpdate { it.toMutableList().apply { addAll(tickets) } }
+            _cartTickets.update { emptyList() }
         }
     }
 
