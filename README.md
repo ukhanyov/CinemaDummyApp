@@ -22,8 +22,14 @@ Some usage examples. Hint. For better performance collapse opened previews befor
   </a>
 </details>
 <details>
-  <summary>Checkout login (click to see)</summary>
+  <summary>Pick movie/seat (click to see)</summary>
   <a>
-    <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_checkout.gif" alt="GIF Preview"> 
+    <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_login_biometric.gif" alt="GIF Preview"> 
+  </a>
+</details>
+<details>
+  <summary>Checkout (click to see)</summary>
+  <a>
+    <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_login_biometric.gif" alt="GIF Preview"> 
   </a>
 </details>
