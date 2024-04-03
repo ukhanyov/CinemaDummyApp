@@ -21,3 +21,9 @@ Some usage examples. Hint. For better performance collapse opened previews befor
     <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_login_biometric.gif" alt="GIF Preview"> 
   </a>
 </details>
+<details>
+  <summary>Pick movie and seats (click to see)</summary>
+  <a>
+    <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_pick_seats.gif" alt="GIF Preview"> 
+  </a>
+</details>
