@@ -15,3 +15,9 @@ Some usage examples. Hint. For better performance collapse opened previews befor
     <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_login_create_account.gif" alt="GIF Preview"> 
   </a>
 </details>
+<details>
+  <summary>Email/Pass Login (click to see)</summary>
+  <a>
+    <img height="400" src="https://github.com/ukhanyov/CinemaDummyApp/blob/master/gif_login_email_pass.gif" alt="GIF Preview"> 
+  </a>
+</details>
