@@ -1,13 +1,18 @@
 package com.example.cinemadummyapp.interaction
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.tween
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.cinemadummyapp.MainViewModel
-import com.example.cinemadummyapp.common.*
 import com.example.cinemadummyapp.common.movies.allMovies
+import com.example.cinemadummyapp.common.navigateSingleTopTo
+import com.example.cinemadummyapp.common.navigateToMovieDetails
+import com.example.cinemadummyapp.common.navigateToMovieSeats
+import com.example.cinemadummyapp.common.onBackClicked
 import com.example.cinemadummyapp.common.tickets.Ticket
 import com.example.cinemadummyapp.interaction.home.HomeScreen
 import com.example.cinemadummyapp.interaction.home.HomeState
@@ -35,7 +40,31 @@ fun InteractionNavHost(
     NavHost(
         navController = navController,
         startDestination = Home.route,
-        modifier = modifier
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Start,
+                tween(350)
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Start,
+                tween(350)
+            )
+        },
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.End,
+                tween(350)
+            )
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.End,
+                tween(350)
+            )
+        },
+        modifier = modifier,
     ) {
         composable(route = Home.route) {
             HomeScreen(
@@ -52,7 +81,7 @@ fun InteractionNavHost(
                 mainViewModel = mainViewModel,
                 onBackClicked = { navController.onBackClicked() },
                 onCartClicked = { onCartClicked() },
-                onTicketClicked = { ticket -> navController.navigateToTicketDetails(ticket.id) }
+                onTicketClicked = { ticket -> /*navController.navigateToTicketDetails(ticket.id)*/ }
             )
             hideBottomNavigation(false)
         }
